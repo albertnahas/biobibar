@@ -12,6 +12,7 @@ module.exports = {
       'secondary-dark': '#283318',
       'text': '#231f20',
       'white': '#fff',
+      transparent: 'transparent',
     },
     fontFamily: {
       'sans': ['Rollgates Luxury', 'sans-serif'],

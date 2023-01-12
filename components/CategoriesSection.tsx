@@ -29,9 +29,9 @@ export const CategoriesSection = () => {
   ]
 
   return (
-    <section className="categories">
+    <section className="categories pb-24">
       <h2 className="my-14 text-center text-3xl uppercase">Main Categories</h2>
-      <div className="container">
+      <div className="container m-auto">
         <div className="mx-20 grid gap-12 md:grid-cols-4">
           {categories.map((category) => (
             <CategoryCard

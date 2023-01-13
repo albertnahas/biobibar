@@ -9,6 +9,9 @@
   .input {
     @apply h-10 w-full rounded-2xl border-2 border-secondary-dark bg-transparent py-1 px-3 font-medium text-secondary-dark;
   }
+  .input-readonly {
+    @apply focus-visible:outline-none cursor-default;
+  }
 }
 
 @layer utilities {

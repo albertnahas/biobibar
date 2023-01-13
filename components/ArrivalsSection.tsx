@@ -69,6 +69,7 @@ export const ArrivalsSection = () => {
           {products.map((product) => (
             <ProductCard
               key={product.id}
+              id={product.title}
               title={product.title}
               description={product.description}
               image={product.image}

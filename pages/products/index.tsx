@@ -1,10 +1,12 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { ProductCard } from "../../components/ProductCard"
 import Layout from "../layout"
 import Breadcrumb from "../../components/Breadcrumb"
 import { Product } from "../../types/product"
+import addProduct from "../../helpers/addProduct"
+import fetchProducts from "../../helpers/fetchProducts"
 
-export const products: Product[] = [
+export const _products: Product[] = [
   {
     id: "1",
     title: "Product 1",
@@ -31,7 +33,14 @@ export const products: Product[] = [
   },
 ]
 
-const Products = () => {
+const Products = ({ products }: { products?: Product[] }) => {
+  //   useEffect(() => {
+  //     console.log("Products page loaded")
+  //     products.forEach((product) => {
+  //       addProduct(product)
+  //     })
+  //   }, [])
+
   return (
     <Layout>
       <Breadcrumb
@@ -41,9 +50,9 @@ const Products = () => {
           { label: "Category", path: "/category" },
         ]}
       />
-      <div className="container mt-12 px-12 md:px-24">
-        {products.map((product) => (
-          <div className="mb-12 grid grid-cols-2" key={product.id}>
+      <div className="container mt-12 px-0 md:px-24">
+        {products?.map((product) => (
+          <div className="mb-12 grid md:grid-cols-2" key={product.id}>
             <ProductCard
               id={product.id}
               title={product.title}
@@ -59,6 +68,15 @@ const Products = () => {
       </div>
     </Layout>
   )
+}
+
+export async function getStaticProps() {
+  const products = await fetchProducts()
+  return {
+    props: {
+      products,
+    },
+  }
 }
 
 export default Products

@@ -2,17 +2,18 @@ import React from "react"
 import { useRouter } from "next/router"
 import Image from "next/image"
 import Breadcrumb from "../../components/Breadcrumb"
-import { products } from "."
 import Layout from "../layout"
 import { Contact } from "../../components/Contact"
 import { ProductCard } from "../../components/ProductCard"
 import { Product } from "../../types/product"
+import fetchProducts from "../../helpers/fetchProducts"
 
 interface SingleProductProps {
   product: Product
+  products: Product[]
 }
 
-const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
+const SingleProduct: React.FC<SingleProductProps> = ({ product, products }) => {
   const { id, title, category, image, images, description, price } = product
   return (
     <>
@@ -62,6 +63,7 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
           {products.map((product) => (
             <ProductCard
               key={product.id}
+              id={product.id}
               title={product.title}
               description={product.description}
               image={product.image}
@@ -74,7 +76,7 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
   )
 }
 
-const ProductPage = ({ product }: SingleProductProps) => {
+const ProductPage = ({ product, products }: SingleProductProps) => {
   if (!product) {
     return {
       notFound: true,
@@ -82,25 +84,28 @@ const ProductPage = ({ product }: SingleProductProps) => {
   }
   return (
     <Layout>
-      <SingleProduct product={product} />
+      <SingleProduct product={product} products={products} />
     </Layout>
   )
 }
 
 export async function getStaticProps({ params }: any) {
   const { id } = params
+  const products = await fetchProducts()
   // this is where you should fetch the product data from your database or API
   const product = products.find((p) => p.id === id)
 
   return {
     props: {
       product,
+      products,
     },
   }
 }
 
 export async function getStaticPaths() {
   // this is where you should fetch all product ids from your database or API
+  const products = await fetchProducts()
   const paths = products.map((product) => `/products/${product.id}`)
 
   return {

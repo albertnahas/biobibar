@@ -10,7 +10,7 @@ export const ProductCard: FC<Props> = ({
   price,
 }) => {
   return (
-    <Link href={`/products?id=${id}`} as={`/products/${id}`}>
+    <Link href={`/products/${id}`}>
       <Image
         src="/box.png"
         alt="product"

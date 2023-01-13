@@ -1,18 +1,20 @@
 import Image from "next/image"
+import Link from "next/link"
 import { FC } from "react"
 
 export const ProductCard: FC<Props> = ({
+  id,
   title,
   description,
   image,
   price,
 }) => {
   return (
-    <a href="#" className="product">
+    <Link href={`/products?id=${id}`} as={`/products/${id}`}>
       <Image
         src="/box.png"
         alt="product"
-        className="product-image rounded-lg border-4 md:border-8 border-primary"
+        className="product-image border-4 border-primary md:border-8"
         style={{
           objectFit: "cover",
         }}
@@ -20,15 +22,16 @@ export const ProductCard: FC<Props> = ({
         height="300"
       />
       <h3 className="mt-2 text-2xl">{title}</h3>
-      <div className="flex justify-between">
+      <div className="w-300 flex justify-between">
         <p className="text-md">{description}</p>
         <p className="text-md">{price}$</p>
       </div>
-    </a>
+    </Link>
   )
 }
 
 interface Props {
+  id?: string
   title?: string
   description?: string
   image?: string

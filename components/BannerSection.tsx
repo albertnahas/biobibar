@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 export const BannerSection = () => {
   return (
     <section
@@ -13,9 +15,12 @@ export const BannerSection = () => {
           Visit our store or order online to get special discounts
         </p>
         <div className="text-center">
-          <button className="btn-primary rounded-3xl bg-white px-10 py-2 text-2xl uppercase">
+          <Link
+            href="/products"
+            className="btn-primary rounded-3xl bg-white px-10 py-2 text-2xl uppercase"
+          >
             Order now
-          </button>
+          </Link>
         </div>
       </div>
     </section>

@@ -2,7 +2,7 @@ import { useRouter } from "next/router"
 import Link from "next/link"
 import { FC, useState } from "react"
 
-export const Navbar: FC<Props> = ({ bottom }) => {
+export const Navbar: FC<Props> = ({ bottom, transparent }) => {
   const [navbar, setNavbar] = useState(false)
   const links = [
     { href: "/", label: "Home" },
@@ -17,7 +17,14 @@ export const Navbar: FC<Props> = ({ bottom }) => {
           navbar ? "block" : "hidden"
         }  fixed inset-0 z-0 bg-text opacity-90`}
       ></div>
-      <nav>
+      <nav
+        className="bg-cover bg-center bg-no-repeat bg-blend-multiply"
+        style={{
+          backgroundImage: transparent || bottom
+            ? ""
+            : `url("/bg.png"), url("/asset1.png")`,
+        }}
+      >
         <div className="z-21 h-100 md:px-18 relative mx-auto justify-between px-12 pt-10 md:flex md:items-center lg:max-w-7xl">
           <div>
             <div className="flex items-center justify-between py-3 md:block md:py-5">
@@ -100,4 +107,5 @@ export const Navbar: FC<Props> = ({ bottom }) => {
 
 interface Props {
   bottom?: boolean
+  transparent?: boolean
 }

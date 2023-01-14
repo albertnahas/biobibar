@@ -12,6 +12,12 @@
   .input-readonly {
     @apply focus-visible:outline-none cursor-default;
   }
+  .input-home {
+    @apply border-primary border-2 focus-visible:outline-none;
+  }
+  .textarea {
+    @apply h-28;
+  }
 }
 
 @layer utilities {

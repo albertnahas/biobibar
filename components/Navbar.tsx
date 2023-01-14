@@ -4,19 +4,12 @@ import { FC, useState } from "react";
 
 export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
   const [navbar, setNavbar] = useState(false);
-  const links = isAdmin
-    ? [
-        { href: "/admin", label: "Home" },
-        { href: "/admin/about", label: "About" },
-        { href: "/admin/products", label: "Products" },
-        { href: "/admin/contact", label: "Contact" },
-      ]
-    : [
-        { href: "/", label: "Home" },
-        { href: "/about", label: "About" },
-        { href: "/products", label: "Products" },
-        { href: "/contact", label: "Contact" },
-      ];
+  const links = [
+    { href: "/", label: "Home" },
+    { href: "/about", label: "About" },
+    { href: "/products", label: "Products" },
+    { href: "/contact", label: "Contact" },
+  ];
 
   return (
     <>
@@ -92,9 +85,9 @@ export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
             >
               <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
                 {links.map((link) => (
-                  <li key={link.href}>
+                  <li key={isAdmin ? `/admin${link.href}` : link.href}>
                     <Link
-                      href={link.href}
+                      href={isAdmin ? `/admin${link.href}` : link.href}
                       className={`mr-2 px-3 py-1 text-2xl uppercase text-${
                         bottom ? "secondary-dark" : "primary"
                       } `}

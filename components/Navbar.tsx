@@ -1,15 +1,23 @@
-import { useRouter } from "next/router"
-import Link from "next/link"
-import { FC, useState } from "react"
+import { useRouter } from "next/router";
+import Link from "next/link";
+import { FC, useState } from "react";
 
-export const Navbar: FC<Props> = ({ bottom, transparent }) => {
-  const [navbar, setNavbar] = useState(false)
-  const links = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/products", label: "Products" },
-    { href: "/contact", label: "Contact" },
-  ]
+export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
+  const [navbar, setNavbar] = useState(false);
+  const links = isAdmin
+    ? [
+        { href: "/admin", label: "Home" },
+        { href: "/admin/about", label: "About" },
+        { href: "/admin/products", label: "Products" },
+        { href: "/admin/contact", label: "Contact" },
+      ]
+    : [
+        { href: "/", label: "Home" },
+        { href: "/about", label: "About" },
+        { href: "/products", label: "Products" },
+        { href: "/contact", label: "Contact" },
+      ];
+
   return (
     <>
       <div
@@ -20,9 +28,8 @@ export const Navbar: FC<Props> = ({ bottom, transparent }) => {
       <nav
         className="bg-cover bg-center bg-no-repeat bg-blend-multiply"
         style={{
-          backgroundImage: transparent || bottom
-            ? ""
-            : `url("/bg.png"), url("/asset1.png")`,
+          backgroundImage:
+            transparent || bottom ? "" : `url("/bg.png"), url("/asset1.png")`,
         }}
       >
         <div className="z-21 h-100 md:px-18 relative mx-auto justify-between px-12 pt-10 md:flex md:items-center lg:max-w-7xl">
@@ -34,7 +41,7 @@ export const Navbar: FC<Props> = ({ bottom, transparent }) => {
                     bottom ? "secondary-dark" : "primary"
                   }`}
                 >
-                  BioBibar
+                  BioBibar {isAdmin && "Admin"}
                 </h2>
               </a>
               {!bottom && (
@@ -102,10 +109,11 @@ export const Navbar: FC<Props> = ({ bottom, transparent }) => {
         </div>
       </nav>
     </>
-  )
-}
+  );
+};
 
 interface Props {
-  bottom?: boolean
-  transparent?: boolean
+  bottom?: boolean;
+  transparent?: boolean;
+  isAdmin?: boolean;
 }

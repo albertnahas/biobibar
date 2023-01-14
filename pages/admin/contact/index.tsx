@@ -1,48 +1,36 @@
-import React, { FC } from "react";
-import CustomerCardEdit from "../../../components/CustomerCardEdit";
-import { Navbar } from "../../../components/Navbar";
+import React from "react";
+import CustomerCard from "../../../components/CustomerCard";
+import Layout from "../../layout";
 
 const customers = [
   {
-    id: 1,
+    id: "1",
     name: "Name",
     phone: "Phone",
     email: "Email Address",
   },
   {
-    id: 2,
+    id: "2",
     name: "Name",
     phone: "Phone",
     email: "Email Address",
   },
 ];
 
-const Contact: FC<Props> = () => {
+const Contact = () => {
   return (
-    <div>
-      <Navbar />
-      <div>
-        {customers.map(({ id, name, phone, email }) => (
-          <CustomerCardEdit
-            key={id}
-            name={name}
-            phone={phone}
-            email={email}
-            title="Customer information"
-          />
-        ))}
-      </div>
-      <Navbar bottom={true} />
-    </div>
+    <Layout isAdmin>
+      {customers.map(({ id, name, phone, email }) => (
+        <CustomerCard
+          key={id}
+          id={id}
+          name={name}
+          phone={phone}
+          email={email}
+        />
+      ))}
+    </Layout>
   );
 };
 
 export default Contact;
-
-interface Props {
-  id: number;
-  name: string;
-  phone: string;
-  email: string;
-  title: string;
-}

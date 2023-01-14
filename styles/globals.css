@@ -7,12 +7,15 @@
     @apply h-10 rounded-2xl bg-secondary-dark py-2 px-4 font-medium text-white;
   }
   .input {
-    @apply h-10 w-full rounded-2xl border-2 border-secondary-dark bg-transparent py-1 px-3 font-medium text-secondary-dark;
+    @apply w-full rounded-2xl border-2 border-secondary-dark bg-transparent py-1 px-3 font-medium text-secondary-dark;
+  }
+  input.input {
+    @apply h-10;
   }
   .input-readonly {
     @apply focus-visible:outline-none cursor-default;
   }
-  .input-home {
+  .input-primary {
     @apply border-primary border-2 focus-visible:outline-none;
   }
   .textarea {

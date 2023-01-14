@@ -28,7 +28,7 @@ export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
         <div className="z-21 h-100 md:px-18 relative mx-auto justify-between px-12 pt-10 md:flex md:items-center lg:max-w-7xl">
           <div>
             <div className="flex items-center justify-between py-3 md:block md:py-5">
-              <a href="javascript:void(0)">
+              <Link href="/">
                 <h2
                   className={`text-2xl uppercase text-${
                     bottom ? "secondary-dark" : "primary"
@@ -36,7 +36,7 @@ export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
                 >
                   BioBibar {isAdmin && "Admin"}
                 </h2>
-              </a>
+              </Link>
               {!bottom && (
                 <div className="md:hidden">
                   <button

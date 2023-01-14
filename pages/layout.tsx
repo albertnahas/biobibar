@@ -3,7 +3,7 @@ import { Navbar } from "../components/Navbar"
 
 interface LayoutProps {
   children: React.ReactNode
-  isAdmin: boolean
+  isAdmin?: boolean
 }
 
 const Layout: React.FC<LayoutProps> = ({ children, isAdmin }) => {

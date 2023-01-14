@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick-theme.css"
 import { Product } from "../../types/product"
 import { productLink } from "../../helpers/utils"
 
-export const FeaturedSection: FC<Props> = ({ products }) => {
+export const FeaturedSection: FC<Props> = ({ products, coverUrl }) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -23,7 +23,9 @@ export const FeaturedSection: FC<Props> = ({ products }) => {
   return (
     <section
       className="bg-cover bg-top bg-no-repeat bg-blend-multiply"
-      style={{ backgroundImage: `url("/bg.png"), url("/asset2.png")` }}
+      style={{
+        backgroundImage: `url("/bg.png"), url(${coverUrl || "./asset2.png"})`,
+      }}
     >
       <div className="h-200 container mx-auto">
         <div className="w-250 md:w-600 relative z-20 m-auto -translate-y-1/3">
@@ -70,4 +72,5 @@ interface CircleProps {
 
 interface Props {
   products?: Product[]
+  coverUrl?: string
 }

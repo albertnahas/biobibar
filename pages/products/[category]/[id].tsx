@@ -15,7 +15,8 @@ interface SingleProductProps {
 }
 
 const SingleProduct: React.FC<SingleProductProps> = ({ product, products }) => {
-  const { id, title, category, image, images, description, price } = product
+  const { id, title, category, image, text, images, description, price } =
+    product
   return (
     <>
       <Breadcrumb
@@ -54,6 +55,7 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product, products }) => {
           <p className="text-secondary-dark">{category}</p>
           <hr className="my-2  text-secondary-dark" />
           <p className="text-secondary-dark">{description}</p>
+          <p className="text-secondary-dark">{text}</p>
           <hr className="my-2  text-secondary-dark" />
           <p className="text-2xl font-medium text-secondary-dark">{price}$</p>
           <hr className="my-2  text-secondary-dark" />

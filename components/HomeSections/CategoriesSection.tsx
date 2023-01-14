@@ -6,10 +6,10 @@ export const CategoriesSection: FC<Props> = ({ categories }) => {
     <section className="categories pb-24">
       <h2 className="my-14 text-center text-3xl uppercase">Main Categories</h2>
       <div className="container m-auto">
-        <div className="mx-20 grid gap-12 md:grid-cols-4">
+        <div className="mx-12 grid gap-12 md:mx-20 md:grid-cols-4">
           {categories.map((category) => (
             <CategoryCard
-              key={category.id}
+              key={category.name}
               title={category.name}
               //   image={category.image}
               productCount={category.productsCount}

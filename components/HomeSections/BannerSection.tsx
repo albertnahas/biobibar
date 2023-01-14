@@ -1,10 +1,12 @@
 import Link from "next/link"
 
-export const BannerSection = () => {
+export const BannerSection = ({ coverUrl }: { coverUrl?: string }) => {
   return (
     <section
       className="banner min-h-500 relative mb-24 bg-cover bg-center bg-no-repeat py-20 px-12 bg-blend-color shadow-2xl shadow-secondary-dark"
-      style={{ backgroundImage: `url("/bg.png"), url("/asset1.png")` }}
+      style={{
+        backgroundImage: `url("/bg.png"), url(${coverUrl || "./asset1.png"})`,
+      }}
     >
       <div className="container [&>*]:mt-10">
         <p className="text-center text-3xl text-white">

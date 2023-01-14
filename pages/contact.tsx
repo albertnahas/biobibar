@@ -4,7 +4,7 @@ import Layout from "./layout"
 const contact = () => {
   return (
     <Layout>
-      <div className="my-24">
+      <div className="h-400">
         <ContactSection />
       </div>
     </Layout>

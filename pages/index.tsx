@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC, useEffect } from "react"
 import { AboutSection } from "../components/HomeSections/AboutSection"
 import { ContactSection } from "../components/HomeSections/ContactSection"
 import { Footer } from "../components/Footer"
@@ -12,8 +12,15 @@ import { BannerSection } from "../components/HomeSections/BannerSection"
 import { CategoriesSection } from "../components/HomeSections/CategoriesSection"
 import { FeaturedSection } from "../components/HomeSections/FeaturedSection"
 import { HeroSection } from "../components/HomeSections/HeroSection"
+import fetchHome from "../helpers/fetchHome"
+import { Home } from "../types/home"
+import updateCover from "../helpers/updateHome"
+import fetchInfo from "../helpers/fetchInfo"
+import { Info } from "../types/info"
 
 export async function getStaticProps() {
+  const home = await fetchHome()
+  const info = await fetchInfo()
   const allProducts = await fetchProducts()
   const newProducts = allProducts.filter((product) => product.isNew)
   const featuredProducts = allProducts.filter((product) => product.isFeatured)
@@ -28,6 +35,8 @@ export async function getStaticProps() {
 
   return {
     props: {
+      home,
+      info,
       newProducts,
       featuredProducts,
       categories,
@@ -36,19 +45,25 @@ export async function getStaticProps() {
   }
 }
 
-const Home: FC<Props> = ({ newProducts, featuredProducts, categories }) => {
+const Home: FC<Props> = ({
+  newProducts,
+  featuredProducts,
+  categories,
+  home,
+  info,
+}) => {
   return (
     <div>
       <Navbar />
-      <HeroSection />
+      <HeroSection coverUrl={home.cover} slogan={home.slogan} />
       <AboutSection />
-      <FeaturedSection products={featuredProducts} />
+      <FeaturedSection coverUrl={home.cover2} products={featuredProducts} />
       <ArrivalsSection products={newProducts} />
       <CategoriesSection categories={categories} />
-      <BannerSection />
+      <BannerSection coverUrl={home.cover3} />
       <div className="md:px-40 md:pt-40">
         <ContactSection />
-        <Footer />
+        <Footer info={info} />
       </div>
       <Navbar bottom={true} />
     </div>
@@ -58,6 +73,8 @@ const Home: FC<Props> = ({ newProducts, featuredProducts, categories }) => {
 export default Home
 
 interface Props {
+  home: Home
+  info: Info
   newProducts: Product[]
   featuredProducts: Product[]
   categories: Category[]

@@ -30,7 +30,6 @@
   }
 
   .hero-bg {
-    background-image: url("/bg.png"), url("/asset1.png");
     background-blend-mode: color, normal;
     background-size: cover;
     background-position: top;

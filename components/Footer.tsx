@@ -1,6 +1,7 @@
 import { ReactSVG } from "react-svg"
+import { Info } from "../types/info"
 
-export const Footer = () => {
+export const Footer = ({ info }: { info?: Info }) => {
   return (
     <footer className="footer mb-24">
       <div className="container px-12 pt-20 md:px-24">
@@ -12,24 +13,19 @@ export const Footer = () => {
                   <td>
                     <ReactSVG src="/location.svg" className="h-6 w-6" />
                   </td>
-                  <td className="text-secondary-dark">
-                    Aleppo, Syria, the industrial zone
-                  </td>
+                  <td className="text-secondary-dark">{info?.address}</td>
                 </tr>
                 <tr>
                   <td>
                     <ReactSVG src="/phone.svg" className="h-6 w-6" />
                   </td>
-                  <td className="text-secondary-dark">2-337-741-997-963+</td>
+                  <td className="text-secondary-dark">{info?.phone}</td>
                 </tr>
                 <tr>
                   <td>
                     <ReactSVG src="/time.svg" className="h-6 w-6" />
                   </td>
-                  <td className="text-secondary-dark">
-                    10am to 9pm from Sunday to Thursday <br /> 9.30am to 6pm on
-                    Saturday
-                  </td>
+                  <td className="w-80 text-secondary-dark">{info?.hours}</td>
                 </tr>
               </tbody>
             </table>
@@ -39,36 +35,36 @@ export const Footer = () => {
               <tbody>
                 <tr>
                   <td>
-                    <a href="#">
+                    <a href={info?.facebook}>
                       <ReactSVG src="/facebook.svg" className="h-6 w-6" />
                     </a>
                   </td>
                   <td className="text-secondary-dark">
-                    <a href="#" className="text-secondary-dark">
+                    <a href={info?.facebook} className="text-secondary-dark">
                       BIO_BIBAR
                     </a>
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <a href="#">
+                    <a href={info?.instagram}>
                       <ReactSVG src="/instagram.svg" className="h-6 w-6" />
                     </a>
                   </td>
                   <td className="text-secondary-dark">
-                    <a href="#" className="text-secondary-dark">
+                    <a href={info?.instagram} className="text-secondary-dark">
                       @BIO_BIBAR
                     </a>
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <a href="#">
+                    <a href={info?.telegram}>
                       <ReactSVG src="/telegram.svg" className="h-6 w-6" />
                     </a>
                   </td>
                   <td className="text-secondary-dark">
-                    <a href="#" className="text-secondary-dark">
+                    <a href={info?.telegram} className="text-secondary-dark">
                       BIO_BIBAR
                     </a>
                   </td>

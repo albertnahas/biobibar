@@ -4,13 +4,11 @@ import Layout from "../../layout";
 
 const customers = [
   {
-    id: "1",
-    name: "Name",
+    name: "Albert",
     phone: "Phone",
     email: "Email Address",
   },
   {
-    id: "2",
     name: "Name",
     phone: "Phone",
     email: "Email Address",
@@ -20,10 +18,9 @@ const customers = [
 const Contact = () => {
   return (
     <Layout isAdmin>
-      {customers.map(({ id, name, phone, email }) => (
+      {customers.map(({ name, phone, email }) => (
         <CustomerCard
-          key={id}
-          id={id}
+          key={name}
           name={name}
           phone={phone}
           email={email}

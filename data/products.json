@@ -1,0 +1,92 @@
+{
+    "product1": {
+        "description": "This is a great product",
+        "image": "/product2.jpg",
+        "isFeatured": true,
+        "isNew": false,
+        "price": 24.99,
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, magna eu tincidunt.",
+        "title": "Product 2",
+        "category": "main 2"
+    },
+    "product2": {
+        "description": "This is a fantastic product",
+        "image": "/product3.jpg",
+        "isFeatured": true,
+        "isNew": true,
+        "price": 29.99,
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, magna eu tincidunt.",
+        "title": "Product 3",
+        "category": "main 3"
+    },
+    "product3": {
+        "description": "This is a premium product",
+        "image": "/product4.jpg",
+        "isFeatured": false,
+        "isNew": true,
+        "price": 34.99,
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, magna eu tincidunt.",
+        "title": "Product 4",
+        "category": "main 4"
+    },
+    "product4": {
+        "description": "This is a high-quality product",
+        "image": "/product5.jpg",
+        "isFeatured": true,
+        "isNew": false,
+        "price": 39.99,
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, magna eu tincidunt.",
+        "title": "Product 5",
+        "category": "main 5"
+    },
+    "product5": {
+        "description": "This is a top-rated product",
+        "image": "/product6.jpg",
+        "isFeatured": false,
+        "isNew": true,
+        "price": 44.99,
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, magna eu tincidunt.",
+        "title": "Product 6",
+        "category": "main 6"
+    },
+    "product6": {
+        "description": "This is a best-selling product",
+        "image": "/product7.jpg",
+        "isFeatured": true,
+        "isNew": false,
+        "price": 49.99,
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, magna eu tincidunt.",
+        "title": "Product 7",
+        "category": "main 7"
+    },
+    "product7": {
+        "description": "This is a must-have product",
+        "image": "/product8.jpg",
+        "isFeatured": false,
+        "isNew": true,
+        "price": 54.99,
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, magna eu tincidunt.",
+        "title": "Product 8",
+        "category": "main 8"
+    },
+    "product8": {
+        "description": "This is a high-demand product",
+        "image": "/product9.jpg",
+        "isFeatured": true,
+        "isNew": false,
+        "price": 59.99,
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, magna eu tincidunt.",
+        "title": "Product 9",
+        "category": "main 9"
+    },
+    "product9": {
+        "description": "This is a premium-quality product",
+        "image": "/product10.jpg",
+        "isFeatured": false,
+        "isNew": true,
+        "price": 64.99,
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, magna eu tincidunt.",
+        "title": "Product 10",
+        "category": "main 10"
+    }
+}

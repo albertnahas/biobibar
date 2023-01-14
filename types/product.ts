@@ -1,5 +1,5 @@
 export interface Product {
-    id: string
+    id?: string
     title: string
     category?: string
     image?: string
@@ -7,4 +7,7 @@ export interface Product {
     description?: string
     text?: string
     price?: number
+    isFeatured?: boolean
+    isNew?: boolean
+    dateAdded?: Date
 }

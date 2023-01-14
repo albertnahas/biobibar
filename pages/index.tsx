@@ -1,25 +1,53 @@
-import { AboutSection } from "../components/AboutSection"
-import { ArrivalsSection } from "../components/ArrivalsSection"
-import { BannerSection } from "../components/BannerSection"
-import { CategoriesSection } from "../components/CategoriesSection"
-import { CircleSection } from "../components/CirclesSection"
-import { Contact } from "../components/Contact"
+import { FC } from "react"
+import { AboutSection } from "../components/HomeSections/AboutSection"
+import { ContactSection } from "../components/HomeSections/ContactSection"
 import { Footer } from "../components/Footer"
-import { HeroSection } from "../components/HeroSection"
 import { Navbar } from "../components/Navbar"
+import fetchCategories from "../helpers/fetchCategories"
+import fetchProducts from "../helpers/fetchProducts"
+import { Category } from "../types/category"
+import { Product } from "../types/product"
+import { ArrivalsSection } from "../components/HomeSections/ArrivalsSection"
+import { BannerSection } from "../components/HomeSections/BannerSection"
+import { CategoriesSection } from "../components/HomeSections/CategoriesSection"
+import { FeaturedSection } from "../components/HomeSections/FeaturedSection"
+import { HeroSection } from "../components/HomeSections/HeroSection"
 
-const Home = () => {
+export async function getStaticProps() {
+  const allProducts = await fetchProducts()
+  const newProducts = allProducts.filter((product) => product.isNew)
+  const featuredProducts = allProducts.filter((product) => product.isFeatured)
+  const categories = await (
+    await fetchCategories()
+  ).map((category) => ({
+    ...category,
+    productsCount: allProducts.filter(
+      (product) => product.category === category.name
+    ).length,
+  }))
+
+  return {
+    props: {
+      newProducts,
+      featuredProducts,
+      categories,
+    },
+    revalidate: 60,
+  }
+}
+
+const Home: FC<Props> = ({ newProducts, featuredProducts, categories }) => {
   return (
     <div>
       <Navbar />
       <HeroSection />
       <AboutSection />
-      <CircleSection />
-      <ArrivalsSection />
-      <CategoriesSection />
+      <FeaturedSection products={featuredProducts} />
+      <ArrivalsSection products={newProducts} />
+      <CategoriesSection categories={categories} />
       <BannerSection />
-      <div className="md:pt-40 md:px-40">
-        <Contact />
+      <div className="md:px-40 md:pt-40">
+        <ContactSection />
         <Footer />
       </div>
       <Navbar bottom={true} />
@@ -28,3 +56,9 @@ const Home = () => {
 }
 
 export default Home
+
+interface Props {
+  newProducts: Product[]
+  featuredProducts: Product[]
+  categories: Category[]
+}

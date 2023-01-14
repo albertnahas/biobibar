@@ -1,16 +1,13 @@
 import Image from "next/image"
 import Link from "next/link"
 import { FC } from "react"
+import { productLink } from "../helpers/utils"
+import { Product } from "../types/product"
 
-export const ProductCard: FC<Props> = ({
-  id,
-  title,
-  description,
-  image,
-  price,
-}) => {
+export const ProductCard: FC<Props> = (product) => {
+  const { title, description, price } = product
   return (
-    <Link href={`/products/${id}`}>
+    <Link href={productLink(product)}>
       <Image
         src="/box.png"
         alt="product"
@@ -30,10 +27,4 @@ export const ProductCard: FC<Props> = ({
   )
 }
 
-interface Props {
-  id?: string
-  title?: string
-  description?: string
-  image?: string
-  price?: number
-}
+interface Props extends Product {}

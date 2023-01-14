@@ -16,7 +16,7 @@ export const CategoryCard: FC<Props> = ({ title, image, productCount }) => {
         }}
       >
         <Link
-          href="/"
+          href={`/products/${title}`}
           className="text-neutral-100 absolute top-1/2 left-0 right-0 mx-auto text-center text-2xl uppercase"
         >
           Shop now

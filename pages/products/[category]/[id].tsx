@@ -1,12 +1,13 @@
 import React from "react"
-import { useRouter } from "next/router"
 import Image from "next/image"
-import Breadcrumb from "../../components/Breadcrumb"
-import Layout from "../layout"
-import { Contact } from "../../components/Contact"
-import { ProductCard } from "../../components/ProductCard"
-import { Product } from "../../types/product"
-import fetchProducts from "../../helpers/fetchProducts"
+import Breadcrumb from "../../../components/Breadcrumb"
+import Layout from "../../layout"
+import { ProductCard } from "../../../components/ProductCard"
+import { Product } from "../../../types/product"
+import fetchProducts from "../../../helpers/fetchProducts"
+import { ContactForm } from "../../../components/ContactForm"
+import fetchProduct from "../../../helpers/fetchProduct"
+import { productLink } from "../../../helpers/utils"
 
 interface SingleProductProps {
   product: Product
@@ -20,8 +21,9 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product, products }) => {
       <Breadcrumb
         items={[
           { label: "Home", path: "/" },
-          { label: "Store", path: "/store" },
-          { label: title, path: `/product/${id}` },
+          { label: "Store", path: "/products" },
+          { label: category || "", path: `/products/${category || "all"}` },
+          { label: title, path: productLink(product) },
         ]}
       />
       <div className="mt-12 grid gap-20 md:grid-cols-2">
@@ -57,7 +59,9 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product, products }) => {
           <hr className="my-2  text-secondary-dark" />
         </div>
       </div>
-      <Contact />
+      <div className="mt-16">
+        <ContactForm source={`product ${product.category}/${product.title}`} />
+      </div>
       <div className="container">
         <div className="my-20 grid gap-12 md:grid-cols-4">
           {products.map((product) => (
@@ -72,6 +76,7 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product, products }) => {
           ))}
         </div>
       </div>
+      <hr className="mx-60" />
     </>
   )
 }
@@ -91,26 +96,27 @@ const ProductPage = ({ product, products }: SingleProductProps) => {
 
 export async function getStaticProps({ params }: any) {
   const { id } = params
-  const products = await fetchProducts()
-  // this is where you should fetch the product data from your database or API
-  const product = products.find((p) => p.id === id)
+  // this is where you should fetch the product data from database or API
+  const product = await fetchProduct(id)
+  const products = await fetchProducts({ category: product.category })
 
   return {
     props: {
       product,
       products,
     },
+    revalidate: 10,
   }
 }
 
 export async function getStaticPaths() {
-  // this is where you should fetch all product ids from your database or API
+  // this is where you should fetch all product ids from database or API
   const products = await fetchProducts()
-  const paths = products.map((product) => `/products/${product.id}`)
+  const paths = products.map((product) => productLink(product))
 
   return {
     paths,
-    fallback: false,
+    fallback: "blocking",
   }
 }
 

@@ -1,7 +1,7 @@
 import React from "react"
 import { ProductCard } from "../../../components/ProductCard"
 import Layout from "../../layout"
-import Breadcrumb from "../../../components/Breadcrumb"
+import Breadcrumb from "../../../molecules/Breadcrumb"
 import { Product } from "../../../types/product"
 import fetchProducts from "../../../helpers/fetchProducts"
 import fetchCategories from "../../../helpers/fetchCategories"

@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const colors = require('tailwindcss/colors')
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -14,6 +15,9 @@ module.exports = {
       'text': '#231f20',
       'white': '#fff',
       transparent: 'transparent',
+      red: colors.red,
+      gray: colors.gray,
+      indigo: colors.indigo,
     },
     fontFamily: {
       'sans': ['Rollgates Luxury', 'sans-serif'],
@@ -22,5 +26,7 @@ module.exports = {
       '-100': '-1',
     }
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 }

@@ -1,6 +1,6 @@
 import React from "react"
 import Image from "next/image"
-import Breadcrumb from "../../../components/Breadcrumb"
+import Breadcrumb from "../../../molecules/Breadcrumb"
 import Layout from "../../layout"
 import { ProductCard } from "../../../components/ProductCard"
 import { Product } from "../../../types/product"

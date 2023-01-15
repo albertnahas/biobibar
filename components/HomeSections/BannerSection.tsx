@@ -8,7 +8,7 @@ export const BannerSection = ({ coverUrl }: { coverUrl?: string }) => {
         backgroundImage: `url("/bg.png"), url(${coverUrl || "./asset1.png"})`,
       }}
     >
-      <div className="container [&>*]:mt-10">
+      <div className="container mx-auto [&>*]:mt-10">
         <p className="text-center text-3xl text-white">
           Let&apos;s change the feelings in your feet with
         </p>

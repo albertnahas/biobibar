@@ -1,26 +1,38 @@
 import React, { useState, useEffect } from "react";
 import { ReactSVG } from "react-svg";
+import fetchInfo from "../helpers/fetchInfo";
+import updateInfo from "../helpers/updateInfo";
+import { Info } from "../types/info";
 
-const defaultInfo = {
-  about: `هي شركة سورية مقرها مدينة حلب متخصصة في مجال صناعة الصابون الغار الحلبي العريق رائدة في مجالها تحمل معها أكثر من 20 عاما من الخبرة في مجال صناعة الصابون وتعمل الشركة على تطوير منتجاتها بشكل دائم ورفع السوية الإنتاجية مما يتلائم مع التطورات التكنولوجية مع الحفاظ على تراث هذه الصناعة`,
-  address: "Aleppo, Syria, the industrial zone",
-  phone: "2-337-741-997-963+",
-  hours: `10am to 9pm from Sunday to Thursday
-9.30am to 6pm on Saturday`,
+const defaultInfo: Info = {
+  about: "",
+  address: "",
+  hours: "",
+  phone: "",
 };
-
 const EditInfoSection = () => {
-  const [info, setInfo] = useState(defaultInfo);
-  const [debouncedInfo, setDebouncedInfo] = useState(info);
+  const [info, setInfo] = useState<Info>(defaultInfo);
+  const [debouncedInfo, setDebouncedInfo] = useState<Info>(defaultInfo);
   const { about, address, phone, hours } = debouncedInfo;
+
+  useEffect(() => {
+    fetchInfo().then((res: Info | null) => {
+      setInfo(res || {});
+      setDebouncedInfo(res || {});
+    });
+  }, [info]);
 
   useEffect(() => {
     const timerId = setTimeout(() => {
       setInfo(debouncedInfo);
-    }, 2000);
+    }, 1000);
 
     return () => clearTimeout(timerId);
   }, [debouncedInfo]);
+
+  useEffect(() => {
+    // updateInfo(info);
+  }, [info]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -37,41 +49,42 @@ const EditInfoSection = () => {
       </div>
 
       <div className="container mx-auto mt-4 mb-8">
-        <div className="grid gap-8 px-12 md:grid-cols-2 md:px-24 [&_td]:p-2 mb-20">
+        <div className="mb-20 grid gap-8 px-12 md:grid-cols-2 md:px-24 [&_td]:p-2">
           <div className="col-1 text-right">
             <label>Edit text</label>
           </div>
           <div className="col-2">
             <textarea
-              className="input input-home textarea"
+              className="input input-primary"
               value={about}
               name="about"
+              rows={5}
               onChange={handleChange}
             />
           </div>
         </div>
-        <div className="grid gap-8 px-12 md:grid-cols-2 md:px-24 [&_td]:p-2 mb-4">
+        <div className="mb-4 grid gap-8 px-12 md:grid-cols-2 md:px-24 [&_td]:p-2">
           <div className="col-1 flex justify-end">
             <ReactSVG src="/location.svg" className="h-6 w-6" />
           </div>
           <div className="col-2">
             <input
               type="text"
-              className="input input-home"
+              className="input input-primary"
               value={address}
               name="address"
               onChange={handleChange}
             />
           </div>
         </div>
-        <div className="grid gap-8 px-12 md:grid-cols-2 md:px-24 [&_td]:p-2 mb-4">
+        <div className="mb-4 grid gap-8 px-12 md:grid-cols-2 md:px-24 [&_td]:p-2">
           <div className="col-1 flex justify-end">
             <ReactSVG src="/phone.svg" className="h-6 w-6" />
           </div>
           <div className="col-2">
             <input
               type="text"
-              className="input input-home"
+              className="input input-primary"
               value={phone}
               name="phone"
               onChange={handleChange}
@@ -84,10 +97,11 @@ const EditInfoSection = () => {
           </div>
           <div className="col-2">
             <textarea
-              className="input input-home textarea"
+              className="input input-primary"
               value={hours}
               name="hours"
               onChange={handleChange}
+              rows={5}
             />
           </div>
         </div>

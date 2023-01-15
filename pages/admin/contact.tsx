@@ -1,6 +1,6 @@
 import React from "react";
-import CustomerCard from "../../../components/CustomerCard";
-import Layout from "../../layout";
+import CustomerCard from "../../components/CustomerCard";
+import Layout from "../layout";
 
 const customers = [
   {

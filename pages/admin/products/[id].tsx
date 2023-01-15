@@ -1,4 +1,10 @@
-import React, { useState, useEffect, ChangeEvent } from "react"
+import React, {
+  useState,
+  useEffect,
+  ChangeEvent,
+  MutableRefObject,
+  LegacyRef,
+} from "react"
 import { Product } from "../../../types/product"
 import fetchProduct from "../../../helpers/fetchProduct"
 import { useForm, Controller } from "react-hook-form"
@@ -56,6 +62,12 @@ const Product = () => {
     handleSubmit,
   } = useForm<Product>()
   const router = useRouter()
+  const hiddenFileInput = React.useRef<any>(null)
+  const handleEditImageClick = () => {
+    if (hiddenFileInput?.current instanceof HTMLInputElement) {
+      hiddenFileInput.current.click()
+    }
+  }
   const handleImageChange = (e: ChangeEvent) => {
     const input = e.target as HTMLInputElement
 
@@ -192,7 +204,7 @@ const Product = () => {
       <div className="container my-12">
         <h1 className="mb-8 text-3xl">{id ? "Edit" : "Add"} Product</h1>
 
-        <div className="grid grid-cols-2">
+        <div className="grid md:grid-cols-2">
           <div>
             <div className="mb-4">
               <Image
@@ -203,8 +215,21 @@ const Product = () => {
               />
             </div>
             <div>
-              <input type="file" onChange={handleImageChange} />
-              <button className="btn-primary-sm">Edit Image</button>
+              <label htmlFor="image">
+                <button
+                  onClick={handleEditImageClick}
+                  className="btn-primary-sm"
+                >
+                  Edit Image
+                </button>
+              </label>
+              <input
+                name="image"
+                ref={hiddenFileInput}
+                type="file"
+                className="hidden"
+                onChange={handleImageChange}
+              />
             </div>
             <div>
               <div className="mt-4 grid grid-cols-2 gap-4">

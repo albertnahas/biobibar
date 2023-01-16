@@ -26,7 +26,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ items }) => {
             {item.label}
           </Link>
           {index !== items.length - 1 && (
-            <span className="mx-2 text-primary">/</span>
+            <span className="mr-4 ml-4 text-primary"> / </span>
           )}
         </React.Fragment>
       ))}

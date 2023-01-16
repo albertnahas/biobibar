@@ -20,7 +20,7 @@ const EditInfoSection = () => {
       setInfo(res || {});
       setDebouncedInfo(res || {});
     });
-  }, [info]);
+  }, []);
 
   useEffect(() => {
     const timerId = setTimeout(() => {
@@ -44,8 +44,8 @@ const EditInfoSection = () => {
   return (
     <section className="contact">
       <div className="container ml-24 p-4">
-        <h2 className="my-12 text-xl">home</h2>
-        <h3 className="my-12">Edit company information</h3>
+        <h2 className="mt-12 mb-4 text-xl">home</h2>
+        <h3 className="mb-12">Edit company information</h3>
       </div>
 
       <div className="container mx-auto mt-4 mb-8">

@@ -38,7 +38,7 @@ const ProductsAdmin = () => {
             loadProducts()
             setShowConfirm(false)
           })
-          .catch((err) => {
+          .catch((err: any) => {
             console.log(err)
             setShowConfirm(false)
             alert("Error deleting product")
@@ -49,7 +49,7 @@ const ProductsAdmin = () => {
             loadCategories()
             setShowConfirm(false)
           })
-          .catch((err) => {
+          .catch((err: any) => {
             console.log(err)
             setShowConfirm(false)
             alert("Error deleting category")
@@ -95,7 +95,7 @@ const ProductsAdmin = () => {
         .then(() => {
           loadCategories()
         })
-        .catch((err) => {
+        .catch((err: any) => {
           console.log(err)
           alert("Error updating category")
         })
@@ -104,7 +104,7 @@ const ProductsAdmin = () => {
         .then(() => {
           loadCategories()
         })
-        .catch((err) => {
+        .catch((err: any) => {
           console.log(err)
           alert("Error adding category")
         })

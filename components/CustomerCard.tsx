@@ -1,16 +1,16 @@
 import React from "react";
 import { customer } from "../types/customer";
 
-const CustomerCard = ({ name, email, phone }: customer) => {
+const CustomerCard = ({ name, email, phone, source }: customer) => {
   return (
     <section className="contact">
-      <div className="container ml-24 p-4">
-        <h2 className="my-12 text-xl">Customer information</h2>
-        <h3 className="my-12">customer</h3>
+      <div className="container ml-12 p-4">
+        <h2 className="mt-8 mb-4 text-xl">Customer information</h2>
+        <h3 className="mb-2">customer</h3>
       </div>
 
-      <div className="container mx-auto my-4">
-        <div className="grid gap-8 px-12 md:grid-cols-3 md:px-24">
+      <div className="container mx-auto my-2">
+        <div className="grid gap-8 px-12 md:grid-cols-4 md:px-24">
           <input
             type="text"
             className="input input-readonly"
@@ -27,6 +27,12 @@ const CustomerCard = ({ name, email, phone }: customer) => {
             type="email"
             className="input input-readonly"
             placeholder={email}
+            readOnly
+          />
+          <input
+            type="text"
+            className="input input-readonly"
+            placeholder={source}
             readOnly
           />
         </div>

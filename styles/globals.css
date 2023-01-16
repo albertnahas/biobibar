@@ -24,6 +24,18 @@
   .textarea {
     @apply h-28;
   }
+  .edit-svg path.cls-1 {
+    @apply fill-primary;
+  }
+  .cover-edit-icon {
+    @apply absolute bottom-8 right-8 2xl:right-36 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border-none bg-white p-1;
+  }
+  .cover-edit-container {
+    @apply absolute -bottom-8 right-16 2xl:right-44 w-120 rounded-2xl border-2 border-primary bg-white px-2 py-1 text-xs;
+  }
+  .cover-edit-btn {
+    @apply cursor-pointer m-1 p-1 rounded-lg border-2 border-primary text-left block;
+  }
 }
 
 @layer utilities {
@@ -108,6 +120,9 @@
     height: 120vh;
   }
 
+  .w-120 {
+    width: 120px;
+  }
   .w-180 {
     width: 180px;
   }

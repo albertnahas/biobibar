@@ -8,6 +8,7 @@ import fetchProducts from "../../../helpers/fetchProducts"
 import { ContactForm } from "../../../components/ContactForm"
 import fetchProduct from "../../../helpers/fetchProduct"
 import { productLink } from "../../../helpers/utils"
+import Head from "next/head"
 
 interface SingleProductProps {
   product: Product
@@ -19,10 +20,28 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product, products }) => {
     product
   return (
     <>
+      <Head>
+        <title>{product.title} - BIOBIBAR</title>
+        <meta name="description" content={product.description} />
+        <meta property="og:title" content={product.title} />
+        <meta property="og:description" content={product.description} />
+        <meta property="og:image" content={product.image} />
+        <meta
+          property="og:url"
+          content={`https://biobibar.com/product/${product.id}`}
+        />
+        <meta property="og:type" content="product" />
+        <meta property="product:price:amount" content={`${product.price}`} />
+        <meta property="product:price:currency" content="USD" />
+        <link
+          rel="canonical"
+          href={`https://biobibar.com/product/${product.id}`}
+        />
+      </Head>
       <Breadcrumb
         items={[
           { label: "Home", path: "/" },
-          { label: "Store", path: "/products" },
+          { label: "Store", path: "/products/all" },
           { label: category || "", path: `/products/${category || "all"}` },
           { label: title, path: productLink(product) },
         ]}

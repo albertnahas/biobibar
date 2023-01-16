@@ -1,13 +1,21 @@
 import Image from "next/image"
 import Link from "next/link"
+import { useRouter } from "next/router"
 import { FC } from "react"
 import { productLink } from "../helpers/utils"
 import { Product } from "../types/product"
 
 export const ProductCard: FC<Props> = (product) => {
   const { title, description, price } = product
+  const route = useRouter()
+
   return (
-    <Link href={productLink(product)}>
+    <div
+      className="cursor-pointer"
+      onClick={() => {
+        route.push(productLink(product))
+      }}
+    >
       <Image
         src="/box.png"
         alt="product"
@@ -18,12 +26,14 @@ export const ProductCard: FC<Props> = (product) => {
         width="300"
         height="300"
       />
-      <h3 className="mt-2 text-2xl">{title}</h3>
-      <div className="w-300 flex justify-between">
-        <p className="text-md">{description}</p>
-        <p className="text-md">{price}$</p>
-      </div>
-    </Link>
+      <Link href={productLink(product)}>
+        <h3 className="mt-2 text-2xl">{title}</h3>
+        <div className="w-300 flex justify-between">
+          <p className="text-md">{description}</p>
+          <p className="text-md">{price}$</p>
+        </div>
+      </Link>
+    </div>
   )
 }
 

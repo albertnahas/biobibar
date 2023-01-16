@@ -5,6 +5,7 @@ import Breadcrumb from "../../../molecules/Breadcrumb"
 import { Product } from "../../../types/product"
 import fetchProducts from "../../../helpers/fetchProducts"
 import fetchCategories from "../../../helpers/fetchCategories"
+import Head from "next/head"
 
 const Products = ({
   products,
@@ -14,31 +15,42 @@ const Products = ({
   category: string
 }) => {
   return (
-    <Layout>
-      <Breadcrumb
-        items={[
-          { label: "Home", path: "/" },
-          { label: "Store", path: "/products" },
-          { label: category, path: `/products/${category}` },
-        ]}
-      />
-      <div className="container mt-12 px-0 md:px-24">
-        {products?.map((product) => (
-          <div className="mb-12 grid md:grid-cols-2" key={product.id}>
-            <ProductCard
-              id={product.id}
-              title={product.title}
-              image={product.image}
-              price={product.price}
-              description={product.description}
-            />
-            <div className="pl-3">
-              <p>{product.text}</p>
+    <>
+      <Head>
+        <title>Products - {category} - BIOBIBAR</title>
+        <meta name="description" content="Browse our selection of products." />
+        <meta name="robots" content="index, follow" />
+        <link
+          rel="canonical"
+          href={`https://www.biobibar.com/products/${category}`}
+        />
+      </Head>
+      <Layout>
+        <Breadcrumb
+          items={[
+            { label: "Home", path: "/" },
+            { label: "Store", path: "/products/all" },
+            { label: category, path: `/products/${category}` },
+          ]}
+        />
+        <div className="container mt-12 px-0 md:px-24">
+          {products?.map((product) => (
+            <div className="mb-12 grid md:grid-cols-2" key={product.id}>
+              <ProductCard
+                id={product.id}
+                title={product.title}
+                image={product.image}
+                price={product.price}
+                description={product.description}
+              />
+              <div className="pl-3">
+                <p>{product.text}</p>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </Layout>
+          ))}
+        </div>
+      </Layout>
+    </>
   )
 }
 

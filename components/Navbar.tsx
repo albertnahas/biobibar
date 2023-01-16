@@ -1,15 +1,15 @@
-import { useRouter } from "next/router";
-import Link from "next/link";
-import { FC, useState } from "react";
+import { useRouter } from "next/router"
+import Link from "next/link"
+import { FC, useState } from "react"
 
 export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
-  const [navbar, setNavbar] = useState(false);
+  const [navbar, setNavbar] = useState(false)
   const links = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
-    { href: "/products", label: "Products" },
+    { href: `/products${!isAdmin && "/all"}`, label: "Products" },
     { href: "/contact", label: "Contact" },
-  ];
+  ]
 
   return (
     <>
@@ -102,11 +102,11 @@ export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
         </div>
       </nav>
     </>
-  );
-};
+  )
+}
 
 interface Props {
-  bottom?: boolean;
-  transparent?: boolean;
-  isAdmin?: boolean;
+  bottom?: boolean
+  transparent?: boolean
+  isAdmin?: boolean
 }

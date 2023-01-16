@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { ReactSVG } from "react-svg"
 import { Info } from "../types/info"
 
@@ -35,38 +36,47 @@ export const Footer = ({ info }: { info?: Info }) => {
               <tbody>
                 <tr>
                   <td>
-                    <a href={info?.facebook}>
+                    <Link href={info?.facebook || "#"}>
                       <ReactSVG src="/facebook.svg" className="h-6 w-6" />
-                    </a>
+                    </Link>
                   </td>
                   <td className="text-secondary-dark">
-                    <a href={info?.facebook} className="text-secondary-dark">
+                    <Link
+                      href={info?.facebook || "#"}
+                      className="text-secondary-dark"
+                    >
                       BIO_BIBAR
-                    </a>
+                    </Link>
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <a href={info?.instagram}>
+                    <Link href={info?.instagram || "#"}>
                       <ReactSVG src="/instagram.svg" className="h-6 w-6" />
-                    </a>
+                    </Link>
                   </td>
                   <td className="text-secondary-dark">
-                    <a href={info?.instagram} className="text-secondary-dark">
+                    <Link
+                      href={info?.instagram || "#"}
+                      className="text-secondary-dark"
+                    >
                       @BIO_BIBAR
-                    </a>
+                    </Link>
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <a href={info?.telegram}>
+                    <Link href={info?.telegram || "#"}>
                       <ReactSVG src="/telegram.svg" className="h-6 w-6" />
-                    </a>
+                    </Link>
                   </td>
                   <td className="text-secondary-dark">
-                    <a href={info?.telegram} className="text-secondary-dark">
+                    <Link
+                      href={info?.telegram || "#"}
+                      className="text-secondary-dark"
+                    >
                       BIO_BIBAR
-                    </a>
+                    </Link>
                   </td>
                 </tr>
               </tbody>

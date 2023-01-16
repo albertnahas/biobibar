@@ -13,7 +13,7 @@ export const FeaturedSection: FC<Props> = ({ products, coverUrl }) => {
     infinite: true,
     speed: 500,
     slidesToShow: 3,
-    slidesToScroll: 3,
+    slidesToScroll: 1,
     centerMode: true,
     centerPadding: "0px",
     nextArrow: <ReactSVG src="/arrows2.svg" />,

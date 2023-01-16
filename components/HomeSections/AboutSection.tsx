@@ -6,7 +6,9 @@ export const AboutSection = ({ about }: { about?: string }) => {
     <section className="ornament-bg min-h-500 relative z-10 bg-white bg-no-repeat py-24 shadow-2xl shadow-text">
       <div className="mx-auto flex w-4/5 flex-col md:w-2/3 md:flex-row md:items-center md:justify-center md:px-12 lg:max-w-7xl">
         <div className="flex flex-col items-center justify-center md:w-2/3">
-          <p className="text-center text-xl text-text md:text-right">{about}</p>
+          <p className="text-center font-arabic text-2xl text-text md:text-right">
+            {about}
+          </p>
         </div>
         {/* <div className="flex flex-col items-center justify-center md:w-1/3"></div> */}
         <ReactSVG

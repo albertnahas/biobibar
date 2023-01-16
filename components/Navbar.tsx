@@ -7,7 +7,7 @@ export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
   const links = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
-    { href: `/products${!isAdmin && "/all"}`, label: "Products" },
+    { href: `/products${isAdmin ? "" : "/all"}`, label: "Products" },
     { href: "/contact", label: "Contact" },
   ]
 

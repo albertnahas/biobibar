@@ -21,6 +21,7 @@ module.exports = {
     },
     fontFamily: {
       'sans': ['Rollgates Luxury', 'sans-serif'],
+      'arabic': ['ARBFONTS BEDAYAH', 'sans-serif'],
     },
     scale: {
       '-100': '-1',

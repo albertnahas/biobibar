@@ -28,7 +28,7 @@ export const HeroSection = ({
         height="100"
         alt={""}
       /> */}
-      <h1 dir="rtl" className="mt-32 text-5xl text-primary-light">
+      <h1 dir="rtl" className="mt-32 font-arabic text-6xl text-primary-light">
         {slogan || "من عبق حلب بدأنا..."}
       </h1>
     </section>

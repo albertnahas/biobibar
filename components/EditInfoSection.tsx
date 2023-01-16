@@ -1,46 +1,45 @@
-import React, { useState, useEffect } from "react";
-import { ReactSVG } from "react-svg";
-import fetchInfo from "../helpers/fetchInfo";
-import updateInfo from "../helpers/updateInfo";
-import { uploadImage } from "../helpers/UploadImage";
-import { Info } from "../types/info";
+import React, { useState, useEffect } from "react"
+import { ReactSVG } from "react-svg"
+import fetchInfo from "../helpers/fetchInfo"
+import updateInfo from "../helpers/updateInfo"
+import { Info } from "../types/info"
 
 const defaultInfo: Info = {
   about: "",
   address: "",
   hours: "",
   phone: "",
-};
+}
 const EditInfoSection = () => {
-  const [info, setInfo] = useState<Info>(defaultInfo);
-  const [debouncedInfo, setDebouncedInfo] = useState<Info>(defaultInfo);
-  const { about, address, phone, hours } = debouncedInfo;
+  const [info, setInfo] = useState<Info>(defaultInfo)
+  const [debouncedInfo, setDebouncedInfo] = useState<Info>(defaultInfo)
+  const { about, address, phone, hours } = debouncedInfo
 
   useEffect(() => {
     fetchInfo().then((res: Info | null) => {
-      setInfo(res || {});
-      setDebouncedInfo(res || {});
-    });
-  }, []);
+      setInfo(res || {})
+      setDebouncedInfo(res || {})
+    })
+  }, [])
 
   useEffect(() => {
     const timerId = setTimeout(() => {
-      setInfo(debouncedInfo);
-    }, 1000);
+      setInfo(debouncedInfo)
+    }, 1000)
 
-    return () => clearTimeout(timerId);
-  }, [debouncedInfo]);
+    return () => clearTimeout(timerId)
+  }, [debouncedInfo])
 
   useEffect(() => {
     // updateInfo(info);
-  }, [info]);
+  }, [info])
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value } = e.target;
-    setDebouncedInfo({ ...info, [name]: value });
-  };
+    const { name, value } = e.target
+    setDebouncedInfo({ ...info, [name]: value })
+  }
 
   return (
     <section className="contact">
@@ -108,7 +107,7 @@ const EditInfoSection = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default EditInfoSection;
+export default EditInfoSection

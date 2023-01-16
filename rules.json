@@ -1,0 +1,36 @@
+{
+    "rules": {
+        "products": {
+            ".indexOn": [
+                "isFeatured",
+                "isNew",
+                "title",
+                "category"
+            ],
+            ".read": true,
+            ".write": "auth != null"
+        },
+        "categories": {
+            ".indexOn": [
+                "name"
+            ],
+            ".read": true,
+            ".write": "auth != null"
+        },
+        "contact": {
+            ".indexOn": [
+                "name"
+            ],
+            ".read": true,
+            ".write": true
+        },
+        "info": {
+            ".read": true,
+            ".write": true
+        },
+        "home": {
+            ".read": true,
+            ".write": true
+        }
+    }
+}

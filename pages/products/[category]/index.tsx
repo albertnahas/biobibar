@@ -41,10 +41,10 @@ const Products = ({
                 title={product.title}
                 image={product.image}
                 price={product.price}
-                description={product.description}
+                description={product.category}
               />
               <div className="pl-3">
-                <p>{product.text}</p>
+                <p>{product.description}</p>
               </div>
             </div>
           ))}

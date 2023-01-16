@@ -13,7 +13,7 @@ export const ArrivalsSection = ({ products }: { products: Product[] }) => {
               key={product.id}
               id={product.id}
               title={product.title}
-              description={product.description}
+              description={product.category}
               image={product.image}
               price={product.price}
             />

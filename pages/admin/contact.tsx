@@ -1,6 +1,7 @@
-import React from "react";
-import CustomerCard from "../../components/CustomerCard";
-import Layout from "../layout";
+import React from "react"
+import CustomerCard from "../../components/CustomerCard"
+import withAuthentication from "../../components/withAuth"
+import Layout from "../layout"
 
 const customers = [
   {
@@ -13,21 +14,16 @@ const customers = [
     phone: "Phone",
     email: "Email Address",
   },
-];
+]
 
 const Contact = () => {
   return (
     <Layout isAdmin>
       {customers.map(({ name, phone, email }) => (
-        <CustomerCard
-          key={name}
-          name={name}
-          phone={phone}
-          email={email}
-        />
+        <CustomerCard key={name} name={name} phone={phone} email={email} />
       ))}
     </Layout>
-  );
-};
+  )
+}
 
-export default Contact;
+export default withAuthentication(Contact)

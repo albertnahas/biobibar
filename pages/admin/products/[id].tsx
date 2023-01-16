@@ -18,6 +18,7 @@ import { Category } from "../../../types/category"
 import { uploadImage } from "../../../helpers/UploadImage"
 import { ReactSVG } from "react-svg"
 import { CloseButton } from "../../../atoms/CloseButton"
+import withAuthentication from "../../../components/withAuth"
 
 const Product = () => {
   const [product, setProduct] = useState<Product>({ title: "" })
@@ -435,4 +436,4 @@ const Product = () => {
   )
 }
 
-export default Product
+export default withAuthentication(Product)

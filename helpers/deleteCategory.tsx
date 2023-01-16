@@ -1,7 +1,10 @@
+import { addAuthToURL } from "./addAuthToURL"
 import { DATABASE_URL } from "./constants"
 const axios = require("axios")
-const deleteCategory = (categoryId: string) => {
-  return axios.delete(`${DATABASE_URL}/categories/${categoryId}.json`)
+const deleteCategory = async (categoryId: string) => {
+  return axios.delete(
+    await addAuthToURL(`${DATABASE_URL}/categories/${categoryId}.json`)
+  )
 }
 
 export default deleteCategory

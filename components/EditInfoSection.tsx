@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ReactSVG } from "react-svg";
 import fetchInfo from "../helpers/fetchInfo";
 import updateInfo from "../helpers/updateInfo";
+import { uploadImage } from "../helpers/UploadImage";
 import { Info } from "../types/info";
 
 const defaultInfo: Info = {
@@ -44,16 +45,16 @@ const EditInfoSection = () => {
   return (
     <section className="contact">
       <div className="container ml-24 p-4">
-        <h2 className="mt-12 mb-4 text-xl">home</h2>
-        <h3 className="mb-12">Edit company information</h3>
+        <h2 className="mt-8 mb-4 text-xl">home</h2>
+        <h3 className="mb-2">Edit company information</h3>
       </div>
 
       <div className="container mx-auto mt-4 mb-8">
-        <div className="mb-20 grid gap-8 px-12 md:grid-cols-2 md:px-24 [&_td]:p-2">
-          <div className="col-1 text-right">
+        <div className="mb-8 grid gap-8 px-12 md:grid-cols-3 md:px-24 [&_td]:p-2">
+          <div className="text-right">
             <label>Edit text</label>
           </div>
-          <div className="col-2">
+          <div className="col-span-2">
             <textarea
               className="input input-primary"
               value={about}
@@ -63,11 +64,11 @@ const EditInfoSection = () => {
             />
           </div>
         </div>
-        <div className="mb-4 grid gap-8 px-12 md:grid-cols-2 md:px-24 [&_td]:p-2">
-          <div className="col-1 flex justify-end">
+        <div className="mb-2 grid gap-8 px-12 md:grid-cols-3 md:px-24 [&_td]:p-2">
+          <div className="flex justify-end">
             <ReactSVG src="/location.svg" className="h-6 w-6" />
           </div>
-          <div className="col-2">
+          <div className="col-span-2">
             <input
               type="text"
               className="input input-primary"
@@ -77,11 +78,11 @@ const EditInfoSection = () => {
             />
           </div>
         </div>
-        <div className="mb-4 grid gap-8 px-12 md:grid-cols-2 md:px-24 [&_td]:p-2">
-          <div className="col-1 flex justify-end">
+        <div className="mb-2 grid gap-8 px-12 md:grid-cols-3 md:px-24 [&_td]:p-2">
+          <div className="flex justify-end">
             <ReactSVG src="/phone.svg" className="h-6 w-6" />
           </div>
-          <div className="col-2">
+          <div className="col-span-2">
             <input
               type="text"
               className="input input-primary"
@@ -91,11 +92,11 @@ const EditInfoSection = () => {
             />
           </div>
         </div>
-        <div className="grid gap-8 px-12 md:grid-cols-2 md:px-24 [&_td]:p-2">
-          <div className="col-1 flex justify-end">
+        <div className="grid gap-8 px-12 md:grid-cols-3 md:px-24 [&_td]:p-2">
+          <div className="flex justify-end">
             <ReactSVG src="/time.svg" className="h-6 w-6" />
           </div>
-          <div className="col-2">
+          <div className="col-span-2">
             <textarea
               className="input input-primary"
               value={hours}

@@ -30,8 +30,10 @@ const Product = () => {
   const [submitting, setSubmitting] = useState(false)
 
   const { id } = useRouter().query
+  const isNew = id && id !== "new"
+
   useEffect(() => {
-    if (id && id !== "new") {
+    if (isNew) {
       fetchProduct(id as string).then((res) => {
         setProduct({ id, ...res })
       })
@@ -46,6 +48,7 @@ const Product = () => {
         isFeatured: true,
       })
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
 
   useEffect(() => {
@@ -119,14 +122,14 @@ const Product = () => {
     const updatedProduct: Product = {
       ...(product || {}),
       ...(data || { title: "new" }),
-      ...((id && { id: id as string }) || {}),
+      ...((isNew && { id: id as string }) || {}),
     }
     updatedProduct.images = [...(data?.images || []), ...imagesUrl]
     if (imageUrl) {
       updatedProduct.image = imageUrl
     }
     let res
-    if (id) {
+    if (isNew) {
       res = updateProduct(id as string, updatedProduct)
     } else {
       // create new product
@@ -202,7 +205,7 @@ const Product = () => {
   return (
     <Layout isAdmin>
       <div className="container my-12">
-        <h1 className="mb-8 text-3xl">{id ? "Edit" : "Add"} Product</h1>
+        <h1 className="mb-8 text-3xl">{isNew ? "Edit" : "Add"} Product</h1>
 
         <div className="grid md:grid-cols-2">
           <div>

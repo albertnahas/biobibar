@@ -33,15 +33,27 @@ const ProductsAdmin = () => {
   const onDeleteConfirm = () => {
     if (selectedItem && selectedItem.id) {
       if ("title" in selectedItem) {
-        deleteProduct(selectedItem.id).then(() => {
-          loadProducts()
-          setShowConfirm(false)
-        })
+        deleteProduct(selectedItem.id)
+          .then(() => {
+            loadProducts()
+            setShowConfirm(false)
+          })
+          .catch((err) => {
+            console.log(err)
+            setShowConfirm(false)
+            alert("Error deleting product")
+          })
       } else if ("name" in selectedItem) {
-        deleteCategory(selectedItem.id).then(() => {
-          loadCategories()
-          setShowConfirm(false)
-        })
+        deleteCategory(selectedItem.id)
+          .then(() => {
+            loadCategories()
+            setShowConfirm(false)
+          })
+          .catch((err) => {
+            console.log(err)
+            setShowConfirm(false)
+            alert("Error deleting category")
+          })
       }
     }
   }
@@ -79,13 +91,23 @@ const ProductsAdmin = () => {
       })
     )
     if (cat.id) {
-      updateCategory(cat.id, cat.name).then(() => {
-        loadCategories()
-      })
+      updateCategory(cat.id, cat.name)
+        .then(() => {
+          loadCategories()
+        })
+        .catch((err) => {
+          console.log(err)
+          alert("Error updating category")
+        })
     } else {
-      addCategory(cat.name).then(() => {
-        loadCategories()
-      })
+      addCategory(cat.name)
+        .then(() => {
+          loadCategories()
+        })
+        .catch((err) => {
+          console.log(err)
+          alert("Error adding category")
+        })
     }
   }
 

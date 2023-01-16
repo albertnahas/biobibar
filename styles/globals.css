@@ -27,6 +27,20 @@
 }
 
 @layer utilities {
+  @font-face {
+    font-family: "Rollgates Luxury";
+    src: local("Rollgates Luxury"),
+      url("/fonts/ROLLGATES LUXURY.ttf") format("opentype"),
+      url("/fonts/ROLLGATES LUXURY.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "ARBFONTS BEDAYAH";
+    src: local("ARBFONTS BEDAYAH"),
+      url("/fonts/ARBFONTS-BEDAYAH_V.1.1.OTF") format("opentype"),
+      url("/fonts/ARBFONTS-BEDAYAH_V.1.1.woff2") format("woff2");
+  }
+
   body {
     --primary: #de9f26;
     --transparent-primary: rgba(227, 191, 34, 0.5);

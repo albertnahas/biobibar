@@ -18,7 +18,7 @@ export const BannerSection = ({ coverUrl }: { coverUrl?: string }) => {
         </p>
         <div className="text-center">
           <Link
-            href="/products"
+            href="/products/all"
             className="btn-primary rounded-3xl bg-white px-10 py-2 text-2xl uppercase"
           >
             Order now

@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react"
+import { FC, useEffect, useState } from "react"
 import { AboutSection } from "../components/HomeSections/AboutSection"
 import { ContactSection } from "../components/HomeSections/ContactSection"
 import { Footer } from "../components/Footer"
@@ -14,9 +14,10 @@ import { FeaturedSection } from "../components/HomeSections/FeaturedSection"
 import { HeroSection } from "../components/HomeSections/HeroSection"
 import fetchHome from "../helpers/fetchHome"
 import { Home } from "../types/home"
-import updateCover from "../helpers/updateHome"
 import fetchInfo from "../helpers/fetchInfo"
 import { Info } from "../types/info"
+import { SplashScreen } from "../components/SplashScreen"
+import { Animate } from "../components/Animate"
 
 export async function getStaticProps() {
   const home = await fetchHome()
@@ -52,13 +53,33 @@ const Home: FC<Props> = ({
   home,
   info,
 }) => {
+  // loading state
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    document.body.style.overflow = loading ? "hidden" : "auto"
+    // scroll to top
+    loading && window.scrollTo(0, 0)
+    // check if body has loaded class
+    setTimeout(() => {
+      setLoading(false)
+      document.body.style.overflow = "auto"
+    }, 3500)
+  }, [loading])
+
   return (
     <div>
+      {loading && <SplashScreen />}
+
       <Navbar />
       <HeroSection coverUrl={home.cover} slogan={home.slogan} />
-      <AboutSection />
+      <Animate>
+        <AboutSection about={info.about} />
+      </Animate>
       <FeaturedSection coverUrl={home.cover2} products={featuredProducts} />
-      <ArrivalsSection products={newProducts} />
+      <Animate>
+        <ArrivalsSection products={newProducts} />
+      </Animate>
       <CategoriesSection categories={categories} />
       <BannerSection coverUrl={home.cover3} />
       <div className="md:px-40 md:pt-40">

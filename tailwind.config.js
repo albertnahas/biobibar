@@ -21,10 +21,23 @@ module.exports = {
     },
     fontFamily: {
       'sans': ['Rollgates Luxury', 'sans-serif'],
+      'arabic': ['ARBFONTS BEDAYAH', 'sans-serif'],
     },
     scale: {
       '-100': '-1',
-    }
+    },
+    // that is animation class
+    animation: {
+      delayedFade: 'fadeOut 200ms ease-in-out 3.3s forwards',
+    },
+
+    // that is actual animation
+    keyframes: theme => ({
+      fadeOut: {
+        '0%': { opacity: 1 },
+        '100%': { opacity: 0 },
+      },
+    }),
   },
   plugins: [
     require('@tailwindcss/forms'),

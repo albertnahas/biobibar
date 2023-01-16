@@ -6,12 +6,8 @@ export const AboutSection = ({ about }: { about?: string }) => {
     <section className="ornament-bg min-h-500 relative z-10 bg-white bg-no-repeat py-24 shadow-2xl shadow-text">
       <div className="mx-auto flex w-4/5 flex-col md:w-2/3 md:flex-row md:items-center md:justify-center md:px-12 lg:max-w-7xl">
         <div className="flex flex-col items-center justify-center md:w-2/3">
-          <p className="text-center text-xl text-text md:text-left">
-            هي شركة سورية مقرها مدينة حلب متخصصة في مجال صناعة الصابون الغار
-            الحلبي العريق رائدة في مجالها تحمل معها أكثر من 20 عاما من الخبرة في
-            مجال صناعة الصابون وتعمل الشركة على تطوير منتجاتها بشكل دائم ورفع
-            السوية الإنتاجية مما يتلائم مع التطورات التكنولوجية مع الحفاظ على
-            تراث هذه الصناعة
+          <p className="text-center font-arabic text-2xl text-text md:text-right">
+            {about}
           </p>
         </div>
         {/* <div className="flex flex-col items-center justify-center md:w-1/3"></div> */}

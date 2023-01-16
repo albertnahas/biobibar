@@ -8,7 +8,7 @@ export const SplashScreen = () => {
         width="600"
         height="200"
         style={{ objectFit: "contain" }}
-        src="/animation.webp"
+        src="https://i.ibb.co/93k2v3W/animation.webp"
         alt="Loading animation"
       />
     </div>

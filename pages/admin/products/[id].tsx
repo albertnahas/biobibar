@@ -217,7 +217,7 @@ const Product = () => {
               <Image
                 width="400"
                 height="300"
-                src={newImageLink || product.image || "/asset3.png"}
+                src={newImageLink || product.image || "/no-image.png"}
                 alt={product.title}
               />
             </div>

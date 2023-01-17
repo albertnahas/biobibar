@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useCallback, useState } from "react"
 import Image from "next/image"
 import Breadcrumb from "../../../molecules/Breadcrumb"
 import Layout from "../../layout"
@@ -9,6 +9,7 @@ import { ContactForm } from "../../../components/ContactForm"
 import fetchProduct from "../../../helpers/fetchProduct"
 import { productLink } from "../../../helpers/utils"
 import Head from "next/head"
+import ImageViewer from "react-simple-image-viewer"
 
 interface SingleProductProps {
   product: Product
@@ -18,6 +19,18 @@ interface SingleProductProps {
 const SingleProduct: React.FC<SingleProductProps> = ({ product, products }) => {
   const { id, title, category, image, text, images, description, price } =
     product
+  const [currentImage, setCurrentImage] = useState(0)
+  const [isViewerOpen, setIsViewerOpen] = useState(false)
+
+  const openImageViewer = useCallback((index: number) => {
+    setCurrentImage(index)
+    setIsViewerOpen(true)
+  }, [])
+
+  const closeImageViewer = () => {
+    setCurrentImage(0)
+    setIsViewerOpen(false)
+  }
   const pageTitle = `${product.title || ""} - BIOBIBAR`
   return (
     <>
@@ -52,14 +65,15 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product, products }) => {
           <Image
             width="600"
             height="600"
-            className="max-h-96 w-full object-cover"
+            className="max-h-96 w-full cursor-pointer object-cover"
             src={image || "/box.png"}
             alt={title}
+            onClick={() => openImageViewer(0)}
           />
           <div className="mt-4 grid gap-2 md:grid-cols-2">
-            {["/box.png", "/asset3.png"]?.map((img) => (
+            {images?.map((img, index) => (
               <Image
-                className="w-full object-cover"
+                className="w-full cursor-pointer object-cover"
                 style={{
                   objectFit: "cover",
                 }}
@@ -68,6 +82,7 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product, products }) => {
                 alt={title}
                 width="200"
                 height="200"
+                onClick={() => openImageViewer(index + 1)}
               />
             ))}
           </div>
@@ -104,6 +119,18 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product, products }) => {
         </div>
       </div>
       <hr className="mx-60" />
+      {isViewerOpen && (
+        <ImageViewer
+          src={(image ? [image] : []).concat([...(images || [])])}
+          currentIndex={currentImage}
+          onClose={closeImageViewer}
+          disableScroll={false}
+          backgroundStyle={{
+            backgroundColor: "rgba(0,0,0,0.9)",
+          }}
+          closeOnClickOutside={true}
+        />
+      )}
     </>
   )
 }

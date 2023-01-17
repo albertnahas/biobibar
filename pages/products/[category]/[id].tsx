@@ -90,7 +90,7 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product, products }) => {
               key={product.id}
               id={product.id}
               title={product.title}
-              description={product.description}
+              description={product.category}
               image={product.image}
               price={product.price}
             />

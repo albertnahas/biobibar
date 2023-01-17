@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { toast } from "react-toastify";
+import { ReactSVG } from "react-svg";
+
+import { Home } from "../types/home";
 import fetchHome from "../helpers/fetchHome";
 import updateHome from "../helpers/updateHome";
-import { Home } from "../types/home";
-import { ReactSVG } from "react-svg";
 import { uploadImage } from "../helpers/UploadImage";
+import EditMenuPopup from "../atoms/EditMenuPopup";
 
 const defaultHome: Home = {
   cover: "",
@@ -84,15 +87,15 @@ const EditCoverSection = () => {
       imageUrl = await uploadImage(file);
       if (imageUrl) {
         setHome({ ...home, [inputName]: imageUrl });
+        toast.success("Image uploaded successfully");
       }
     } catch (e) {
-      console.error("Image size is too large");
+      toast.error("Image size is too large");
       return;
     }
   };
 
-  const handleView = () => {
-    //
+  const handleView = (e: any) => {
   };
 
   return (
@@ -119,28 +122,13 @@ const EditCoverSection = () => {
                 <ReactSVG src="/edit.svg" className="edit-svg h-3 w-3" />
               </div>
               {isOpen === "cover" && (
-                <div className="cover-edit-container">
-                  <label htmlFor="image">
-                    <button onClick={handleView} className="cover-edit-btn">
-                      view photo
-                    </button>
-                  </label>
-                  <label htmlFor="cover">
-                    <button
-                      onClick={handleUploadImageClick}
-                      className="cover-edit-btn"
-                    >
-                      upload a photo
-                    </button>
-                  </label>
-                  <input
-                    name="cover"
-                    ref={hiddenFileInput}
-                    type="file"
-                    className="hidden"
-                    onChange={handleUpload}
+                <EditMenuPopup
+                  handleView={handleView}
+                  handleUpload={handleUpload}
+                  handleUploadImageClick={handleUploadImageClick}
+                  hiddenFileInput={hiddenFileInput}
+                  inputName="cover"
                   />
-                </div>
               )}
             </div>
           </div>
@@ -181,28 +169,13 @@ const EditCoverSection = () => {
                 <ReactSVG src="/edit.svg" className="edit-svg h-3 w-3" />
               </div>
               {isOpen === "cover2" && (
-                <div className="cover-edit-container">
-                  <label htmlFor="image">
-                    <button onClick={handleView} className="cover-edit-btn">
-                      view photo
-                    </button>
-                  </label>
-                  <label htmlFor="cover2">
-                    <button
-                      onClick={handleUploadImageClick}
-                      className="cover-edit-btn"
-                    >
-                      upload a photo
-                    </button>
-                  </label>
-                  <input
-                    name="cover2"
-                    ref={hiddenFileInput}
-                    type="file"
-                    className="hidden"
-                    onChange={handleUpload}
+                <EditMenuPopup
+                  handleView={handleView}
+                  handleUpload={handleUpload}
+                  handleUploadImageClick={handleUploadImageClick}
+                  hiddenFileInput={hiddenFileInput}
+                  inputName="cover2"
                   />
-                </div>
               )}
             </div>
           </div>
@@ -226,28 +199,13 @@ const EditCoverSection = () => {
                 <ReactSVG src="/edit.svg" className="edit-svg h-3 w-3" />
               </div>
               {isOpen === "cover3" && (
-                <div className="cover-edit-container">
-                  <label htmlFor="image">
-                    <button onClick={handleView} className="cover-edit-btn">
-                      view photo
-                    </button>
-                  </label>
-                  <label htmlFor="cover3">
-                    <button
-                      onClick={handleUploadImageClick}
-                      className="cover-edit-btn"
-                    >
-                      upload a photo
-                    </button>
-                  </label>
-                  <input
-                    name="cover3"
-                    ref={hiddenFileInput}
-                    type="file"
-                    className="hidden"
-                    onChange={handleUpload}
+                <EditMenuPopup
+                  handleView={handleView}
+                  handleUpload={handleUpload}
+                  handleUploadImageClick={handleUploadImageClick}
+                  hiddenFileInput={hiddenFileInput}
+                  inputName="cover3"
                   />
-                </div>
               )}
             </div>
           </div>

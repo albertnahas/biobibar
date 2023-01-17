@@ -18,7 +18,6 @@ import fetchInfo from "../helpers/fetchInfo"
 import { Info } from "../types/info"
 import { SplashScreen } from "../components/SplashScreen"
 import { Animate } from "../components/Animate"
-import { toast } from "react-toastify"
 
 export async function getStaticProps() {
   const home = await fetchHome()

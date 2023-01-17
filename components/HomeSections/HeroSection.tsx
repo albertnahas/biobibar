@@ -19,7 +19,7 @@ export const HeroSection = ({
         className="md:h-80 md:w-80"
         width="300"
         height="300"
-        alt={""}
+        alt={"BioBibar logo"}
       />
       {/* <Image
         src="/slogan.svg"
@@ -28,7 +28,10 @@ export const HeroSection = ({
         height="100"
         alt={""}
       /> */}
-      <h1 dir="rtl" className="mt-32 font-arabic text-6xl text-primary-light">
+      <h1
+        dir="rtl"
+        className="mt-32 text-center font-arabic text-primary-light text-6xl"
+      >
         {slogan || "من عبق حلب بدأنا..."}
       </h1>
     </section>

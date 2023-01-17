@@ -115,28 +115,14 @@ const EditCoverSection = () => {
   const handleView = (e: any) => {
     const imageUrl = e.target.src;
     const lightbox = document.createElement("div");
-    lightbox.style.position = "fixed";
-    lightbox.style.top = "0";
-    lightbox.style.bottom = "0";
-    lightbox.style.left = "0";
-    lightbox.style.right = "0";
-    lightbox.style.background = "rgba(0,0,0,0.8)";
+    lightbox.classList.add('img-lightbox');
 
     const image = document.createElement("img");
-    image.style.position = "absolute";
-    image.style.top = "50%";
-    image.style.left = "50%";
-    image.style.transform = "translate(-50%, -50%)";
     image.src = imageUrl;
     lightbox.appendChild(image);
 
     const closeButton = document.createElement("button");
-    closeButton.style.position = "absolute";
-    closeButton.style.top = "20px";
-    closeButton.style.right = "20px";
-    closeButton.style.background = "transparent";
-    closeButton.style.border = "none";
-    closeButton.style.color = "#fff";
+    closeButton.classList.add('close-lightbox-btn');
     closeButton.innerHTML = "X";
     lightbox.appendChild(closeButton);
 

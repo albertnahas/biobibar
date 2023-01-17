@@ -7,7 +7,7 @@ import { Home } from "../types/home";
 import fetchHome from "../helpers/fetchHome";
 import updateHome from "../helpers/updateHome";
 import { uploadImage } from "../helpers/UploadImage";
-import EditMenuPopup from "../atoms/EditMenuPopup";
+import EditImageMenu from "../atoms/EditImageMenu";
 
 const defaultHome: Home = {
   cover: "",
@@ -55,14 +55,6 @@ const EditCoverSection = () => {
 
   const handleOpen = (name: string): void => {
         setIsOpen(isOpen === name ? null : name);
-  };
-
-  const hiddenFileInput = React.useRef<any>(null);
-
-  const handleUploadImageClick = () => {
-    if (hiddenFileInput?.current instanceof HTMLInputElement) {
-      hiddenFileInput.current.click();
-    }
   };
 
   const handleUpload = async (e: React.ChangeEvent) => {
@@ -122,11 +114,9 @@ const EditCoverSection = () => {
                 <ReactSVG src="/edit.svg" className="edit-svg h-3 w-3" />
               </div>
               {isOpen === "cover" && (
-                <EditMenuPopup
+                <EditImageMenu
                   handleView={handleView}
                   handleUpload={handleUpload}
-                  handleUploadImageClick={handleUploadImageClick}
-                  hiddenFileInput={hiddenFileInput}
                   inputName="cover"
                   />
               )}
@@ -169,11 +159,9 @@ const EditCoverSection = () => {
                 <ReactSVG src="/edit.svg" className="edit-svg h-3 w-3" />
               </div>
               {isOpen === "cover2" && (
-                <EditMenuPopup
+                <EditImageMenu
                   handleView={handleView}
                   handleUpload={handleUpload}
-                  handleUploadImageClick={handleUploadImageClick}
-                  hiddenFileInput={hiddenFileInput}
                   inputName="cover2"
                   />
               )}
@@ -199,11 +187,9 @@ const EditCoverSection = () => {
                 <ReactSVG src="/edit.svg" className="edit-svg h-3 w-3" />
               </div>
               {isOpen === "cover3" && (
-                <EditMenuPopup
+                <EditImageMenu
                   handleView={handleView}
                   handleUpload={handleUpload}
-                  handleUploadImageClick={handleUploadImageClick}
-                  hiddenFileInput={hiddenFileInput}
                   inputName="cover3"
                   />
               )}

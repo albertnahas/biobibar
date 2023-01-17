@@ -1,14 +1,20 @@
 import React from "react";
 
-const EditMenuPopup = ({
+const EditImageMenu = ({
   handleView,
   handleUpload,
-  handleUploadImageClick,
-  hiddenFileInput,
   inputName,
-}: EditMenuPopupProps) => {
+}: EditImageMenuProps) => {
+  const hiddenFileInput = React.useRef<any>(null);
+
+  const handleUploadImageClick = () => {
+    if (hiddenFileInput?.current instanceof HTMLInputElement) {
+      hiddenFileInput.current.click();
+    }
+  };
+
   return (
-    <div className="cover-edit-container">
+    <div className="cover">
       <button onClick={handleView} className="cover-edit-btn">
         view photo
       </button>
@@ -28,12 +34,10 @@ const EditMenuPopup = ({
   );
 };
 
-export default EditMenuPopup;
+export default EditImageMenu;
 
-interface EditMenuPopupProps {
-  handleUploadImageClick: () => void,
-  handleUpload: (e: React.ChangeEvent) => void,
-  handleView: (e: any) => void,
-  hiddenFileInput: any;
+interface EditImageMenuProps {
+  handleUpload: (e: React.ChangeEvent) => void;
+  handleView: (e: any) => void;
   inputName: string;
 }

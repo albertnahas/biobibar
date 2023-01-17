@@ -30,7 +30,7 @@
   .cover-edit-icon {
     @apply absolute bottom-8 right-8 2xl:right-36 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border-none bg-white p-1;
   }
-  .cover-edit-container {
+  .cover {
     @apply absolute -bottom-8 right-16 2xl:right-44 w-120 rounded-2xl border-2 border-primary bg-white px-2 py-1 text-xs;
   }
   .cover-edit-btn {

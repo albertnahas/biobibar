@@ -18,6 +18,7 @@ import { Category } from "../../../types/category"
 import { uploadImage } from "../../../helpers/UploadImage"
 import { ReactSVG } from "react-svg"
 import { CloseButton } from "../../../atoms/CloseButton"
+import { toast } from "react-toastify"
 
 const Product = () => {
   const [product, setProduct] = useState<Product>({ title: "" })
@@ -48,7 +49,7 @@ const Product = () => {
         isFeatured: true,
       })
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
 
   useEffect(() => {
@@ -138,6 +139,7 @@ const Product = () => {
     res
       .then((response) => {
         // redirect to product list
+        toast.success("Product saved successfully")
         router.push("/admin/products")
       })
       .catch((e) => {
@@ -145,6 +147,8 @@ const Product = () => {
           type: "server",
           message: "Something went wrong please try again later",
         })
+
+        toast.error("Something went wron1g please try again later")
         setSubmitting(false)
       })
   }

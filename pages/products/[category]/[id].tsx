@@ -18,10 +18,11 @@ interface SingleProductProps {
 const SingleProduct: React.FC<SingleProductProps> = ({ product, products }) => {
   const { id, title, category, image, text, images, description, price } =
     product
+  const pageTitle = `${product.title || ""} - BIOBIBAR`
   return (
     <>
       <Head>
-        <title>{product.title} - BIOBIBAR</title>
+        <title>{pageTitle}</title>
         <meta name="description" content={product.description} />
         <meta property="og:title" content={product.title} />
         <meta property="og:description" content={product.description} />

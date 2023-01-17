@@ -88,16 +88,32 @@ const EditCoverSection = () => {
   };
 
   const imageRef = React.useRef<any>(null);
+  const imageRef2 = React.useRef<any>(null);
+  const imageRef3 = React.useRef<any>(null);
 
-  const handleViewClick = () => {
-    if (imageRef?.current instanceof HTMLImageElement) {
-      imageRef.current.click();
+  const handleViewClick = (cover: string) => {
+    let ref;
+    switch (cover) {
+      case "cover":
+        ref = imageRef;
+        break;
+      case "cover2":
+        ref = imageRef2;
+        break;
+      case "cover3":
+        ref = imageRef3;
+        break;
+      default:
+        break;
+    }
+
+    if (ref?.current instanceof HTMLImageElement) {
+      ref.current.click();
     }
   };
 
   const handleView = (e: any) => {
     const imageUrl = e.target.src;
-    console.log(e.target);
     const lightbox = document.createElement("div");
     lightbox.style.position = "fixed";
     lightbox.style.top = "0";
@@ -158,7 +174,7 @@ const EditCoverSection = () => {
               </div>
               {isOpen === "cover" && (
                 <EditImageMenu
-                  handleViewClick={handleViewClick}
+                  handleViewClick={() => handleViewClick("cover")}
                   handleUpload={handleUpload}
                   inputName="cover"
                 />
@@ -189,7 +205,7 @@ const EditCoverSection = () => {
               <Image
                 width="500"
                 height="200"
-                ref={imageRef}
+                ref={imageRef2}
                 onClick={handleView}
                 style={{
                   objectFit: "cover",
@@ -205,7 +221,7 @@ const EditCoverSection = () => {
               </div>
               {isOpen === "cover2" && (
                 <EditImageMenu
-                  handleViewClick={handleViewClick}
+                  handleViewClick={() => handleViewClick("cover2")}
                   handleUpload={handleUpload}
                   inputName="cover2"
                 />
@@ -219,7 +235,7 @@ const EditCoverSection = () => {
               <Image
                 width="500"
                 height="200"
-                ref={imageRef}
+                ref={imageRef3}
                 onClick={handleView}
                 style={{
                   objectFit: "cover",
@@ -235,7 +251,7 @@ const EditCoverSection = () => {
               </div>
               {isOpen === "cover3" && (
                 <EditImageMenu
-                  handleViewClick={handleViewClick}
+                  handleViewClick={() => handleViewClick("cover3")}
                   handleUpload={handleUpload}
                   inputName="cover3"
                 />

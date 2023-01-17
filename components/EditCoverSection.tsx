@@ -54,7 +54,7 @@ const EditCoverSection = () => {
   };
 
   const handleOpen = (name: string): void => {
-        setIsOpen(isOpen === name ? null : name);
+    setIsOpen(isOpen === name ? null : name);
   };
 
   const handleUpload = async (e: React.ChangeEvent) => {
@@ -87,7 +87,48 @@ const EditCoverSection = () => {
     }
   };
 
+  const imageRef = React.useRef<any>(null);
+
+  const handleViewClick = () => {
+    if (imageRef?.current instanceof HTMLImageElement) {
+      imageRef.current.click();
+    }
+  };
+
   const handleView = (e: any) => {
+    const imageUrl = e.target.src;
+    console.log(e.target);
+    const lightbox = document.createElement("div");
+    lightbox.style.position = "fixed";
+    lightbox.style.top = "0";
+    lightbox.style.bottom = "0";
+    lightbox.style.left = "0";
+    lightbox.style.right = "0";
+    lightbox.style.background = "rgba(0,0,0,0.8)";
+
+    const image = document.createElement("img");
+    image.style.position = "absolute";
+    image.style.top = "50%";
+    image.style.left = "50%";
+    image.style.transform = "translate(-50%, -50%)";
+    image.src = imageUrl;
+    lightbox.appendChild(image);
+
+    const closeButton = document.createElement("button");
+    closeButton.style.position = "absolute";
+    closeButton.style.top = "20px";
+    closeButton.style.right = "20px";
+    closeButton.style.background = "transparent";
+    closeButton.style.border = "none";
+    closeButton.style.color = "#fff";
+    closeButton.innerHTML = "X";
+    lightbox.appendChild(closeButton);
+
+    closeButton.addEventListener("click", () => {
+      document.body.removeChild(lightbox);
+    });
+
+    document.body.appendChild(lightbox);
   };
 
   return (
@@ -101,6 +142,8 @@ const EditCoverSection = () => {
               <Image
                 width="500"
                 height="200"
+                ref={imageRef}
+                onClick={handleView}
                 src={cover || "/asset1.png"}
                 style={{
                   objectFit: "cover",
@@ -115,10 +158,10 @@ const EditCoverSection = () => {
               </div>
               {isOpen === "cover" && (
                 <EditImageMenu
-                  handleView={handleView}
+                  handleViewClick={handleViewClick}
                   handleUpload={handleUpload}
                   inputName="cover"
-                  />
+                />
               )}
             </div>
           </div>
@@ -146,6 +189,8 @@ const EditCoverSection = () => {
               <Image
                 width="500"
                 height="200"
+                ref={imageRef}
+                onClick={handleView}
                 style={{
                   objectFit: "cover",
                 }}
@@ -160,10 +205,10 @@ const EditCoverSection = () => {
               </div>
               {isOpen === "cover2" && (
                 <EditImageMenu
-                  handleView={handleView}
+                  handleViewClick={handleViewClick}
                   handleUpload={handleUpload}
                   inputName="cover2"
-                  />
+                />
               )}
             </div>
           </div>
@@ -174,6 +219,8 @@ const EditCoverSection = () => {
               <Image
                 width="500"
                 height="200"
+                ref={imageRef}
+                onClick={handleView}
                 style={{
                   objectFit: "cover",
                 }}
@@ -188,10 +235,10 @@ const EditCoverSection = () => {
               </div>
               {isOpen === "cover3" && (
                 <EditImageMenu
-                  handleView={handleView}
+                  handleViewClick={handleViewClick}
                   handleUpload={handleUpload}
                   inputName="cover3"
-                  />
+                />
               )}
             </div>
           </div>

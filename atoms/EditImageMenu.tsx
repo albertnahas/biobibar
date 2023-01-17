@@ -1,7 +1,7 @@
 import React from "react";
 
 const EditImageMenu = ({
-  handleView,
+  handleViewClick,
   handleUpload,
   inputName,
 }: EditImageMenuProps) => {
@@ -15,7 +15,7 @@ const EditImageMenu = ({
 
   return (
     <div className="cover">
-      <button onClick={handleView} className="cover-edit-btn">
+      <button onClick={handleViewClick} className="cover-edit-btn">
         view photo
       </button>
       <label htmlFor={inputName}>
@@ -38,6 +38,6 @@ export default EditImageMenu;
 
 interface EditImageMenuProps {
   handleUpload: (e: React.ChangeEvent) => void;
-  handleView: (e: any) => void;
+  handleViewClick: () => void;
   inputName: string;
 }

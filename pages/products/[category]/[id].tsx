@@ -53,14 +53,16 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product, products }) => {
             width="600"
             height="600"
             className="max-h-96 w-full object-cover"
-            //   src={image}
-            src={"/asset3.png"}
+            src={image || "/box.png"}
             alt={title}
           />
-          <div className="mt-4 flex flex-wrap">
-            {images?.map((img) => (
+          <div className="mt-4 grid gap-2 md:grid-cols-2">
+            {["/box.png", "/asset3.png"]?.map((img) => (
               <Image
-                className="h-24 w-1/4 object-cover"
+                className="w-full object-cover"
+                style={{
+                  objectFit: "cover",
+                }}
                 key={img}
                 src={img}
                 alt={title}

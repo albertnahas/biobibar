@@ -1,9 +1,16 @@
 import axios from "axios"
+import { useRouter } from "next/router"
 import { useState } from "react"
 import { useForm, Controller } from "react-hook-form"
 import { DATABASE_URL } from "../helpers/constants"
 
-export const ContactForm = ({ source }: { source?: string }) => {
+export const ContactForm = ({
+  source,
+  redirect,
+}: {
+  source?: string
+  redirect?: string
+}) => {
   interface FormData {
     name: string
     phone: string
@@ -18,6 +25,7 @@ export const ContactForm = ({ source }: { source?: string }) => {
     handleSubmit,
   } = useForm<FormData>()
   const [submitted, setSubmitted] = useState(false)
+  const route = useRouter()
 
   const onSubmit = (data: FormData) => {
     axios
@@ -28,6 +36,11 @@ export const ContactForm = ({ source }: { source?: string }) => {
       .then((response) => {
         reset()
         setSubmitted(true)
+        if (redirect) {
+          setTimeout(() => {
+            route.push(redirect)
+          }, 3000)
+        }
       })
       .catch((e) => {
         setError("name", {
@@ -84,7 +97,7 @@ export const ContactForm = ({ source }: { source?: string }) => {
           </div>
         </form>
       ) : (
-        <p className="text-center text-2xl">
+        <p className="text-center text-2xl text-primary">
           Thank you for contacting us, we will reach out to you soon
         </p>
       )}

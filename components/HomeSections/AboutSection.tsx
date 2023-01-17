@@ -23,7 +23,7 @@ export const AboutInfo = ({ about }: { about?: string }) => (
       className="md:h-52 md:w-52"
       width="300"
       height="300"
-      alt={""}
+      alt={"BioBibar logo"}
     />
   </div>
 )

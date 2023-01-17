@@ -14,10 +14,11 @@ const Products = ({
   products?: Product[]
   category: string
 }) => {
+  const title = `Products - ${category || "All"} - BIOBIBAR`
   return (
     <>
       <Head>
-        <title>Products - {category} - BIOBIBAR</title>
+        <title>{title}</title>
         <meta name="description" content="Browse our selection of products." />
         <meta name="robots" content="index, follow" />
         <link

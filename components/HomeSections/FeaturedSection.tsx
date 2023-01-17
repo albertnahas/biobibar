@@ -2,8 +2,6 @@ import Link from "next/link"
 import { FC } from "react"
 import { ReactSVG } from "react-svg"
 import Slider from "react-slick"
-import "slick-carousel/slick/slick.css"
-import "slick-carousel/slick/slick-theme.css"
 import { Product } from "../../types/product"
 import { productLink } from "../../helpers/utils"
 

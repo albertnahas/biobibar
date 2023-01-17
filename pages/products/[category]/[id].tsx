@@ -18,10 +18,11 @@ interface SingleProductProps {
 const SingleProduct: React.FC<SingleProductProps> = ({ product, products }) => {
   const { id, title, category, image, text, images, description, price } =
     product
+  const pageTitle = `${product.title || ""} - BIOBIBAR`
   return (
     <>
       <Head>
-        <title>{product.title} - BIOBIBAR</title>
+        <title>{pageTitle}</title>
         <meta name="description" content={product.description} />
         <meta property="og:title" content={product.title} />
         <meta property="og:description" content={product.description} />
@@ -81,7 +82,10 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product, products }) => {
         </div>
       </div>
       <div className="mt-16">
-        <ContactForm source={`product ${product.category}/${product.title}`} />
+        <ContactForm
+          redirect={`/products/${product.category}`}
+          source={`product ${product.category}/${product.title}`}
+        />
       </div>
       <div className="container">
         <div className="my-20 grid gap-12 md:grid-cols-4">

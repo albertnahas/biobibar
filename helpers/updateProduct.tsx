@@ -1,4 +1,5 @@
 import { Product } from "../types/product"
+import { addAuthToURL } from "./addAuthToURL"
 import { DATABASE_URL } from "./constants"
 
 export async function updateProduct(productId: string, product: Product) {
@@ -7,7 +8,7 @@ export async function updateProduct(productId: string, product: Product) {
   }
   delete updates.id
 
-  const url = `${DATABASE_URL}/products/${productId}.json`
+  const url = await addAuthToURL(`${DATABASE_URL}/products/${productId}.json`)
   const options = {
     method: "PATCH",
     body: JSON.stringify(updates),

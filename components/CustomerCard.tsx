@@ -13,25 +13,25 @@ const CustomerCard = ({ name, email, phone, source }: customer) => {
         <div className="grid gap-8 px-12 md:grid-cols-4 md:px-24">
           <input
             type="text"
-            className="input input-readonly"
+            className="input-readonly"
             placeholder={name}
             readOnly
           />
           <input
             type="text"
-            className="input input-readonly"
+            className="input-readonly"
             placeholder={phone}
             readOnly
           />
           <input
             type="email"
-            className="input input-readonly"
+            className="input-readonly"
             placeholder={email}
             readOnly
           />
           <input
             type="text"
-            className="input input-readonly"
+            className="input-readonly"
             placeholder={source}
             readOnly
           />

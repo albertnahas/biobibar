@@ -16,10 +16,10 @@
     @apply h-10;
   }
   .input-readonly {
-    @apply cursor-default focus-visible:outline-none;
+    @apply input cursor-default focus:outline-none focus:border-secondary-dark focus:ring-0 focus-visible:outline-none;
   }
   .input-primary {
-    @apply border-2 border-primary focus-visible:outline-none;
+    @apply input border-2 border-primary focus:outline-none focus:border-primary focus:ring-0 focus-visible:outline-none;
   }
   .textarea {
     @apply h-28;

@@ -51,17 +51,7 @@ const EditCoverSection = () => {
   };
 
   const handleOpen = (name: string): void => {
-    switch (name) {
-      case "cover":
         setIsOpen(isOpen === name ? null : name);
-        break;
-      case "cover2":
-        setIsOpen(isOpen === name ? null : name);
-        break;
-      case "cover3":
-        setIsOpen(isOpen === name ? null : name);
-        break;
-    }
   };
 
   const hiddenFileInput = React.useRef<any>(null);
@@ -74,7 +64,6 @@ const EditCoverSection = () => {
 
   const handleUpload = async (e: React.ChangeEvent) => {
     const input = e.target as HTMLInputElement;
-    console.log(home.slogan);
 
     const inputName = input.name;
 
@@ -159,7 +148,7 @@ const EditCoverSection = () => {
             <div className="grid gap-4 md:grid-cols-4">
               <label>Edit text</label>
               <textarea
-                className="input input-primary col-span-3"
+                className="input-primary col-span-3"
                 value={slogan}
                 name="slogan"
                 rows={5}

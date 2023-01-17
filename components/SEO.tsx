@@ -18,7 +18,10 @@ export const SEO = () => {
         property="og:description"
         content="BIOBIBAR - From Aleppo, we started...."
       />
-      <meta property="og:image" content="https://biobibar.com/logo.png" />
+      <meta
+        property="og:image"
+        content="https://biobibar.vercel.app/logo-dark.png"
+      />
       <meta property="og:url" content="https://biobibar.com" />
       <meta property="og:site_name" content="BIOBIBAR" />
       <meta property="og:type" content="website" />
@@ -28,7 +31,10 @@ export const SEO = () => {
         name="twitter:description"
         content="BIOBIBAR - From Aleppo, we started...."
       />
-      <meta name="twitter:image" content="https://biobibar.com/logo.png" />
+      <meta
+        name="twitter:image"
+        content="https://biobibar.vercel.app/logo-dark.png"
+      />
       <meta name="twitter:site" content="@biobibar" />
       <meta name="twitter:creator" content="@biobibar" />
     </Head>

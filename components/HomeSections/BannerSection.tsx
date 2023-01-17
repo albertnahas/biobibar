@@ -12,7 +12,7 @@ export const BannerSection = ({ coverUrl }: { coverUrl?: string }) => {
         <p className="text-center text-3xl text-white">
           Let&apos;s change the feelings in your feet with
         </p>
-        <h1 className="text-center text-6xl text-white">BIOBIBAR</h1>
+        <h2 className="text-center text-6xl text-white">BIOBIBAR</h2>
         <p className="text-center text-xl text-white">
           Visit our store or order online to get special discounts
         </p>

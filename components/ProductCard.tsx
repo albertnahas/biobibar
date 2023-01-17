@@ -17,7 +17,7 @@ export const ProductCard: FC<Props> = (product) => {
       }}
     >
       <Image
-        src="/box.png"
+        src={product.image || "/box.png"}
         alt="product"
         className="product-image border-4 border-primary md:border-8"
         style={{

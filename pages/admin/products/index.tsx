@@ -14,6 +14,8 @@ import { CloseButton } from "../../../atoms/CloseButton"
 import addCategory from "../../../helpers/addCategory"
 import { updateCategory } from "../../../helpers/updateCategory"
 import withAuthentication from "../../../components/withAuth"
+import { toast } from "react-toastify"
+
 const ProductsAdmin = () => {
   const [products, setProducts] = useState<Product[]>([])
   const [categories, setCategories] = useState<CategoryItem[]>([])
@@ -42,7 +44,7 @@ const ProductsAdmin = () => {
           .catch((err: any) => {
             console.log(err)
             setShowConfirm(false)
-            alert("Error deleting product")
+            toast.error("Error deleting product")
           })
       } else if ("name" in selectedItem) {
         deleteCategory(selectedItem.id)
@@ -53,7 +55,7 @@ const ProductsAdmin = () => {
           .catch((err: any) => {
             console.log(err)
             setShowConfirm(false)
-            alert("Error deleting category")
+            toast.error("Error deleting category")
           })
       }
     }
@@ -98,7 +100,7 @@ const ProductsAdmin = () => {
         })
         .catch((err: any) => {
           console.log(err)
-          alert("Error updating category")
+          toast.error("Error updating category")
         })
     } else {
       addCategory(cat.name)
@@ -107,7 +109,7 @@ const ProductsAdmin = () => {
         })
         .catch((err: any) => {
           console.log(err)
-          alert("Error adding category")
+          toast.error("Error adding category")
         })
     }
   }

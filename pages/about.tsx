@@ -1,19 +1,21 @@
 import Head from "next/head"
+import { Footer } from "../components/Footer"
 import { AboutInfo } from "../components/HomeSections/AboutSection"
 import fetchInfo from "../helpers/fetchInfo"
+import { Info } from "../types/info"
 import Layout from "./layout"
 
 export async function getStaticProps() {
-  const { about } = (await fetchInfo()) || {}
+  const info = (await fetchInfo()) || {}
   return {
     props: {
-      about,
+      info,
     },
     revalidate: 60,
   }
 }
 
-const about = ({ about }: { about?: string }) => {
+const about = ({ info }: { info?: Info }) => {
   return (
     <>
       <Head>
@@ -23,8 +25,11 @@ const about = ({ about }: { about?: string }) => {
         <link rel="canonical" href={`https://www.biobibar.com/about`} />
       </Head>
       <Layout>
-        <div className="my-24">
-          <AboutInfo about={about} />
+        <div className="md:mt-24">
+          <AboutInfo about={info?.about} />
+        </div>
+        <div className="md:px-40">
+          <Footer info={info} />
         </div>
       </Layout>
     </>

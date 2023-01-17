@@ -1,8 +1,22 @@
 import Head from "next/head"
+import { Footer } from "../components/Footer"
 import { ContactSection } from "../components/HomeSections/ContactSection"
+import fetchInfo from "../helpers/fetchInfo"
+import { Info } from "../types/info"
 import Layout from "./layout"
 
-const contact = () => {
+export async function getStaticProps() {
+  const info = await fetchInfo()
+
+  return {
+    props: {
+      info,
+    },
+    revalidate: 60,
+  }
+}
+
+const contact = ({ info }: { info: Info }) => {
   return (
     <>
       <Head>
@@ -12,8 +26,9 @@ const contact = () => {
         <link rel="canonical" href={`https://www.biobibar.com/contact`} />
       </Head>
       <Layout>
-        <div className="h-400">
+        <div className="md:px-40">
           <ContactSection />
+          <Footer info={info} />
         </div>
       </Layout>
     </>

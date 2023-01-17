@@ -82,7 +82,10 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product, products }) => {
         </div>
       </div>
       <div className="mt-16">
-        <ContactForm source={`product ${product.category}/${product.title}`} />
+        <ContactForm
+          redirect={`/products/${product.category}`}
+          source={`product ${product.category}/${product.title}`}
+        />
       </div>
       <div className="container">
         <div className="my-20 grid gap-12 md:grid-cols-4">

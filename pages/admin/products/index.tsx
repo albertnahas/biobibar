@@ -13,7 +13,9 @@ import deleteCategory from "../../../helpers/deleteCategory"
 import { CloseButton } from "../../../atoms/CloseButton"
 import addCategory from "../../../helpers/addCategory"
 import { updateCategory } from "../../../helpers/updateCategory"
+import withAuthentication from "../../../components/withAuth"
 import { toast } from "react-toastify"
+
 const ProductsAdmin = () => {
   const [products, setProducts] = useState<Product[]>([])
   const [categories, setCategories] = useState<CategoryItem[]>([])
@@ -232,4 +234,4 @@ interface CategoryItem extends Category {
   edit?: boolean
 }
 
-export default ProductsAdmin
+export default withAuthentication(ProductsAdmin)

@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint"
   },
@@ -25,11 +26,13 @@
     "firebase": "^9.15.0",
     "memory-cache": "^0.2.0",
     "next": "13.1.1",
+    "next-sitemap": "^3.1.45",
     "postcss": "^8.4.21",
     "react": "18.2.0",
     "react-animate-on-scroll": "^2.1.5",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.42.0",
+    "react-simple-image-viewer": "^1.2.2",
     "react-slick": "^0.29.0",
     "react-svg": "^15.1.18",
     "react-toastify": "^9.1.1",

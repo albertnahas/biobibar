@@ -4,4 +4,6 @@ export interface Contact {
   phone: string,
   email: string,
   source?: string
+  read?: boolean,
+  createdAt?: Date,
 }

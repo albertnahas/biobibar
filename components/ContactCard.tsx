@@ -1,16 +1,24 @@
-import React from "react";
-import { Contact } from "../types/contact";
+import moment from "moment"
+import React from "react"
+import { Contact } from "../types/contact"
 
-const ContactCard = ({ name, email, phone, source }: Contact) => {
+const ContactCard = (
+  contact: Contact & { onCheckRead: (id: string, checked?: boolean) => void }
+) => {
+  const { id, name, phone, email, source, createdAt, read, onCheckRead } =
+    contact
   return (
-    <section className="contact">
-      <div className="container ml-12 p-4">
-        <h2 className="mt-8 mb-4 text-xl">Customer information</h2>
-        <h3 className="mb-2">customer</h3>
-      </div>
-
-      <div className="container mx-auto my-2">
-        <div className="grid gap-8 px-12 md:grid-cols-4 md:px-24">
+    <>
+      <section
+        className={`contact rounded-lg py-2 ${read ? "bg-gray-100" : ""}`}
+      >
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-6 lg:px-24">
+          <h3>
+            customer
+            <small className="block text-gray-400">
+              {moment(createdAt).fromNow()}
+            </small>
+          </h3>
           <input
             type="text"
             className="input-readonly"
@@ -29,16 +37,30 @@ const ContactCard = ({ name, email, phone, source }: Contact) => {
             placeholder={email}
             readOnly
           />
+          {source ? (
+            <input
+              type="text"
+              className="input-readonly"
+              placeholder={source}
+              readOnly
+            />
+          ) : (
+            <>-</>
+          )}
           <input
-            type="text"
-            className="input-readonly"
-            placeholder={source}
-            readOnly
+            type="checkbox"
+            className="mt-3 rounded-full text-secondary shadow focus:ring-secondary"
+            name="isFeatured"
+            checked={read}
+            onChange={(e) => {
+              onCheckRead(id || "", e.target.checked)
+            }}
           />
         </div>
-      </div>
-    </section>
-  );
-};
+      </section>
+      <hr className="mb-4 md:mb-4" />
+    </>
+  )
+}
 
-export default ContactCard;
+export default ContactCard

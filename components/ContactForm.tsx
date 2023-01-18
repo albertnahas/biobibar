@@ -31,6 +31,7 @@ export const ContactForm = ({
     axios
       .post(`${DATABASE_URL}/contacts.json`, {
         ...data,
+        createdAt: new Date().toISOString(),
         ...(source && { source }),
       })
       .then((response) => {

@@ -1,6 +1,7 @@
-import React from "react";
-import CustomerCard from "../../components/CustomerCard";
-import Layout from "../layout";
+import React from "react"
+import CustomerCard from "../../components/CustomerCard"
+import withAuthentication from "../../components/withAuth"
+import Layout from "../layout"
 
 const customers = [
   {
@@ -15,7 +16,7 @@ const customers = [
     email: "Email Address",
     source: "Test"
   },
-];
+]
 
 const Contact = () => {
   return (
@@ -30,7 +31,7 @@ const Contact = () => {
         />
       ))}
     </Layout>
-  );
-};
+  )
+}
 
-export default Contact;
+export default withAuthentication(Contact)

@@ -13,6 +13,13 @@ const nextConfig = {
   images: {
     domains: ['firebasestorage.googleapis.com'],
   },
+  exportPathMap: async function (defaultPathMap) {
+    return {
+      '/': { page: '/' },
+      ...defaultPathMap,
+      '/sitemap.xml': { page: '/sitemap' },
+    }
+  }
 }
 
 module.exports = nextConfig

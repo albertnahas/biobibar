@@ -1,4 +1,5 @@
 import { Category } from "../types/category"
+import { addAuthToURL } from "./addAuthToURL"
 import { DATABASE_URL } from "./constants"
 
 export async function updateCategory(categoryId: string, name: string) {
@@ -6,7 +7,7 @@ export async function updateCategory(categoryId: string, name: string) {
     name: name,
   }
 
-  const url = `${DATABASE_URL}/categories/${categoryId}.json`
+  const url = await addAuthToURL(`${DATABASE_URL}/categories/${categoryId}.json`)
   const options = {
     method: "PATCH",
     body: JSON.stringify(updates),

@@ -18,6 +18,7 @@ import { Category } from "../../../types/category"
 import { uploadImage } from "../../../helpers/UploadImage"
 import { ReactSVG } from "react-svg"
 import { CloseButton } from "../../../atoms/CloseButton"
+import withAuthentication from "../../../components/withAuth"
 import { toast } from "react-toastify"
 
 const Product = () => {
@@ -217,7 +218,7 @@ const Product = () => {
               <Image
                 width="400"
                 height="300"
-                src={newImageLink || product.image || "/asset3.png"}
+                src={newImageLink || product.image || "/no-image.png"}
                 alt={product.title}
               />
             </div>
@@ -439,4 +440,4 @@ const Product = () => {
   )
 }
 
-export default Product
+export default withAuthentication(Product)

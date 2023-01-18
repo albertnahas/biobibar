@@ -55,7 +55,7 @@ const EditInfoSection = () => {
           </div>
           <div className="col-span-2">
             <textarea
-              className="input input-primary"
+              className="input-primary text-right"
               value={about}
               name="about"
               rows={5}
@@ -70,7 +70,7 @@ const EditInfoSection = () => {
           <div className="col-span-2">
             <input
               type="text"
-              className="input input-primary"
+              className="input-primary"
               value={address}
               name="address"
               onChange={handleChange}
@@ -84,7 +84,7 @@ const EditInfoSection = () => {
           <div className="col-span-2">
             <input
               type="text"
-              className="input input-primary"
+              className="input-primary"
               value={phone}
               name="phone"
               onChange={handleChange}
@@ -97,7 +97,7 @@ const EditInfoSection = () => {
           </div>
           <div className="col-span-2">
             <textarea
-              className="input input-primary"
+              className="input-primary"
               value={hours}
               name="hours"
               onChange={handleChange}

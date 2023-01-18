@@ -21,9 +21,6 @@
   .input-primary {
     @apply input border-2 border-primary focus:outline-none focus:border-primary focus:ring-0 focus-visible:outline-none;
   }
-  .textarea {
-    @apply h-28;
-  }
   .edit-svg path.cls-1 {
     @apply fill-primary;
   }

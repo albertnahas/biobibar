@@ -16,22 +16,22 @@
     @apply h-10;
   }
   .input-readonly {
-    @apply input cursor-default focus:outline-none focus:border-secondary-dark focus:ring-0 focus-visible:outline-none;
+    @apply input cursor-default focus:border-secondary-dark focus:outline-none focus:ring-0 focus-visible:outline-none;
   }
   .input-primary {
-    @apply input border-2 border-primary focus:outline-none focus:border-primary focus:ring-0 focus-visible:outline-none;
+    @apply input border-2 border-primary focus:border-primary focus:outline-none focus:ring-0 focus-visible:outline-none;
   }
   .edit-svg path.cls-1 {
     @apply fill-primary;
   }
   .cover-edit-icon {
-    @apply absolute bottom-8 right-8 2xl:right-36 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border-none bg-white p-1;
+    @apply absolute bottom-8 right-8 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border-none bg-white p-1 2xl:right-36;
   }
   .cover {
-    @apply absolute -bottom-8 right-16 2xl:right-44 w-120 rounded-2xl border-2 border-primary bg-white px-2 py-1 text-xs;
+    @apply w-120 absolute -bottom-8 right-16 rounded-2xl border-2 border-primary bg-white px-2 py-1 text-xs 2xl:right-44;
   }
   .cover-edit-btn {
-    @apply cursor-pointer m-1 p-1 rounded-lg border-2 border-primary text-left block;
+    @apply block m-1 p-1 rounded-lg border-2 border-primary text-left cursor-pointer;
   }
   .img-lightbox {
     @apply fixed top-0 bottom-0 left-0 right-0 bg-text bg-opacity-80;
@@ -40,7 +40,7 @@
     @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
   }
   .close-lightbox-btn {
-    @apply absolute top-3 right-3 bg-transparent border-none text-white;
+    @apply absolute top-3 right-3 border-none bg-transparent text-white;
   }
 }
 

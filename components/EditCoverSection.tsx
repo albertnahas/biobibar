@@ -176,6 +176,7 @@ const EditCoverSection = () => {
                   handleViewClick={() => handleViewClick("cover")}
                   handleUpload={handleUpload}
                   inputName="cover"
+                  btnClass="cover-edit-btn"
                 />
               )}
             </div>
@@ -224,6 +225,7 @@ const EditCoverSection = () => {
                   handleViewClick={() => handleViewClick("cover2")}
                   handleUpload={handleUpload}
                   inputName="cover2"
+                  btnClass="cover-edit-btn"
                 />
               )}
             </div>
@@ -254,6 +256,7 @@ const EditCoverSection = () => {
                   handleViewClick={() => handleViewClick("cover3")}
                   handleUpload={handleUpload}
                   inputName="cover3"
+                  btnClass="cover-edit-btn"
                 />
               )}
             </div>

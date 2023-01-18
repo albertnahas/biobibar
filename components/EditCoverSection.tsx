@@ -115,22 +115,32 @@ const EditCoverSection = () => {
   const handleView = (e: any) => {
     const imageUrl = e.target.src;
     const lightbox = document.createElement("div");
-    lightbox.classList.add('img-lightbox');
+    lightbox.classList.add("img-lightbox");
 
     const image = document.createElement("img");
     image.src = imageUrl;
     lightbox.appendChild(image);
 
     const closeButton = document.createElement("button");
-    closeButton.classList.add('close-lightbox-btn');
+    closeButton.classList.add("close-lightbox-btn");
     closeButton.innerHTML = "X";
     lightbox.appendChild(closeButton);
+
+    lightbox.addEventListener("click", (e: any) => {
+      const els = document.querySelectorAll('.img-lightbox img');
+      let isImg = false;
+      for(let i = 0; i < els.length; i++) {
+        if (els[i] === e.target) isImg = true;
+      }
+      if (!isImg) document.body.removeChild(lightbox);
+    });
 
     closeButton.addEventListener("click", () => {
       document.body.removeChild(lightbox);
     });
 
     document.body.appendChild(lightbox);
+    document.body.style.overflow = "hidden";
   };
 
   return (

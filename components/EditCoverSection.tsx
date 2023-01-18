@@ -57,6 +57,16 @@ const EditCoverSection = () => {
     setIsOpen(isOpen === name ? null : name);
   };
 
+  document.addEventListener("mousedown", (e: any) => {
+    let btns = document.querySelectorAll(".cover-edit-icon");
+    for (let i = 0; i < btns.length; i++) {
+      if (isOpen && !btns[i].contains(e.target)) {
+        setIsOpen(null);
+        e.stopPropagation();
+      }
+    }
+  });
+
   const handleUpload = async (e: React.ChangeEvent) => {
     const input = e.target as HTMLInputElement;
 
@@ -148,7 +158,7 @@ const EditCoverSection = () => {
 
   return (
     <section className="contact">
-      <div className="container md:ml-24 px-8 py-4 md:px-16">
+      <div className="container px-8 py-4 md:ml-24 md:px-16">
         <h2 className="mt-12 mb-4 text-xl">home</h2>
         <h3 className="mb-12">Edit cover information</h3>
         <div className="mb-4 grid gap-8 md:grid-cols-2 [&_td]:p-2">
@@ -197,7 +207,7 @@ const EditCoverSection = () => {
         </div>
       </div>
 
-      <div className="container md:ml-4 p-4">
+      <div className="container p-4 md:ml-4">
         <div className="mb-20 grid gap-8 px-4 md:grid-cols-2 md:px-12 [&_td]:p-2">
           <div className="col-1">
             <h2 className="mb-4 text-xl">home</h2>

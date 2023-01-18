@@ -55,6 +55,7 @@ const EditInfoSection = () => {
           </div>
           <div className="col-span-2">
             <textarea
+              dir="rtl"
               className="input-primary text-right"
               value={about}
               name="about"

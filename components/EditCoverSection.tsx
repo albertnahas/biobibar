@@ -184,6 +184,7 @@ const EditCoverSection = () => {
             <div className="grid gap-4 md:grid-cols-4">
               <label>Edit text</label>
               <textarea
+                dir="rtl"
                 className="input-primary col-span-3 text-right"
                 value={slogan}
                 name="slogan"

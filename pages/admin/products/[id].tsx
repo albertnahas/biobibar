@@ -211,22 +211,16 @@ const Product = () => {
 
   if (!product) return <div>Loading...</div>;
 
-  const pageTitle = `${product.title || ""} - BIOBIBAR Admin`
+  const pageTitle = `${product.title || ""} - BIOBIBAR Admin`;
   return (
     <>
       <Head>
         <title>{pageTitle}</title>
         <meta name="description" content={product.description} />
-        <meta property="og:title" content={product.title} />
-        <meta property="og:description" content={product.description} />
-        <meta property="og:image" content={product.image} />
-        <meta
-          property="og:url"
-          content={`https://biobibar.com/admin/products/${product.id}`}
+        <link
+          rel="canonical"
+          href={`https://www.biobibar.com/admin/products/${id}`}
         />
-        <meta property="og:type" content="product" />
-        <meta property="product:price:amount" content={`${product.price}`} />
-        <meta property="product:price:currency" content="USD" />
       </Head>
       <Layout isAdmin>
         <div className="container my-12">

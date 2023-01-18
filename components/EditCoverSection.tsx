@@ -55,17 +55,18 @@ const EditCoverSection = () => {
 
   const handleOpen = (name: string): void => {
     setIsOpen(isOpen === name ? null : name);
-  };
+    if (!isOpen) {
+      const overlay = document.createElement("div");
+      console.log(overlay);
+      overlay.classList.add("overlay");
+      document.body.appendChild(overlay);
 
-  document.addEventListener("mousedown", (e: any) => {
-    let btns = document.querySelectorAll(".cover-edit-icon, .cover, .cover *");
-    for (let i = 0; i < btns.length; i++) {
-      if (isOpen && !btns[i].contains(e.target)) {
+      overlay.addEventListener("click", (e: any) => {
         setIsOpen(null);
-        e.stopPropagation();
-      }
+        document.body.removeChild(overlay);
+      });
     }
-  });
+  };
 
   const handleUpload = async (e: React.ChangeEvent) => {
     const input = e.target as HTMLInputElement;

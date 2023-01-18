@@ -127,16 +127,19 @@ const EditCoverSection = () => {
     lightbox.appendChild(closeButton);
 
     lightbox.addEventListener("click", (e: any) => {
-      const els = document.querySelectorAll('.img-lightbox img');
+      const els = document.querySelectorAll(".img-lightbox img");
       let isImg = false;
-      for(let i = 0; i < els.length; i++) {
+      for (let i = 0; i < els.length; i++) {
         if (els[i] === e.target) isImg = true;
       }
       if (!isImg) document.body.removeChild(lightbox);
+
+      document.body.style.overflow = "scroll";
     });
 
     closeButton.addEventListener("click", () => {
       document.body.removeChild(lightbox);
+      document.body.style.overflow = "scroll";
     });
 
     document.body.appendChild(lightbox);

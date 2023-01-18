@@ -148,7 +148,7 @@ const EditCoverSection = () => {
 
   return (
     <section className="contact">
-      <div className="container ml-24 px-8 py-4 md:px-16">
+      <div className="container md:ml-24 px-8 py-4 md:px-16">
         <h2 className="mt-12 mb-4 text-xl">home</h2>
         <h3 className="mb-12">Edit cover information</h3>
         <div className="mb-4 grid gap-8 md:grid-cols-2 [&_td]:p-2">
@@ -197,7 +197,7 @@ const EditCoverSection = () => {
         </div>
       </div>
 
-      <div className="container ml-4 p-4">
+      <div className="container md:ml-4 p-4">
         <div className="mb-20 grid gap-8 px-4 md:grid-cols-2 md:px-12 [&_td]:p-2">
           <div className="col-1">
             <h2 className="mb-4 text-xl">home</h2>

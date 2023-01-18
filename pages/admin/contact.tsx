@@ -1,27 +1,22 @@
-import React from "react";
-import CustomerCard from "../../components/CustomerCard";
+import React, { useState, useEffect } from "react";
+import ContactCard from "../../components/ContactCard";
+import fetchContacts from "../../helpers/fetchContacts";
+import { Contact } from "../../types/contact";
 import Layout from "../layout";
 
-const customers = [
-  {
-    name: "Albert",
-    phone: "Phone",
-    email: "Email Address",
-    source: "Test"
-  },
-  {
-    name: "Name",
-    phone: "Phone",
-    email: "Email Address",
-    source: "Test"
-  },
-];
-
 const Contact = () => {
+  const [contacts, setContacts] = useState<Contact[]>([]);
+
+  useEffect(() => {
+    fetchContacts().then((res) => {
+      setContacts(res)
+    })
+  }, [])
+
   return (
     <Layout isAdmin>
-      {customers.map(({ name, phone, email, source }) => (
-        <CustomerCard
+      {contacts.map(({ name, phone, email, source }) => (
+        <ContactCard
           key={name}
           name={name}
           phone={phone}

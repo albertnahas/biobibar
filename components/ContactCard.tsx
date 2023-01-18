@@ -1,7 +1,7 @@
 import React from "react";
-import { customer } from "../types/customer";
+import { Contact } from "../types/contact";
 
-const CustomerCard = ({ name, email, phone, source }: customer) => {
+const ContactCard = ({ name, email, phone, source }: Contact) => {
   return (
     <section className="contact">
       <div className="container ml-12 p-4">
@@ -41,4 +41,4 @@ const CustomerCard = ({ name, email, phone, source }: customer) => {
   );
 };
 
-export default CustomerCard;
+export default ContactCard;

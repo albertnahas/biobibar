@@ -59,6 +59,8 @@ const LoginPage = () => {
     <>
       <Head>
         <title>Login - BIOBIBAR Admin</title>
+        <meta name="description" content="Log in to BIOBIBAR Admin portal" />
+        <link rel="canonical" href={`https://www.biobibar.com/admin/login?path=/admin`} />
       </Head>
       {loading && <SplashScreen />}
       <div className="flex h-screen w-screen flex-col items-center pt-12">

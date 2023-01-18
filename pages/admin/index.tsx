@@ -10,6 +10,8 @@ const Home = () => {
     <>
       <Head>
         <title>Home - BIOBIBAR Admin</title>
+        <meta name="description" content="View, edit or remove home page information: covers, slogan, contact details and working hours" />
+        <link rel="canonical" href={'https://www.biobibar.com/admin/'} />
       </Head>
       <Layout isAdmin>
         <EditCoverSection />

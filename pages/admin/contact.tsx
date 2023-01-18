@@ -33,7 +33,7 @@ const Contact = () => {
     <>
       <Head>
         <title>Contact - BIOBIBAR Admin</title>
-        <meta name="description" content="Contact. Admin" />
+        <meta name="description" content="View list of customers contacts" />
         <link rel="canonical" href={`https://www.biobibar.com/admin/contact`} />
       </Head>
       <Layout isAdmin>

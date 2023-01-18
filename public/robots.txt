@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://biobibar.vercel.app/
+
+# Sitemaps
+Sitemap: https://biobibar.vercel.app/sitemap.xml

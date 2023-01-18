@@ -18,6 +18,7 @@ import fetchInfo from "../helpers/fetchInfo"
 import { Info } from "../types/info"
 import { SplashScreen } from "../components/SplashScreen"
 import { Animate } from "../components/Animate"
+import Head from "next/head"
 
 export async function getStaticProps() {
   const home = await fetchHome()
@@ -68,26 +69,31 @@ const Home: FC<Props> = ({
   }, [loading])
 
   return (
-    <div>
-      {loading && <SplashScreen />}
+    <>
+      <Head>
+        <title>Home - BIOBIBAR</title>
+      </Head>
+      <div>
+        {loading && <SplashScreen />}
 
-      <Navbar />
-      <HeroSection coverUrl={home.cover} slogan={home.slogan} />
-      <Animate>
-        <AboutSection about={info.about} />
-      </Animate>
-      <FeaturedSection coverUrl={home.cover2} products={featuredProducts} />
-      <Animate>
-        <ArrivalsSection products={newProducts} />
-      </Animate>
-      <CategoriesSection categories={categories} />
-      <BannerSection coverUrl={home.cover3} />
-      <div className="md:px-40 md:pt-40">
-        <ContactSection />
-        <Footer info={info} />
+        <Navbar />
+        <HeroSection coverUrl={home.cover} slogan={home.slogan} />
+        <Animate>
+          <AboutSection about={info.about} />
+        </Animate>
+        <FeaturedSection coverUrl={home.cover2} products={featuredProducts} />
+        <Animate>
+          <ArrivalsSection products={newProducts} />
+        </Animate>
+        <CategoriesSection categories={categories} />
+        <BannerSection coverUrl={home.cover3} />
+        <div className="md:px-40 md:pt-40">
+          <ContactSection />
+          <Footer info={info} />
+        </div>
+        <Navbar bottom={true} />
       </div>
-      <Navbar bottom={true} />
-    </div>
+    </>
   )
 }
 

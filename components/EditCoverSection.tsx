@@ -58,7 +58,7 @@ const EditCoverSection = () => {
   };
 
   document.addEventListener("mousedown", (e: any) => {
-    let btns = document.querySelectorAll(".cover-edit-icon");
+    let btns = document.querySelectorAll(".cover-edit-icon, .cover, .cover *");
     for (let i = 0; i < btns.length; i++) {
       if (isOpen && !btns[i].contains(e.target)) {
         setIsOpen(null);

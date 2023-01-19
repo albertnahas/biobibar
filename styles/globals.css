@@ -138,11 +138,6 @@
 
   .circle {
     border-color: var(--primary);
-    background-image: linear-gradient(
-        var(--transparent-primary),
-        var(--transparent-primary)
-      ),
-      url("/asset1.png");
     background-size: cover;
     background-position: center;
   }

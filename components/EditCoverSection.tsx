@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, RefObject } from "react";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import { ReactSVG } from "react-svg";
@@ -69,30 +69,12 @@ const EditCoverSection = () => {
     }
   };
 
-  const imageRef = React.useRef<any>(null);
-  const imageRef2 = React.useRef<any>(null);
-  const imageRef3 = React.useRef<any>(null);
+  const imageRef = React.useRef<HTMLImageElement>(null);
+  const imageRef2 = React.useRef<HTMLImageElement>(null);
+  const imageRef3 = React.useRef<HTMLImageElement>(null);
 
-  const switchRefs = (refParam: string) => {
-    let ref: any;
-    switch (refParam) {
-      case "cover":
-        ref = imageRef;
-        break;
-      case "cover2":
-        ref = imageRef2;
-        break;
-      case "cover3":
-        ref = imageRef3;
-        break;
-      default:
-        break;
-    }
-    return ref;
-  };
-
-  const handleUpload = async (e: React.ChangeEvent) => {
-    const input = e.target as HTMLInputElement;
+  const handleUpload = async (ref?: RefObject<HTMLImageElement>, e?: React.ChangeEvent) => {
+    const input = e?.target as HTMLInputElement;
 
     const inputName = input.name;
 
@@ -101,8 +83,6 @@ const EditCoverSection = () => {
     }
     const file = input.files[0];
 
-    let ref = switchRefs(inputName);
-
     // display the image
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -110,7 +90,7 @@ const EditCoverSection = () => {
       setIsOpen(null);
 
       if (ref?.current instanceof HTMLImageElement) {
-        ref.current.style.opacity = "0";
+        ref.current.style.opacity = "0.5";
       }
     };
     reader.readAsDataURL(file);
@@ -121,7 +101,8 @@ const EditCoverSection = () => {
       if (imageUrl) {
         setHome({ ...home, [inputName]: imageUrl });
         toast.success("Image uploaded successfully");
-        setTimeout(() => ref.current.style.opacity = "1", 1500)
+        const img = ref?.current
+        img && setTimeout(() => (img.style.opacity = "1"), 1500);
       }
     } catch (e) {
       toast.error("Image size is too large");
@@ -129,9 +110,7 @@ const EditCoverSection = () => {
     }
   };
 
-  const handleViewClick = (cover: string) => {
-    let ref = switchRefs(cover);
-
+  const handleViewClick = (ref: any) => {
     if (ref?.current instanceof HTMLImageElement) {
       ref.current.click();
     }
@@ -200,8 +179,8 @@ const EditCoverSection = () => {
               </div>
               {isOpen === "cover" && (
                 <EditImageMenu
-                  handleViewClick={() => handleViewClick("cover")}
-                  handleUpload={handleUpload}
+                  handleViewClick={() => handleViewClick(imageRef)}
+                  handleUpload={handleUpload.bind(this, imageRef)}
                   inputName="cover"
                   btnClass="cover-edit-btn"
                 />
@@ -249,8 +228,8 @@ const EditCoverSection = () => {
               </div>
               {isOpen === "cover2" && (
                 <EditImageMenu
-                  handleViewClick={() => handleViewClick("cover2")}
-                  handleUpload={handleUpload}
+                  handleViewClick={() => handleViewClick(imageRef2)}
+                  handleUpload={handleUpload.bind(imageRef2)}
                   inputName="cover2"
                   btnClass="cover-edit-btn"
                 />
@@ -280,8 +259,8 @@ const EditCoverSection = () => {
               </div>
               {isOpen === "cover3" && (
                 <EditImageMenu
-                  handleViewClick={() => handleViewClick("cover3")}
-                  handleUpload={handleUpload}
+                  handleViewClick={() => handleViewClick(imageRef3)}
+                  handleUpload={handleUpload.bind(imageRef3)}
                   inputName="cover3"
                   btnClass="cover-edit-btn"
                 />

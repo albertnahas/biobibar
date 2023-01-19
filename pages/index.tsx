@@ -70,10 +70,12 @@ const Home: FC<Props> = ({
         </Animate>
         <CategoriesSection categories={categories} />
         <BannerSection coverUrl={home.cover3} />
-        <div className="md:px-40 md:pt-40">
-          <ContactSection />
-          <Footer info={info} />
-        </div>
+        <Animate>
+          <div className="md:px-40 md:pt-40">
+            <ContactSection />
+            <Footer info={info} />
+          </div>
+        </Animate>
         <Navbar bottom={true} />
       </div>
     </>

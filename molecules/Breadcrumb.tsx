@@ -14,7 +14,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ items }) => {
   return (
     <nav className="flex">
       {items.map((item, index) => (
-        <React.Fragment key={item.path}>
+        <React.Fragment key={index}>
           <Link
             href={item.path}
             className={`text-${

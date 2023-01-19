@@ -16,7 +16,6 @@ import fetchHome from "../helpers/fetchHome"
 import { Home } from "../types/home"
 import fetchInfo from "../helpers/fetchInfo"
 import { Info } from "../types/info"
-import { SplashScreen } from "../components/SplashScreen"
 import { Animate } from "../components/Animate"
 import Head from "next/head"
 
@@ -54,28 +53,12 @@ const Home: FC<Props> = ({
   home,
   info,
 }) => {
-  // loading state
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    document.body.style.overflow = loading ? "hidden" : "auto"
-    // scroll to top
-    loading && window.scrollTo(0, 0)
-    // check if body has loaded class
-    setTimeout(() => {
-      setLoading(false)
-      document.body.style.overflow = "auto"
-    }, 3500)
-  }, [loading])
-
   return (
     <>
       <Head>
         <title>Home - BIOBIBAR</title>
       </Head>
       <div>
-        {loading && <SplashScreen />}
-
         <Navbar />
         <HeroSection coverUrl={home.cover} slogan={home.slogan} />
         <Animate>

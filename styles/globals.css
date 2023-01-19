@@ -16,13 +16,34 @@
     @apply h-10;
   }
   .input-readonly {
-    @apply cursor-default focus-visible:outline-none;
+    @apply input cursor-default focus:border-secondary-dark focus:outline-none focus:ring-0 focus-visible:outline-none;
   }
   .input-primary {
-    @apply border-2 border-primary focus-visible:outline-none;
+    @apply input border-2 border-primary focus:border-primary focus:outline-none focus:ring-0 focus-visible:outline-none;
   }
-  .textarea {
-    @apply h-28;
+  .edit-svg path.cls-1 {
+    @apply fill-primary;
+  }
+  .cover-edit-icon {
+    @apply absolute bottom-8 right-8 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border-none bg-white p-1 2xl:right-36;
+  }
+  .cover {
+    @apply z-10 w-120 absolute -bottom-8 right-16 rounded-2xl border-2 border-primary bg-white px-2 py-1 text-xs 2xl:right-44;
+  }
+  .cover-edit-btn {
+    @apply block m-1 p-1 rounded-lg border-2 border-primary text-left cursor-pointer;
+  }
+  .overlay {
+    @apply fixed inset-0 bg-transparent z-0;
+  }
+  .img-lightbox {
+    @apply fixed inset-0 bg-text bg-opacity-80 z-20;
+  }
+  .img-lightbox img {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+  }
+  .close-lightbox-btn {
+    @apply absolute top-3 right-3 border-none bg-transparent text-white;
   }
 }
 
@@ -108,6 +129,9 @@
     height: 120vh;
   }
 
+  .w-120 {
+    width: 120px;
+  }
   .w-180 {
     width: 180px;
   }

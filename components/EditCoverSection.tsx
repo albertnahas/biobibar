@@ -147,12 +147,12 @@ const EditCoverSection = () => {
         }
         if (!isImg) document.body.removeChild(lightbox);
 
-        document.body.style.overflow = "scroll";
+        document.body.style.overflow = "auto";
       });
 
       closeButton.addEventListener("click", () => {
         document.body.removeChild(lightbox);
-        document.body.style.overflow = "scroll";
+        document.body.style.overflow = "auto";
       });
 
       document.body.appendChild(lightbox);

@@ -57,7 +57,6 @@ const EditCoverSection = () => {
     setIsOpen(isOpen === name ? null : name);
     if (!isOpen) {
       const overlay = document.createElement("div");
-      console.log(overlay);
       overlay.classList.add("overlay");
       document.body.appendChild(overlay);
 

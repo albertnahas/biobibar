@@ -37,7 +37,7 @@
     @apply fixed inset-0 bg-transparent z-0;
   }
   .img-lightbox {
-    @apply fixed inset-0 bg-text bg-opacity-80;
+    @apply fixed inset-0 bg-text bg-opacity-80 z-20;
   }
   .img-lightbox img {
     @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;

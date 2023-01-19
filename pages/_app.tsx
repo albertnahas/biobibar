@@ -30,20 +30,15 @@ export default function App({ Component, pageProps }: AppProps) {
   })
 
   // loading state
-  const [loading, setLoading] = useState(false)
   const route = useRouter()
+  const [loading, setLoading] = useState(route.pathname === "/")
 
   useEffect(() => {
-    // show only for home page
-    if (route.pathname === "/") {
-      setLoading(true)
-      return
-    }
     document.body.style.overflow = loading ? "hidden" : "auto"
     // scroll to top
     loading && window.scrollTo(0, 0)
     // check if body has loaded class
-    setTimeout(() => {
+    loading && setTimeout(() => {
       setLoading(false)
       document.body.style.overflow = "auto"
     }, 3500)

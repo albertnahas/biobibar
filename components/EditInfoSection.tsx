@@ -43,19 +43,20 @@ const EditInfoSection = () => {
 
   return (
     <section className="contact">
-      <div className="container ml-24 p-4">
-        <h2 className="my-12 text-xl">home</h2>
-        <h3 className="my-12">Edit company information</h3>
+      <div className="container md:ml-24 p-4">
+        <h2 className="mt-8 mb-4 text-xl">home</h2>
+        <h3 className="mb-2">Edit company information</h3>
       </div>
 
       <div className="container mx-auto mt-4 mb-8">
-        <div className="mb-20 grid gap-8 px-12 md:grid-cols-2 md:px-24 [&_td]:p-2">
-          <div className="col-1 text-right">
+        <div className="mb-8 flex justify-between md:grid md:gap-8 px-6 md:grid-cols-3 md:px-24 [&_td]:p-2">
+          <div className="md:text-right col-1">
             <label>Edit text</label>
           </div>
-          <div className="col-2">
+          <div className="col-span-2">
             <textarea
-              className="input input-primary"
+              dir="rtl"
+              className="input-primary text-right"
               value={about}
               name="about"
               rows={5}
@@ -63,41 +64,41 @@ const EditInfoSection = () => {
             />
           </div>
         </div>
-        <div className="mb-4 grid gap-8 px-12 md:grid-cols-2 md:px-24 [&_td]:p-2">
-          <div className="col-1 flex justify-end">
+        <div className="mb-2 flex justify-between md:grid md:gap-8 px-6 md:grid-cols-3 md:px-24 [&_td]:p-2">
+          <div className="col-1 flex md:justify-end">
             <ReactSVG src="/location.svg" className="h-6 w-6" />
           </div>
-          <div className="col-2">
+          <div className="col-span-2">
             <input
               type="text"
-              className="input input-primary"
+              className="input-primary"
               value={address}
               name="address"
               onChange={handleChange}
             />
           </div>
         </div>
-        <div className="mb-4 grid gap-8 px-12 md:grid-cols-2 md:px-24 [&_td]:p-2">
-          <div className="col-1 flex justify-end">
+        <div className="mb-2 flex justify-between md:grid md:gap-8 px-6 md:grid-cols-3 md:px-24 [&_td]:p-2">
+          <div className="col-1 flex md:justify-end">
             <ReactSVG src="/phone.svg" className="h-6 w-6" />
           </div>
-          <div className="col-2">
+          <div className="col-span-2">
             <input
               type="text"
-              className="input input-primary"
+              className="input-primary"
               value={phone}
               name="phone"
               onChange={handleChange}
             />
           </div>
         </div>
-        <div className="grid gap-8 px-12 md:grid-cols-2 md:px-24 [&_td]:p-2">
-          <div className="col-1 flex justify-end">
+        <div className="flex justify-between md:grid md:gap-8 px-6 md:grid-cols-3 md:px-24 [&_td]:p-2">
+          <div className="col-1 w-100 flex md:justify-end">
             <ReactSVG src="/time.svg" className="h-6 w-6" />
           </div>
-          <div className="col-2">
+          <div className="col-span-2">
             <textarea
-              className="input input-primary"
+              className="input-primary"
               value={hours}
               name="hours"
               onChange={handleChange}

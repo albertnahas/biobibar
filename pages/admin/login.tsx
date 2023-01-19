@@ -4,6 +4,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
 } from "firebase/auth"
+import Head from "next/head"
 import Image from "next/image"
 import { useRouter } from "next/router"
 import { useState, FormEvent, useEffect } from "react"
@@ -56,6 +57,11 @@ const LoginPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Login - BIOBIBAR Admin</title>
+        <meta name="description" content="Log in to BIOBIBAR Admin portal" />
+        <link rel="canonical" href={`https://www.biobibar.com/admin/login?path=/admin`} />
+      </Head>
       {loading && <SplashScreen />}
       <div className="flex h-screen w-screen flex-col items-center pt-12">
         <Image

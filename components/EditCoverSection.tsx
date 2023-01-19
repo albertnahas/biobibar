@@ -138,12 +138,14 @@ const EditCoverSection = () => {
           if (els[i] === e.target) isImg = true;
         }
         if (!isImg) document.body.removeChild(lightbox);
+        setIsOpen(null);
 
         document.body.style.overflow = "auto";
       });
 
       closeButton.addEventListener("click", () => {
         document.body.removeChild(lightbox);
+        setIsOpen(null);
         document.body.style.overflow = "auto";
       });
 
@@ -229,7 +231,7 @@ const EditCoverSection = () => {
               {isOpen === "cover2" && (
                 <EditImageMenu
                   handleViewClick={() => handleViewClick(imageRef2)}
-                  handleUpload={handleUpload.bind(imageRef2)}
+                  handleUpload={handleUpload.bind(this, imageRef2)}
                   inputName="cover2"
                   btnClass="cover-edit-btn"
                 />
@@ -260,7 +262,7 @@ const EditCoverSection = () => {
               {isOpen === "cover3" && (
                 <EditImageMenu
                   handleViewClick={() => handleViewClick(imageRef3)}
-                  handleUpload={handleUpload.bind(imageRef3)}
+                  handleUpload={handleUpload.bind(this, imageRef3)}
                   inputName="cover3"
                   btnClass="cover-edit-btn"
                 />

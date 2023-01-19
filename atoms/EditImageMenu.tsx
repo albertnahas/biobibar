@@ -38,7 +38,7 @@ const EditImageMenu = ({
 export default EditImageMenu;
 
 interface EditImageMenuProps {
-  handleUpload: (ref?: any, e?: React.ChangeEvent) => void;
+  handleUpload: (e?: React.ChangeEvent) => void;
   handleViewClick: () => void;
   inputName: string;
   btnClass: string;

@@ -56,14 +56,16 @@ const EditCoverSection = () => {
   const handleOpen = (name: string): void => {
     setIsOpen(isOpen === name ? null : name);
     if (!isOpen) {
-      const overlay = document.createElement("div");
-      overlay.classList.add("overlay");
-      document.body.appendChild(overlay);
+      if (!document.querySelector("div.overlay")) {
+        const overlay = document.createElement("div");
+        overlay.classList.add("overlay");
+        document.body.appendChild(overlay);
 
-      overlay.addEventListener("click", (e: any) => {
-        setIsOpen(null);
-        document.body.removeChild(overlay);
-      });
+        overlay.addEventListener("click", (e: any) => {
+          setIsOpen(null);
+          document.body.removeChild(overlay);
+        });
+      }
     }
   };
 
@@ -124,36 +126,38 @@ const EditCoverSection = () => {
 
   const handleView = (e: any) => {
     const imageUrl = e.target.src;
-    const lightbox = document.createElement("div");
-    lightbox.classList.add("img-lightbox");
+    if (!document.querySelector("div.img-lightbox")) {
+      const lightbox = document.createElement("div");
+      lightbox.classList.add("img-lightbox");
 
-    const image = document.createElement("img");
-    image.src = imageUrl;
-    lightbox.appendChild(image);
+      const image = document.createElement("img");
+      image.src = imageUrl;
+      lightbox.appendChild(image);
 
-    const closeButton = document.createElement("button");
-    closeButton.classList.add("close-lightbox-btn");
-    closeButton.innerHTML = "X";
-    lightbox.appendChild(closeButton);
+      const closeButton = document.createElement("button");
+      closeButton.classList.add("close-lightbox-btn");
+      closeButton.innerHTML = "X";
+      lightbox.appendChild(closeButton);
 
-    lightbox.addEventListener("click", (e: any) => {
-      const els = document.querySelectorAll(".img-lightbox img");
-      let isImg = false;
-      for (let i = 0; i < els.length; i++) {
-        if (els[i] === e.target) isImg = true;
-      }
-      if (!isImg) document.body.removeChild(lightbox);
+      lightbox.addEventListener("click", (e: any) => {
+        const els = document.querySelectorAll(".img-lightbox img");
+        let isImg = false;
+        for (let i = 0; i < els.length; i++) {
+          if (els[i] === e.target) isImg = true;
+        }
+        if (!isImg) document.body.removeChild(lightbox);
 
-      document.body.style.overflow = "scroll";
-    });
+        document.body.style.overflow = "scroll";
+      });
 
-    closeButton.addEventListener("click", () => {
-      document.body.removeChild(lightbox);
-      document.body.style.overflow = "scroll";
-    });
+      closeButton.addEventListener("click", () => {
+        document.body.removeChild(lightbox);
+        document.body.style.overflow = "scroll";
+      });
 
-    document.body.appendChild(lightbox);
-    document.body.style.overflow = "hidden";
+      document.body.appendChild(lightbox);
+      document.body.style.overflow = "hidden";
+    }
   };
 
   return (

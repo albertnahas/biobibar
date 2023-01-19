@@ -69,43 +69,13 @@ const EditCoverSection = () => {
     }
   };
 
-  const handleUpload = async (e: React.ChangeEvent) => {
-    const input = e.target as HTMLInputElement;
-
-    const inputName = input.name;
-
-    if (!input.files?.length) {
-      return;
-    }
-    const file = input.files[0];
-
-    // display the image
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      setImageLink(e.target?.result as string);
-    };
-    reader.readAsDataURL(file);
-
-    let imageUrl;
-    try {
-      imageUrl = await uploadImage(file);
-      if (imageUrl) {
-        setHome({ ...home, [inputName]: imageUrl });
-        toast.success("Image uploaded successfully");
-      }
-    } catch (e) {
-      toast.error("Image size is too large");
-      return;
-    }
-  };
-
   const imageRef = React.useRef<any>(null);
   const imageRef2 = React.useRef<any>(null);
   const imageRef3 = React.useRef<any>(null);
 
-  const handleViewClick = (cover: string) => {
-    let ref;
-    switch (cover) {
+  const switchRefs = (refParam: string) => {
+    let ref: any;
+    switch (refParam) {
       case "cover":
         ref = imageRef;
         break;
@@ -118,6 +88,49 @@ const EditCoverSection = () => {
       default:
         break;
     }
+    return ref;
+  };
+
+  const handleUpload = async (e: React.ChangeEvent) => {
+    const input = e.target as HTMLInputElement;
+
+    const inputName = input.name;
+
+    if (!input.files?.length) {
+      return;
+    }
+    const file = input.files[0];
+
+    let ref = switchRefs(inputName);
+
+    // display the image
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setImageLink(e.target?.result as string);
+      setIsOpen(null);
+
+      if (ref?.current instanceof HTMLImageElement) {
+        ref.current.style.opacity = "0";
+      }
+    };
+    reader.readAsDataURL(file);
+
+    let imageUrl;
+    try {
+      imageUrl = await uploadImage(file);
+      if (imageUrl) {
+        setHome({ ...home, [inputName]: imageUrl });
+        toast.success("Image uploaded successfully");
+        setTimeout(() => ref.current.style.opacity = "1", 1500)
+      }
+    } catch (e) {
+      toast.error("Image size is too large");
+      return;
+    }
+  };
+
+  const handleViewClick = (cover: string) => {
+    let ref = switchRefs(cover);
 
     if (ref?.current instanceof HTMLImageElement) {
       ref.current.click();

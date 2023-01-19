@@ -43,7 +43,7 @@ const EditCoverSection = () => {
   }, [debouncedHome]);
 
   useEffect(() => {
-    // updateHome(home);
+    updateHome(home);
   }, [home]);
 
   const handleChange = (

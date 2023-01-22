@@ -45,6 +45,36 @@
   .close-lightbox-btn {
     @apply absolute top-3 right-3 border-none bg-transparent text-white;
   }
+  .pagination {
+    @apply w-600 flex justify-between items-center list-none mt-8;
+  }
+  .page-item {
+    @apply flex justify-center items-center pt-1 w-8 h-8 border-2 border-none rounded-full bg-transparent cursor-pointer;
+  }
+  .page-item:hover {
+    @apply border-none bg-primary-light text-white transition-all ease-out;
+  }
+  .page-item-active {
+    @apply page-item bg-primary text-white border-primary cursor-default;
+  }
+  .page-item-active:hover {
+    @apply bg-primary;
+  }
+  .page-item.dots {
+    @apply text-2xl;
+  }
+  .page-arrow-inactive {
+    @apply cursor-not-allowed;
+  }
+  .page-arrow > div, .page-arrow-inactive {
+    @apply w-4;
+  }
+  .page-arrow:hover {
+    @apply fill-primary-light stroke-primary-light;
+  }
+  .page-arrow-inactive path {
+    @apply fill-gray-300 stroke-gray-300;
+  }
 }
 
 @layer utilities {

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { ReactSVG } from "react-svg";
 import DeleteConfirmation from "../../../molecules/DeleteConfirmation";
 import deleteProduct from "../../../helpers/deleteProduct";
@@ -16,6 +16,7 @@ import { updateCategory } from "../../../helpers/updateCategory";
 import withAuthentication from "../../../components/withAuth";
 import { toast } from "react-toastify";
 import Head from "next/head";
+import Pagination from "../../../components/Pagination";
 
 const ProductsAdmin = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -23,8 +24,24 @@ const ProductsAdmin = () => {
   const [selectedItem, setSelectedItem] = useState<Product | Category>();
   const [showConfirm, setShowConfirm] = useState(false);
 
+  const [pagination, setPagination] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 10;
+
+  const paginatedProducts = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * pageSize;
+    const lastPageIndex = firstPageIndex + pageSize;
+    return products?.slice(firstPageIndex, lastPageIndex);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage]);
+
+  const onPageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
   const loadProducts = () => {
     fetchProducts().then((data) => setProducts(data));
+    setPagination(true);
   };
   const loadCategories = () => {
     fetchCategories().then((data) => setCategories(data));
@@ -211,7 +228,7 @@ const ProductsAdmin = () => {
         </h1>
         <div className=" min-h-300">
           <ProductsTable
-            products={products}
+            products={paginatedProducts}
             onDelete={(product: Product) => {
               setSelectedItem(product);
               setShowConfirm(true);
@@ -227,6 +244,15 @@ const ProductsAdmin = () => {
                 View Products
               </button>
             </div>
+          )}
+
+          {pagination && (
+            <Pagination
+              items={products?.length || 0}
+              currentPage={currentPage}
+              pageSize={pageSize}
+              onPageChange={onPageChange}
+            />
           )}
         </div>
 

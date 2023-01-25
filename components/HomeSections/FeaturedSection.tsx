@@ -48,7 +48,7 @@ export const FeaturedSection: FC<Props> = ({ products, coverUrl }) => {
 const Circle: FC<CircleProps> = ({ children, className, product, href }) => {
   return (
     <Link href={href || ""}>
-      <div
+    <div
         style={{
           backgroundImage: `linear-gradient(
             var(--transparent-primary),

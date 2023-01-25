@@ -30,7 +30,7 @@ export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
             <div className="flex items-center justify-between py-3 md:block md:py-5">
               <Link href="/">
                 <h2
-                  className={`text-2xl uppercase text-${
+                  className={`text-xl uppercase text-${
                     bottom ? "secondary-dark" : "primary"
                   }`}
                 >
@@ -88,7 +88,7 @@ export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
                   <li key={isAdmin ? `/admin${link.href}` : link.href}>
                     <Link
                       href={isAdmin ? `/admin${link.href}` : link.href}
-                      className={`mr-2 px-3 py-1 text-2xl uppercase text-${
+                      className={`mr-2 px-3 py-1 text-xl uppercase text-${
                         bottom ? "secondary-dark" : "primary"
                       } `}
                     >

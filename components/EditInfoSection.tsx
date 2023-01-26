@@ -31,7 +31,7 @@ const EditInfoSection = () => {
   }, [debouncedInfo])
 
   useEffect(() => {
-    updateInfo(info);
+    if(info !== defaultInfo) updateInfo(info);
   }, [info])
 
   const handleChange = (

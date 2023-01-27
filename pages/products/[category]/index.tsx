@@ -1,20 +1,35 @@
-import React from "react"
-import { ProductCard } from "../../../components/ProductCard"
-import Layout from "../../layout"
-import Breadcrumb from "../../../molecules/Breadcrumb"
-import { Product } from "../../../types/product"
-import fetchProducts from "../../../helpers/fetchProducts"
-import fetchCategories from "../../../helpers/fetchCategories"
-import Head from "next/head"
+import React, { useMemo, useState } from "react";
+import { ProductCard } from "../../../components/ProductCard";
+import Layout from "../../layout";
+import Breadcrumb from "../../../molecules/Breadcrumb";
+import { Product } from "../../../types/product";
+import fetchProducts from "../../../helpers/fetchProducts";
+import fetchCategories from "../../../helpers/fetchCategories";
+import Head from "next/head";
+import Pagination from "../../../components/Pagination";
 
 const Products = ({
   products,
   category,
 }: {
-  products?: Product[]
-  category: string
+  products?: Product[];
+  category: string;
 }) => {
-  const title = `Products - ${category || "All"} - BIOBIBAR`
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 10;
+
+  const paginatedProducts = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * pageSize;
+    const lastPageIndex = firstPageIndex + pageSize;
+    return products?.slice(firstPageIndex, lastPageIndex);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage]);
+
+  const onPageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const title = `Products - ${category || "All"} - BIOBIBAR`;
   return (
     <>
       <Head>
@@ -35,7 +50,7 @@ const Products = ({
           ]}
         />
         <div className="container mt-12 px-0 md:px-24">
-          {products?.map((product) => (
+          {paginatedProducts?.map((product) => (
             <div className="mb-12 grid md:grid-cols-2" key={product.id}>
               <ProductCard
                 id={product.id}
@@ -49,6 +64,12 @@ const Products = ({
               </div>
             </div>
           ))}
+          <Pagination
+            items={products?.length || 0}
+            currentPage={currentPage}
+            pageSize={pageSize}
+            onPageChange={onPageChange}
+          />
         </div>
       </Layout>
     </>

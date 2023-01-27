@@ -4,7 +4,7 @@ const EditImageMenu = ({
   handleViewClick,
   handleUpload,
   inputName,
-  btnClass
+  btnClass,
 }: EditImageMenuProps) => {
   const hiddenFileInput = React.useRef<any>(null);
 
@@ -16,11 +16,11 @@ const EditImageMenu = ({
 
   return (
     <div className="cover">
-      <button className={btnClass} onClick={handleViewClick} >
+      <button className={btnClass} onClick={handleViewClick}>
         view photo
       </button>
       <label htmlFor={inputName}>
-        <button className={btnClass} onClick={handleUploadImageClick} >
+        <button className={btnClass} onClick={handleUploadImageClick}>
           upload a photo
         </button>
       </label>
@@ -29,7 +29,7 @@ const EditImageMenu = ({
         ref={hiddenFileInput}
         type="file"
         className="hidden"
-        onChange={handleUpload}
+        onChange={(e) => handleUpload(e)}
       />
     </div>
   );
@@ -38,7 +38,7 @@ const EditImageMenu = ({
 export default EditImageMenu;
 
 interface EditImageMenuProps {
-  handleUpload: (e: React.ChangeEvent) => void;
+  handleUpload: (e?: React.ChangeEvent) => void;
   handleViewClick: () => void;
   inputName: string;
   btnClass: string;

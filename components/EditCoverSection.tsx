@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, RefObject } from "react";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import { ReactSVG } from "react-svg";
@@ -72,8 +73,12 @@ const EditCoverSection = () => {
     }
   };
 
-  const handleUpload = async (e: React.ChangeEvent) => {
-    const input = e.target as HTMLInputElement;
+  const imageRef = React.useRef<HTMLImageElement>(null);
+  const imageRef2 = React.useRef<HTMLImageElement>(null);
+  const imageRef3 = React.useRef<HTMLImageElement>(null);
+
+  const handleUpload = async (ref?: RefObject<HTMLImageElement>, e?: React.ChangeEvent) => {
+    const input = e?.target as HTMLInputElement;
 
     const inputName = input.name;
 
@@ -86,6 +91,11 @@ const EditCoverSection = () => {
     const reader = new FileReader();
     reader.onload = (e) => {
       setImageLink(e.target?.result as string);
+      setIsOpen(null);
+
+      if (ref?.current instanceof HTMLImageElement) {
+        ref.current.style.opacity = "0.5";
+      }
     };
     reader.readAsDataURL(file);
 
@@ -95,6 +105,8 @@ const EditCoverSection = () => {
       if (imageUrl) {
         setHome({ ...home, [inputName]: imageUrl });
         toast.success("Image uploaded successfully");
+        const img = ref?.current
+        img && setTimeout(() => (img.style.opacity = "1"), 1500);
       }
     } catch (e) {
       toast.error("Image size is too large");
@@ -102,26 +114,7 @@ const EditCoverSection = () => {
     }
   };
 
-  const imageRef = React.useRef<any>(null);
-  const imageRef2 = React.useRef<any>(null);
-  const imageRef3 = React.useRef<any>(null);
-
-  const handleViewClick = (cover: string) => {
-    let ref;
-    switch (cover) {
-      case "cover":
-        ref = imageRef;
-        break;
-      case "cover2":
-        ref = imageRef2;
-        break;
-      case "cover3":
-        ref = imageRef3;
-        break;
-      default:
-        break;
-    }
-
+  const handleViewClick = (ref: any) => {
     if (ref?.current instanceof HTMLImageElement) {
       ref.current.click();
     }
@@ -149,12 +142,14 @@ const EditCoverSection = () => {
           if (els[i] === e.target) isImg = true;
         }
         if (!isImg) document.body.removeChild(lightbox);
+        setIsOpen(null);
 
         document.body.style.overflow = "auto";
       });
 
       closeButton.addEventListener("click", () => {
         document.body.removeChild(lightbox);
+        setIsOpen(null);
         document.body.style.overflow = "auto";
       });
 
@@ -190,8 +185,8 @@ const EditCoverSection = () => {
               </div>
               {isOpen === "cover" && (
                 <EditImageMenu
-                  handleViewClick={() => handleViewClick("cover")}
-                  handleUpload={handleUpload}
+                  handleViewClick={() => handleViewClick(imageRef)}
+                  handleUpload={handleUpload.bind(this, imageRef)}
                   inputName="cover"
                   btnClass="cover-edit-btn"
                 />
@@ -240,8 +235,8 @@ const EditCoverSection = () => {
               </div>
               {isOpen === "cover2" && (
                 <EditImageMenu
-                  handleViewClick={() => handleViewClick("cover2")}
-                  handleUpload={handleUpload}
+                  handleViewClick={() => handleViewClick(imageRef2)}
+                  handleUpload={handleUpload.bind(this, imageRef2)}
                   inputName="cover2"
                   btnClass="cover-edit-btn"
                 />
@@ -271,8 +266,8 @@ const EditCoverSection = () => {
               </div>
               {isOpen === "cover3" && (
                 <EditImageMenu
-                  handleViewClick={() => handleViewClick("cover3")}
-                  handleUpload={handleUpload}
+                  handleViewClick={() => handleViewClick(imageRef3)}
+                  handleUpload={handleUpload.bind(this, imageRef3)}
                   inputName="cover3"
                   btnClass="cover-edit-btn"
                 />

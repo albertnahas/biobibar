@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useRef } from "react";
 import React, { useState, useEffect, RefObject } from "react";
 import Image from "next/image";
 import { toast } from "react-toastify";
@@ -19,9 +20,9 @@ const defaultHome: Home = {
 };
 const EditCoverSection = () => {
   const [home, setHome] = useState<Home>(defaultHome);
-  const [debouncedHome, setDebouncedHome] = useState<Home>(defaultHome);
-  const { slogan } = debouncedHome;
-  const { cover, logo, logoDark, cover2, cover3 } = home;
+  const { slogan, cover, logo, logoDark, cover2, cover3 } = home;
+  const isMounted = useRef(false);
+  const [loading, setLoading] = useState(true);
 
   const [imageLink, setImageLink] = useState<string>();
 
@@ -30,27 +31,30 @@ const EditCoverSection = () => {
   useEffect(() => {
     fetchHome().then((res: Home | null) => {
       setHome(res || {});
-      setDebouncedHome(res || {});
+      setLoading(false);
     });
   }, []);
 
   useEffect(() => {
+    if (loading) {
+      return;
+    }
     const timerId = setTimeout(() => {
-      setHome(debouncedHome);
+      if (isMounted.current) {
+        updateHome(home)
+      } else {
+        isMounted.current = true
+      }
     }, 1000);
 
-    return () => clearTimeout(timerId);
-  }, [debouncedHome]);
-
-  useEffect(() => {
-    updateHome(home);
-  }, [home]);
+    return () => timerId && clearTimeout(timerId);
+  }, [home, loading]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setDebouncedHome({ ...home, [name]: value });
+    setHome({ ...home, [name]: value });
   };
 
   const handleOpen = (name: string): void => {
@@ -167,7 +171,7 @@ const EditCoverSection = () => {
                 height="200"
                 ref={imageRef}
                 onClick={handleView}
-                src={cover || "/asset1.png"}
+                src={cover || "/placeholder-image.jpg"}
                 style={{
                   objectFit: "cover",
                 }}
@@ -194,8 +198,9 @@ const EditCoverSection = () => {
               <label>Edit text</label>
               <textarea
                 dir="rtl"
-                className="input-primary col-span-3 text-right"
+                className={`${loading ? 'input-disabled' : 'input-primary'} col-span-3 text-right`}
                 value={slogan}
+                disabled={loading}
                 name="slogan"
                 rows={5}
                 onChange={handleChange}
@@ -219,7 +224,7 @@ const EditCoverSection = () => {
                 style={{
                   objectFit: "cover",
                 }}
-                src={cover2 || "/asset2.png"}
+                src={cover2 || "/placeholder-image.jpg"}
                 alt="cover2"
               />
               <div
@@ -250,7 +255,7 @@ const EditCoverSection = () => {
                 style={{
                   objectFit: "cover",
                 }}
-                src={cover3 || "/asset1.png"}
+                src={cover3 || "/placeholder-image.jpg"}
                 alt="cover3"
               />
               <div

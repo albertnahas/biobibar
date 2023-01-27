@@ -1,8 +1,8 @@
 import React, { useMemo } from "react";
 import { Pagination } from "../types/pagination";
 
-export const LEFT_DOTS = 'left-dots';
-export const RIGHT_DOTS = 'right-dots';
+export const LEFT_DOTS = "left-dots";
+export const RIGHT_DOTS = "right-dots";
 
 const range = (start: number, end: number) => {
   let length = end - start + 1;
@@ -15,7 +15,7 @@ export const usePaginate = ({
   siblingCount = 1,
   currentPage,
 }: Pagination) => {
-  const paginationRange = useMemo((): any => {
+  const paginationRange = useMemo(() => {
     const pagesCount = Math.ceil(items / pageSize);
 
     if (pagesCount === 1) return null;

@@ -53,7 +53,7 @@ const Pagination = ({
               </li>
             )}
 
-            {paginationRange?.map((page: any) => {
+            {paginationRange?.map((page) => {
               if (page === LEFT_DOTS || page === RIGHT_DOTS) {
                 return (
                   <li key={page} className="page-item dots">
@@ -67,7 +67,9 @@ const Pagination = ({
                   className={
                     page === currentPage ? "page-item-active" : "page-item"
                   }
-                  onClick={() => onPageChange(page)}
+                  onClick={() =>
+                    !isNaN(Number(page)) && onPageChange(Number(page))
+                  }
                 >
                   {page}
                 </li>

@@ -32,8 +32,7 @@ const ProductsAdmin = () => {
     const firstPageIndex = (currentPage - 1) * pageSize;
     const lastPageIndex = firstPageIndex + pageSize;
     return products?.slice(firstPageIndex, lastPageIndex);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage]);
+  }, [currentPage, products]);
 
   const onPageChange = (page: number) => {
     setCurrentPage(page);

@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
-import React, { useState, useEffect, RefObject } from "react";
+import React, { useState, useEffect, useRef, RefObject } from "react";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import { ReactSVG } from "react-svg";

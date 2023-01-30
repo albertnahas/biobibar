@@ -173,15 +173,8 @@ const ProductsAdmin = () => {
     RefObject<HTMLImageElement> | undefined | null
   >(null);
 
-  const [isOverlay, setIsOverlay] = useState<boolean>(false);
-
   const handleOpen = (ref?: RefObject<HTMLImageElement>): void => {
     setIsOpen(ref);
-    if (!isOpen) {
-      if (!document.querySelector("div.overlay")) {
-        setIsOverlay(true);
-      }
-    }
   };
 
   const handleUpload = async (
@@ -227,7 +220,6 @@ const ProductsAdmin = () => {
         );
         toast.success("Image uploaded successfully");
         img && setTimeout(() => (img.style.opacity = "1"), 1500);
-        setIsOverlay(false);
       }
     } catch (e) {
       toast.error("Image size is too large");
@@ -274,7 +266,6 @@ const ProductsAdmin = () => {
       document.body.appendChild(lightbox);
       document.body.style.overflow = "hidden";
       setIsOpen(null);
-      setIsOverlay(false);
     }
   };
 
@@ -410,11 +401,10 @@ const ProductsAdmin = () => {
           />
         )}
 
-        {isOverlay && (
+        {isOpen && (
           <div
             className="overlay"
             onClick={() => {
-              setIsOverlay(false);
               setIsOpen(null);
             }}
           ></div>

@@ -63,11 +63,6 @@ const EditCoverSection = () => {
 
   const handleOpen = (ref?: RefObject<HTMLImageElement>): void => {
     setIsOpen(ref);
-    if (!isOpen) {
-      if (!document.querySelector("div.overlay")) {
-        setIsOpen(null);
-      }
-    }
   };
 
   const handleUpload = async (
@@ -103,7 +98,6 @@ const EditCoverSection = () => {
         toast.success("Image uploaded successfully");
         const img = ref?.current;
         img && setTimeout(() => (img.style.opacity = "1"), 1500);
-        setIsOpen(ref);
       }
     } catch (e) {
       toast.error("Image size is too large");

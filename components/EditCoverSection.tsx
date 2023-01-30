@@ -61,13 +61,11 @@ const EditCoverSection = () => {
     RefObject<HTMLImageElement> | undefined | null
   >(null);
 
-  const [isOverlay, setIsOverlay] = useState<boolean>(false);
-
   const handleOpen = (ref?: RefObject<HTMLImageElement>): void => {
     setIsOpen(ref);
     if (!isOpen) {
       if (!document.querySelector("div.overlay")) {
-        setIsOverlay(true);
+        setIsOpen(null);
       }
     }
   };
@@ -105,7 +103,7 @@ const EditCoverSection = () => {
         toast.success("Image uploaded successfully");
         const img = ref?.current;
         img && setTimeout(() => (img.style.opacity = "1"), 1500);
-        setIsOverlay(false);
+        setIsOpen(ref);
       }
     } catch (e) {
       toast.error("Image size is too large");
@@ -152,7 +150,6 @@ const EditCoverSection = () => {
       document.body.appendChild(lightbox);
       document.body.style.overflow = "hidden";
       setIsOpen(null);
-      setIsOverlay(false);
     }
   };
 
@@ -264,11 +261,10 @@ const EditCoverSection = () => {
           </div>
         </div>
       </div>
-      {isOverlay && (
+      {isOpen && (
         <div
           className="overlay"
           onClick={() => {
-            setIsOverlay(false);
             setIsOpen(null);
           }}
         ></div>

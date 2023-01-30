@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef, RefObject } from "react";
 import Image from "next/image";
 import { toast } from "react-toastify";
-import { ReactSVG } from "react-svg";
 
 import { Home } from "../types/home";
 import fetchHome from "../helpers/fetchHome";
 import updateHome from "../helpers/updateHome";
 import { uploadImage } from "../helpers/UploadImage";
-import EditImageMenu from "../atoms/EditImageMenu";
+import EditImageBlock from "../atoms/EditImageBlock";
 
 const defaultHome: Home = {
   cover: "",
@@ -25,8 +24,6 @@ const EditCoverSection = () => {
 
   const [imageLink, setImageLink] = useState<string>();
 
-  const [isOpen, setIsOpen] = useState<string | null>(null);
-
   useEffect(() => {
     fetchHome().then((res: Home | null) => {
       setHome(res || {});
@@ -40,9 +37,9 @@ const EditCoverSection = () => {
     }
     const timerId = setTimeout(() => {
       if (isMounted.current) {
-        updateHome(home)
+        updateHome(home);
       } else {
-        isMounted.current = true
+        isMounted.current = true;
       }
     }, 1000);
 
@@ -56,27 +53,29 @@ const EditCoverSection = () => {
     setHome({ ...home, [name]: value });
   };
 
-  const handleOpen = (name: string): void => {
-    setIsOpen(isOpen === name ? null : name);
-    if (!isOpen) {
-      if (!document.querySelector("div.overlay")) {
-        const overlay = document.createElement("div");
-        overlay.classList.add("overlay");
-        document.body.appendChild(overlay);
-
-        overlay.addEventListener("click", (e: any) => {
-          setIsOpen(null);
-          document.body.removeChild(overlay);
-        });
-      }
-    }
-  };
-
   const imageRef = React.useRef<HTMLImageElement>(null);
   const imageRef2 = React.useRef<HTMLImageElement>(null);
   const imageRef3 = React.useRef<HTMLImageElement>(null);
 
-  const handleUpload = async (ref?: RefObject<HTMLImageElement>, e?: React.ChangeEvent) => {
+  const [isOpen, setIsOpen] = useState<
+    RefObject<HTMLImageElement> | undefined | null
+  >(null);
+
+  const [isOverlay, setIsOverlay] = useState<boolean>(false);
+
+  const handleOpen = (ref?: RefObject<HTMLImageElement>): void => {
+    setIsOpen(ref);
+    if (!isOpen) {
+      if (!document.querySelector("div.overlay")) {
+        setIsOverlay(true);
+      }
+    }
+  };
+
+  const handleUpload = async (
+    ref?: RefObject<HTMLImageElement>,
+    e?: React.ChangeEvent
+  ) => {
     const input = e?.target as HTMLInputElement;
 
     const inputName = input.name;
@@ -104,8 +103,9 @@ const EditCoverSection = () => {
       if (imageUrl) {
         setHome({ ...home, [inputName]: imageUrl });
         toast.success("Image uploaded successfully");
-        const img = ref?.current
+        const img = ref?.current;
         img && setTimeout(() => (img.style.opacity = "1"), 1500);
+        setIsOverlay(false);
       }
     } catch (e) {
       toast.error("Image size is too large");
@@ -141,19 +141,18 @@ const EditCoverSection = () => {
           if (els[i] === e.target) isImg = true;
         }
         if (!isImg) document.body.removeChild(lightbox);
-        setIsOpen(null);
-
         document.body.style.overflow = "auto";
       });
 
       closeButton.addEventListener("click", () => {
         document.body.removeChild(lightbox);
-        setIsOpen(null);
         document.body.style.overflow = "auto";
       });
 
       document.body.appendChild(lightbox);
       document.body.style.overflow = "hidden";
+      setIsOpen(null);
+      setIsOverlay(false);
     }
   };
 
@@ -176,20 +175,16 @@ const EditCoverSection = () => {
                 }}
                 alt="cover"
               />
-              <div
-                className="cover-edit-icon"
-                onClick={() => handleOpen("cover")}
-              >
-                <ReactSVG src="/edit.svg" className="edit-svg h-3 w-3" />
-              </div>
-              {isOpen === "cover" && (
-                <EditImageMenu
-                  handleViewClick={() => handleViewClick(imageRef)}
-                  handleUpload={handleUpload.bind(this, imageRef)}
-                  inputName="cover"
-                  btnClass="cover-edit-btn"
-                />
-              )}
+              <EditImageBlock
+                iconClass="cover-edit-icon"
+                handleOpen={handleOpen.bind(this, imageRef)}
+                handleViewClick={() => handleViewClick(imageRef)}
+                handleUpload={handleUpload.bind(this, imageRef)}
+                inputName="cover"
+                btnClass="cover-edit-btn"
+                open={isOpen}
+                svgClass="edit-svg h-3 w-3"
+              />
             </div>
           </div>
           <div className="col-2">
@@ -197,7 +192,9 @@ const EditCoverSection = () => {
               <label>Edit text</label>
               <textarea
                 dir="rtl"
-                className={`${loading ? 'input-disabled' : 'input-primary'} col-span-3 text-right`}
+                className={`${
+                  loading ? "input-disabled" : "input-primary"
+                } col-span-3 text-right`}
                 value={slogan}
                 disabled={loading}
                 name="slogan"
@@ -226,20 +223,16 @@ const EditCoverSection = () => {
                 src={cover2 || "/placeholder-image.jpg"}
                 alt="cover2"
               />
-              <div
-                className="cover-edit-icon"
-                onClick={() => handleOpen("cover2")}
-              >
-                <ReactSVG src="/edit.svg" className="edit-svg h-3 w-3" />
-              </div>
-              {isOpen === "cover2" && (
-                <EditImageMenu
-                  handleViewClick={() => handleViewClick(imageRef2)}
-                  handleUpload={handleUpload.bind(this, imageRef2)}
-                  inputName="cover2"
-                  btnClass="cover-edit-btn"
-                />
-              )}
+              <EditImageBlock
+                iconClass="cover-edit-icon"
+                btnClass="cover-edit-btn"
+                svgClass="edit-svg h-3 w-3"
+                inputName="cover2"
+                open={isOpen}
+                handleOpen={handleOpen.bind(this, imageRef2)}
+                handleViewClick={() => handleViewClick(imageRef2)}
+                handleUpload={handleUpload.bind(this, imageRef2)}
+              />
             </div>
           </div>
           <div className="col-2">
@@ -257,24 +250,29 @@ const EditCoverSection = () => {
                 src={cover3 || "/placeholder-image.jpg"}
                 alt="cover3"
               />
-              <div
-                className="cover-edit-icon"
-                onClick={() => handleOpen("cover3")}
-              >
-                <ReactSVG src="/edit.svg" className="edit-svg h-3 w-3" />
-              </div>
-              {isOpen === "cover3" && (
-                <EditImageMenu
-                  handleViewClick={() => handleViewClick(imageRef3)}
-                  handleUpload={handleUpload.bind(this, imageRef3)}
-                  inputName="cover3"
-                  btnClass="cover-edit-btn"
-                />
-              )}
+              <EditImageBlock
+                iconClass="cover-edit-icon"
+                btnClass="cover-edit-btn"
+                svgClass="edit-svg h-3 w-3"
+                inputName="cover3"
+                open={isOpen}
+                handleOpen={handleOpen.bind(this, imageRef3)}
+                handleViewClick={() => handleViewClick(imageRef3)}
+                handleUpload={handleUpload.bind(this, imageRef3)}
+              />
             </div>
           </div>
         </div>
       </div>
+      {isOverlay && (
+        <div
+          className="overlay"
+          onClick={() => {
+            setIsOverlay(false);
+            setIsOpen(null);
+          }}
+        ></div>
+      )}
     </section>
   );
 };

@@ -36,6 +36,9 @@
   .cover {
     @apply w-120 absolute -bottom-8 right-16 z-10 rounded-2xl border-2 border-primary bg-white px-2 py-1 text-xs 2xl:right-44;
   }
+  .cat-img-container .cover {
+    @apply 2xl:right-14 2xl:-bottom-16 !important;
+  }
   .cover-edit-btn {
     @apply m-1 block cursor-pointer rounded-lg border-2 border-primary p-1 text-left;
   }

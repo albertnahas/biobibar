@@ -114,7 +114,7 @@ const ProductsAdmin = () => {
       })
     );
     if (cat.id) {
-      updateCategory(cat.id, cat.name)
+      updateCategory(cat.id, { name: cat.name })
         .then(() => {
           loadCategories();
         })
@@ -123,7 +123,7 @@ const ProductsAdmin = () => {
           toast.error("Error updating category");
         });
     } else {
-      addCategory(cat.name)
+      addCategory(cat.name!)
         .then(() => {
           loadCategories();
         })
@@ -179,6 +179,7 @@ const ProductsAdmin = () => {
 
   const handleUpload = async (
     ref?: RefObject<HTMLImageElement>,
+    cat?: Category,
     e?: React.ChangeEvent
   ) => {
     const input = e?.target as HTMLInputElement;
@@ -207,17 +208,16 @@ const ProductsAdmin = () => {
       imageUrl = await uploadImage(file);
       if (imageUrl) {
         const img = ref?.current;
-        setCategories(
-          categories.map((c) => {
-            if (c.name === inputName) {
-              return {
-                ...c,
-                image: imageUrl,
-              };
-            }
-            return c;
-          })
-        );
+        cat &&
+          cat.id &&
+          updateCategory(cat.id, { image: imageUrl })
+            .then(() => {
+              loadCategories();
+            })
+            .catch((err: any) => {
+              console.log(err);
+              toast.error("Error updating category");
+            });
         toast.success("Image uploaded successfully");
         img && setTimeout(() => (img.style.opacity = "1"), 1500);
       }
@@ -298,7 +298,7 @@ const ProductsAdmin = () => {
                   style={{
                     objectFit: "cover",
                   }}
-                  alt={c.name}
+                  alt={c.name!}
                   ref={imageRefs[i]}
                   onClick={handleView}
                 />
@@ -306,8 +306,8 @@ const ProductsAdmin = () => {
                   iconClass="cover-edit-icon small"
                   handleOpen={handleOpen.bind(this, imageRefs[i])}
                   handleViewClick={() => handleViewClick(imageRefs[i])}
-                  handleUpload={handleUpload.bind(this, imageRefs[i])}
-                  inputName={c.name}
+                  handleUpload={handleUpload.bind(this, imageRefs[i], c)}
+                  inputName={c.name!}
                   btnClass="cover-edit-btn"
                   open={isOpen}
                   svgClass="edit-svg h-3 w-3"

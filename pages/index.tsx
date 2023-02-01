@@ -60,16 +60,16 @@ const Home: FC<Props> = ({
       </Head>
       <div>
         <Navbar />
-        <HeroSection coverUrl={home.cover} slogan={home.slogan} />
+        <HeroSection coverUrl={home?.cover} slogan={home?.slogan} />
         <Animate>
-          <AboutSection about={info.about} />
+          <AboutSection about={info?.about} />
         </Animate>
-        <FeaturedSection coverUrl={home.cover2} products={featuredProducts} />
+        <FeaturedSection coverUrl={home?.cover2} products={featuredProducts} />
         <Animate>
-          <ArrivalsSection products={newProducts} />
+          <ArrivalsSection products={newProducts || []} />
         </Animate>
-        <CategoriesSection categories={categories} />
-        <BannerSection coverUrl={home.cover3} />
+        <CategoriesSection categories={categories || []} />
+        <BannerSection coverUrl={home?.cover3} />
         <Animate>
           <div className="md:px-40 md:pt-40">
             <ContactSection />
@@ -85,9 +85,9 @@ const Home: FC<Props> = ({
 export default Home
 
 interface Props {
-  home: Home
-  info: Info
-  newProducts: Product[]
-  featuredProducts: Product[]
-  categories: Category[]
+  home?: Home
+  info?: Info
+  newProducts?: Product[]
+  featuredProducts?: Product[]
+  categories?: Category[]
 }

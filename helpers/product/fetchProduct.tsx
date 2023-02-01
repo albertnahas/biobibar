@@ -1,7 +1,7 @@
 import axios from "axios"
-import _products from "../data/products.json"
-import { Product } from "../types/product"
-import { DATABASE_URL, MOCK_PRODUCTS } from "./constants"
+import _products from "../../data/products.json"
+import { Product } from "../../types/product"
+import { DATABASE_URL, MOCK_PRODUCTS } from "../constants"
 
 const fetchProduct = async (productId: string) => {
   if (MOCK_PRODUCTS) {

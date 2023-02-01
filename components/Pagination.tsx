@@ -1,6 +1,6 @@
 import { ReactSVG } from "react-svg";
 import { Pagination } from "../types/pagination";
-import { usePaginate, LEFT_DOTS, RIGHT_DOTS } from "../helpers/usePaginate";
+import { usePaginate, LEFT_DOTS, RIGHT_DOTS } from "../hooks/usePaginate";
 
 const Pagination = ({
   onPageChange,

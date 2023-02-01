@@ -1,5 +1,5 @@
-import { addAuthToURL } from "./addAuthToURL"
-import { DATABASE_URL } from "./constants"
+import { addAuthToURL } from "../addAuthToURL"
+import { DATABASE_URL } from "../constants"
 
 const axios = require("axios")
 

@@ -1,7 +1,8 @@
 import Head from "next/head"
 import { Footer } from "../components/Footer"
 import { ContactSection } from "../components/HomeSections/ContactSection"
-import fetchInfo from "../helpers/fetchInfo"
+import fetchInfo from "../helpers/info/fetchInfo"
+import Breadcrumb from "../molecules/Breadcrumb"
 import { Info } from "../types/info"
 import Layout from "./layout"
 
@@ -26,6 +27,12 @@ const contact = ({ info }: { info: Info }) => {
         <link rel="canonical" href={`https://www.biobibar.com/contact`} />
       </Head>
       <Layout>
+        <Breadcrumb
+          items={[
+            { label: "Home", path: "/" },
+            { label: "Contact", path: "/contact" },
+          ]}
+        />
         <div className="md:px-40">
           <ContactSection />
           <Footer info={info} />

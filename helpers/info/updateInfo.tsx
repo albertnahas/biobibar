@@ -1,6 +1,6 @@
-import { Info } from "../types/info"
-import { addAuthToURL } from "./addAuthToURL"
-import { DATABASE_URL } from "./constants"
+import { Info } from "../../types/info"
+import { addAuthToURL } from "../addAuthToURL"
+import { DATABASE_URL } from "../constants"
 
 const axios = require("axios")
 

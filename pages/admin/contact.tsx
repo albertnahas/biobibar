@@ -1,11 +1,11 @@
 import Head from "next/head";
 import React, { useState, useEffect } from "react";
 import ContactCard from "../../components/ContactCard";
-import fetchContacts from "../../helpers/fetchContacts";
+import fetchContacts from "../../helpers/contact/fetchContacts";
 import withAuthentication from "../../components/withAuth";
 import { Contact } from "../../types/contact";
 import Layout from "../layout";
-import { updateContact } from "../../helpers/updateContact";
+import { updateContact } from "../../helpers/contact/updateContact";
 import { toast } from "react-toastify";
 
 const Contact = () => {

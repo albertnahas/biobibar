@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { ReactSVG } from "react-svg";
-import fetchInfo from "../helpers/fetchInfo";
-import updateInfo from "../helpers/updateInfo";
+import fetchInfo from "../helpers/info/fetchInfo";
+import updateInfo from "../helpers/info/updateInfo";
 import { Info } from "../types/info";
 
 const defaultInfo: Info = {

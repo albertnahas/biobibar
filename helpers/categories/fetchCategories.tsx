@@ -1,5 +1,5 @@
-import { Category } from "../types/category"
-import { DATABASE_URL } from "./constants"
+import { Category } from "../../types/category"
+import { DATABASE_URL } from "../constants"
 
 const axios = require("axios")
 

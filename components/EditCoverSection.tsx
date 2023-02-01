@@ -3,8 +3,8 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 
 import { Home } from "../types/home";
-import fetchHome from "../helpers/fetchHome";
-import updateHome from "../helpers/updateHome";
+import fetchHome from "../helpers/home/fetchHome";
+import updateHome from "../helpers/home/updateHome";
 import { uploadImage } from "../helpers/UploadImage";
 import EditImageBlock from "../atoms/EditImageBlock";
 

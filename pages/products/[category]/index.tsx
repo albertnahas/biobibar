@@ -3,8 +3,8 @@ import { ProductCard } from "../../../components/ProductCard";
 import Layout from "../../layout";
 import Breadcrumb from "../../../molecules/Breadcrumb";
 import { Product } from "../../../types/product";
-import fetchProducts from "../../../helpers/fetchProducts";
-import fetchCategories from "../../../helpers/fetchCategories";
+import fetchProducts from "../../../helpers/products/fetchProducts";
+import fetchCategories from "../../../helpers/categories/fetchCategories";
 import Head from "next/head";
 import Pagination from "../../../components/Pagination";
 

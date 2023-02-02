@@ -147,13 +147,13 @@ const EditAboutSection = () => {
 
   return (
     <section className="contact">
-      <div className="container px-8 py-4 md:px-12">
-        <h2 className="mt-12 mb-4 text-xl">about</h2>
-        <div className="mb-6 grid grid-cols-5 gap-8">
-          <div className="col-1 md:text-right">
-            <label>Edit 1st paragraph text</label>
+      <div className="container px-8 py-4 md:px-16">
+        <h2 className="mt-12 mb-4 md:ml-24 text-xl">about</h2>
+        <div className="mb-12 md:ml-24 grid grid-cols-4 gap-8">
+          <div className="col-1">
+            <label>Edit paragraph</label>
           </div>
-          <div className="col-span-4">
+          <div className="col-span-3">
             <textarea
               className={`${loading ? "input-disabled" : "input-primary"}`}
               value={paragraph1}
@@ -164,7 +164,7 @@ const EditAboutSection = () => {
             />
           </div>
         </div>
-        <div className="mb-6 grid gap-8 md:grid-cols-2">
+        <div className="mb-12 grid gap-8 md:grid-cols-2">
           <div className="col-1">
             <div className="h-300 relative mb-4 flex">
               <Image
@@ -192,7 +192,7 @@ const EditAboutSection = () => {
           </div>
           <div className="col-2">
             <div className="grid gap-4 md:grid-cols-4">
-              <label className="col-1">Edit 2nd paragraph text</label>
+              <label className="col-1">Edit paragraph</label>
               <textarea
                 className={`${
                   loading ? "input-disabled" : "input-primary"
@@ -200,17 +200,17 @@ const EditAboutSection = () => {
                 value={paragraph2}
                 disabled={loading}
                 name="paragraph2"
-                rows={8}
+                rows={10}
                 onChange={handleChange}
               />
             </div>
           </div>
         </div>
-        <div className="mb-6 grid grid-cols-5 gap-8">
-          <div className="col-1 md:text-right">
-            <label>Edit 3rd paragraph text</label>
+        <div className="mb-6 md:ml-24 grid grid-cols-4 gap-8">
+          <div className="col-1">
+            <label>Edit paragraph</label>
           </div>
-          <div className="col-span-4">
+          <div className="col-span-3">
             <textarea
               className={`${loading ? "input-disabled" : "input-primary"}`}
               value={paragraph3}

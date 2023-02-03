@@ -97,19 +97,22 @@ export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
                     </Link>
                   </li>
                 ))}
-                <li key="chat">
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault()
-                      if (window.FB && window.FB.CustomerChat) {
-                        window.FB.CustomerChat.show()
-                        window.FB.CustomerChat.showDialog()
-                      }
-                    }}
-                  >
-                    <ReactSVG src="/chat.svg" className="h-6 w-6" />
-                  </button>
-                </li>
+                {!isAdmin && (
+                  <li className="flex" key="chat">
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault()
+                        if (window.FB && window.FB.CustomerChat) {
+                          window.FB.CustomerChat.show()
+                          window.FB.CustomerChat.showDialog()
+                        }
+                      }}
+                      className="py-1 pl-3"
+                    >
+                      <ReactSVG src="/chat.svg" className="h-6 w-6" />
+                    </button>
+                  </li>
+                )}
               </ul>
             </div>
           </div>

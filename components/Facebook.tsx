@@ -1,11 +1,12 @@
 import Script from "next/script"
 
 function Facebook() {
+  const props = { color: "#de9f26" }
   return (
     <div>
       <div id="fb-root"></div>
+      <div id="fb-customer-chat" {...props} className="fb-customerchat"></div>
 
-      <div id="fb-customer-chat" className="fb-customerchat"></div>
       <Script id="fb" strategy="lazyOnload">
         {`
       var chatbox = document.getElementById('fb-customer-chat');

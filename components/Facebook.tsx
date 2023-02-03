@@ -19,6 +19,9 @@ function Facebook() {
           version          : 'v16.0'
         });
       };
+      window.addEventListener("messengerDialog", function (event) {
+        event.detail === "open" ? FB.CustomerChat.showDialog() : FB.CustomerChat.hideDialog();
+    });
 
       (function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];

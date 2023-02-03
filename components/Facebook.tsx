@@ -23,7 +23,7 @@ function Facebook() {
             console.log('finished rendering plugins');
             setTimeout(function() {
             FB.CustomerChat.hide()
-            }, 1000);
+            }, 3000);
           }
           // In your onload handler
           FB.Event.subscribe('xfbml.render', finished_rendering);

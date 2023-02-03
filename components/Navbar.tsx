@@ -1,6 +1,6 @@
-import { useRouter } from "next/router"
 import Link from "next/link"
 import { FC, useState } from "react"
+import Facebook from "./Facebook"
 
 export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
   const [navbar, setNavbar] = useState(false)
@@ -16,7 +16,7 @@ export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
       <div
         className={`${
           navbar ? "block" : "hidden"
-        }  fixed inset-0 z-0 bg-text opacity-90`}
+        } fixed inset-0 z-0 bg-text opacity-90`}
       ></div>
       <nav
         className="bg-cover bg-center bg-no-repeat bg-blend-multiply"
@@ -100,6 +100,7 @@ export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
             </div>
           </div>
         </div>
+        {bottom && !isAdmin && <Facebook />}
       </nav>
     </>
   )

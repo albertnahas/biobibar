@@ -18,6 +18,7 @@ function Facebook() {
           xfbml            : true,
           version          : 'v16.0'
         });
+        FB.CustomerChat.hide()
       };
       window.addEventListener("messengerDialog", function (event) {
         event.detail === "open" ? FB.CustomerChat.showDialog() : FB.CustomerChat.hideDialog();

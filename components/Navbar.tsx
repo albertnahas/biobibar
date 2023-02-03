@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { FC, useState } from "react"
 import Facebook from "./Facebook"
+import { ReactSVG } from "react-svg"
 
 export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
   const [navbar, setNavbar] = useState(false)
@@ -96,6 +97,19 @@ export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
                     </Link>
                   </li>
                 ))}
+                <li key="chat">
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault()
+                      if (window.FB && window.FB.CustomerChat) {
+                        window.FB.CustomerChat.show()
+                        window.FB.CustomerChat.showDialog()
+                      }
+                    }}
+                  >
+                    <ReactSVG src="/chat.svg" className="h-6 w-6" />
+                  </button>
+                </li>
               </ul>
             </div>
           </div>
@@ -104,6 +118,12 @@ export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
       </nav>
     </>
   )
+}
+
+declare global {
+  interface Window {
+    FB: any
+  }
 }
 
 interface Props {

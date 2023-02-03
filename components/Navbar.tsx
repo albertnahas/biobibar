@@ -100,7 +100,7 @@ export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
             </div>
           </div>
         </div>
-        {/* {bottom && !isAdmin && <Facebook />} */}
+        {bottom && !isAdmin && <Facebook />}
       </nav>
     </>
   )

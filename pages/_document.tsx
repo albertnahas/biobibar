@@ -9,7 +9,7 @@ export default function Document() {
         </Head>
       <body>
         <Main />
-        <Facebook />
+        {/* <Facebook /> */}
         <NextScript />
       </body>
     </Html>

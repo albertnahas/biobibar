@@ -8,21 +8,10 @@ function Facebook() {
       <div id="fb-customer-chat" className="fb-customerchat"></div>
       <Script id="fb" strategy="lazyOnload">
         {`
-    <!-- Messenger Chat Plugin Code -->
-    <div id="fb-root"></div>
-
-    <!-- Your Chat Plugin code -->
-    <div id="fb-customer-chat" class="fb-customerchat">
-    </div>
-
-    <script>
       var chatbox = document.getElementById('fb-customer-chat');
       chatbox.setAttribute("page_id", "105410252199747");
       chatbox.setAttribute("attribution", "biz_inbox");
-    </script>
 
-    <!-- Your SDK code -->
-    <script>
       window.fbAsyncInit = function() {
         FB.init({
           xfbml            : true,
@@ -37,7 +26,6 @@ function Facebook() {
         js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
-    </script>
         `}
       </Script>
     </div>

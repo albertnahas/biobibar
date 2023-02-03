@@ -1,7 +1,7 @@
 import Script from "next/script"
 
 function Facebook() {
-  const props = { color: "#de9f26" }
+  const props = { theme_color: "#de9f26" }
   return (
     <div>
       <div id="fb-root"></div>

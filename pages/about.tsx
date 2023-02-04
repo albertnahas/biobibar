@@ -56,7 +56,7 @@ const about = ({
         <div className="my-16">
           <div className="container grid gap-4 px-0 md:grid-cols-12 md:px-24">
             <div className="md:col-span-8">
-              <p className="text-xl font-bold text-primary md:mt-12 md:pr-12">
+              <p className="text-xl text-primary md:mt-12 md:pr-12">
                 {ReactHtmlParser(
                   about?.paragraph1?.replace(/\./g, ".</br>") || ""
                 )}

@@ -1,6 +1,7 @@
-import { useRouter } from "next/router"
 import Link from "next/link"
 import { FC, useState } from "react"
+import Facebook from "./Facebook"
+import { ReactSVG } from "react-svg"
 
 export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
   const [navbar, setNavbar] = useState(false)
@@ -16,7 +17,7 @@ export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
       <div
         className={`${
           navbar ? "block" : "hidden"
-        }  fixed inset-0 z-0 bg-text opacity-90`}
+        } fixed inset-0 z-0 bg-text opacity-90`}
       ></div>
       <nav
         className="bg-cover bg-center bg-no-repeat bg-blend-multiply"
@@ -96,13 +97,50 @@ export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
                     </Link>
                   </li>
                 ))}
+                {!isAdmin && (
+                  <li className="flex" key="chat">
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault()
+                        if (window.FB && window.FB.CustomerChat) {
+                          var event = new CustomEvent("messengerDialog", {
+                            detail: "open",
+                            bubbles: true,
+                          })
+                          document.dispatchEvent(event)
+                        }
+                      }}
+                      className={`py-1 pl-3  stroke-${
+                        bottom ? "secondary-dark" : "primary"
+                      }`}
+                      style={{
+                        stroke: bottom
+                          ? "var(--secondary-dark)"
+                          : "var(--primary)",
+                      }}
+                    >
+                      <ReactSVG
+                        stroke="currentColor"
+                        src="/chat.svg"
+                        className="h-6 w-6"
+                      />
+                    </button>
+                  </li>
+                )}
               </ul>
             </div>
           </div>
         </div>
+        {bottom && !isAdmin && <Facebook />}
       </nav>
     </>
   )
+}
+
+declare global {
+  interface Window {
+    FB: any
+  }
 }
 
 interface Props {

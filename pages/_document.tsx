@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document'
+import Facebook from '../components/Facebook'
 
 export default function Document() {
   return (
@@ -8,6 +9,7 @@ export default function Document() {
         </Head>
       <body>
         <Main />
+        {/* <Facebook /> */}
         <NextScript />
       </body>
     </Html>

@@ -103,8 +103,11 @@ export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
                       onClick={(e) => {
                         e.preventDefault()
                         if (window.FB && window.FB.CustomerChat) {
-                          window.FB.CustomerChat.show()
-                          window.FB.CustomerChat.showDialog()
+                          var event = new CustomEvent("messengerDialog", {
+                            detail: "open",
+                            bubbles: true,
+                          })
+                          document.dispatchEvent(event)
                         }
                       }}
                       className={`py-1 pl-3  stroke-${

@@ -4,7 +4,7 @@ chatbox.setAttribute("page_id", "104294979153163");
 chatbox.setAttribute("attribution", "biz_inbox");
 
 var chatroot = document.getElementById('fb-root');
-chatroot.style.visibility = "hidden";
+// chatroot.style.visibility = "hidden";
 
 window.fbAsyncInit = function () {
     FB.init({

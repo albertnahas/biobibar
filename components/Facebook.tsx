@@ -6,7 +6,7 @@ function Facebook() {
     <div>
       <div id="fb-root"></div>
       <div id="fb-customer-chat" {...props} className="fb-customerchat"></div>
-      <Script id="fb" src="../chat.js" strategy="lazyOnload" />
+      <Script id="fb" src="./chat.js" strategy="lazyOnload" />
     </div>
   )
 }

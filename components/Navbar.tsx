@@ -113,6 +113,11 @@ export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
                       className={`py-1 pl-3  stroke-${
                         bottom ? "secondary-dark" : "primary"
                       }`}
+                      style={{
+                        stroke: bottom
+                          ? "var(--secondary-dark)"
+                          : "var(--primary)",
+                      }}
                     >
                       <ReactSVG
                         stroke="currentColor"

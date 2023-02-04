@@ -10,9 +10,7 @@ window.fbAsyncInit = function () {
         xfbml: true,
         version: 'v16.0'
     });
-
-    // In your onload handler
-    FB.Event.subscribe('xfbml.render', finished_rendering);
+    // FB.Event.subscribe('xfbml.render', finished_rendering);
 };
 window.addEventListener("messengerDialog", function (event) {
     if (event.detail === "open") {

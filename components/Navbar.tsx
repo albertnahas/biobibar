@@ -107,9 +107,15 @@ export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
                           window.FB.CustomerChat.showDialog()
                         }
                       }}
-                      className="py-1 pl-3"
+                      className={`py-1 pl-3  stroke-${
+                        bottom ? "secondary-dark" : "primary"
+                      }`}
                     >
-                      <ReactSVG src="/chat.svg" className="h-6 w-6" />
+                      <ReactSVG
+                        stroke="currentColor"
+                        src="/chat.svg"
+                        className="h-6 w-6"
+                      />
                     </button>
                   </li>
                 )}

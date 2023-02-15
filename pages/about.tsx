@@ -25,7 +25,7 @@ export async function getStaticProps() {
       about,
       featuredProducts,
     },
-    revalidate: 60,
+    revalidate: 10,
   }
 }
 

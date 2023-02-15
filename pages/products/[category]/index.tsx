@@ -1,35 +1,35 @@
-import React, { useMemo, useState } from "react";
-import { ProductCard } from "../../../components/ProductCard";
-import Layout from "../../layout";
-import Breadcrumb from "../../../molecules/Breadcrumb";
-import { Product } from "../../../types/product";
-import fetchProducts from "../../../helpers/products/fetchProducts";
-import fetchCategories from "../../../helpers/categories/fetchCategories";
-import Head from "next/head";
-import Pagination from "../../../components/Pagination";
+import React, { useMemo, useState } from "react"
+import { ProductCard } from "../../../components/ProductCard"
+import Layout from "../../layout"
+import Breadcrumb from "../../../molecules/Breadcrumb"
+import { Product } from "../../../types/product"
+import fetchProducts from "../../../helpers/products/fetchProducts"
+import fetchCategories from "../../../helpers/categories/fetchCategories"
+import Head from "next/head"
+import Pagination from "../../../components/Pagination"
 
 const Products = ({
   products,
   category,
 }: {
-  products?: Product[];
-  category: string;
+  products?: Product[]
+  category: string
 }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 10;
+  const [currentPage, setCurrentPage] = useState(1)
+  const pageSize = 10
 
   const paginatedProducts = useMemo(() => {
-    const firstPageIndex = (currentPage - 1) * pageSize;
-    const lastPageIndex = firstPageIndex + pageSize;
-    return products?.slice(firstPageIndex, lastPageIndex);
+    const firstPageIndex = (currentPage - 1) * pageSize
+    const lastPageIndex = firstPageIndex + pageSize
+    return products?.slice(firstPageIndex, lastPageIndex)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage]);
+  }, [currentPage])
 
   const onPageChange = (page: number) => {
-    setCurrentPage(page);
-  };
+    setCurrentPage(page)
+  }
 
-  const title = `Products - ${category || "All"} - BIOBIBAR`;
+  const title = `Products - ${category || "All"} - BIOBIBAR`
   return (
     <>
       <Head>
@@ -95,8 +95,18 @@ export async function getStaticPaths() {
   // this is where you should fetch all product ids from database or API
   const categories = await fetchCategories()
   const paths = categories
-    .map((category) => `/products/${category.name}`)
-    .concat("/products/all")
+    .map((category) => ({
+      params: {
+        category: category.name,
+      },
+    }))
+    .concat([
+      {
+        params: {
+          category: "all",
+        },
+      },
+    ])
 
   return {
     paths,

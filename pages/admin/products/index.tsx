@@ -184,8 +184,6 @@ const ProductsAdmin = () => {
   ) => {
     const input = e?.target as HTMLInputElement
 
-    const inputName = input.name
-
     if (!input.files?.length) {
       return
     }
@@ -286,7 +284,7 @@ const ProductsAdmin = () => {
             <ReactSVG src="/plus.svg" className="inline-block h-8 w-8" />
           </button>
         </h1>
-        <div className="my-8 grid gap-6 md:grid-cols-2 lg:mb-16 lg:grid-cols-3 2xl:gap-12">
+        <div className="my-8 grid gap-4 md:grid-cols-2 lg:mb-16 lg:grid-cols-3 2xl:gap-4">
           {categories.map((c, i) => (
             <div className="relative grid gap-2 md:grid-cols-2" key={c.id}>
               <div className="col-1 h-180 cat-img-container relative">
@@ -318,17 +316,17 @@ const ProductsAdmin = () => {
                   !c.edit && "[&>.cat-tools]:hidden"
                 }`}
               >
-                <input
-                  type="text"
+                <textarea
                   autoFocus={c.edit}
                   className={`input ${
                     c.edit ? "input-primary" : ""
-                  } w-44 pr-16`}
+                  } w-full pr-14`}
                   value={c.name}
                   onChange={(e) => {
                     handleOnChangeCategory(e, c)
                   }}
                   readOnly={!c.edit}
+                  rows={3}
                 />
                 <div className="cat-tools top-18 absolute right-0 2xl:right-4">
                   {!c.edit && (

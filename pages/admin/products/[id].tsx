@@ -159,8 +159,6 @@ const Product = () => {
 
   // useEffect when images change set imagesLinks
   useEffect(() => {
-    console.log("images", images);
-
     setImagesLinks([]);
     if (images?.length) {
       images.forEach((image) => {

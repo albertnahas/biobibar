@@ -123,7 +123,7 @@ const ProductsAdmin = () => {
           toast.error("Error updating category")
         })
     } else {
-      addCategory(cat.name!)
+      addCategory(cat.name!, cat.image)
         .then(() => {
           loadCategories()
         })
@@ -206,8 +206,7 @@ const ProductsAdmin = () => {
       imageUrl = await uploadImage(file)
       if (imageUrl) {
         const img = ref?.current
-        cat &&
-          cat.id &&
+        if (cat && cat.id) {
           updateCategory(cat.id, { image: imageUrl })
             .then(() => {
               loadCategories()
@@ -216,6 +215,20 @@ const ProductsAdmin = () => {
               console.log(err)
               toast.error("Error updating category")
             })
+        } else if (cat) {
+          setCategories(
+            categories.map(c => {
+              if (c === cat) {
+                return {
+                  ...c,
+                  image: imageUrl
+                };
+              } else {
+                return c;
+              }
+           })
+          );
+        }
         toast.success("Image uploaded successfully")
         img && setTimeout(() => (img.style.opacity = "1"), 1500)
       }

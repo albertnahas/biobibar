@@ -11,7 +11,7 @@ const app = initializeApp(firebaseConfig)
 
 const storage = getStorage(app)
 
-const MAX_FILE_SIZE = 2048 // 2MB
+const MAX_FILE_SIZE = 3072 // 3MB
 // Function to upload an image and get its URL
 export const uploadImage = async (file: File) => {
   const fileSizeKiloBytes = file.size / 1024

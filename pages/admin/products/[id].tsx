@@ -152,7 +152,7 @@ const Product = () => {
           message: "Something went wrong please try again later",
         });
 
-        toast.error("Something went wron1g please try again later");
+        toast.error("Something went wrong please try again later");
         setSubmitting(false);
       });
   };

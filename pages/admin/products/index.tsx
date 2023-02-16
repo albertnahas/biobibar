@@ -114,7 +114,7 @@ const ProductsAdmin = () => {
       })
     )
     if (cat.id) {
-      updateCategory(cat.id, { name: cat.name })
+      updateCategory(cat.id, { name: cat.name?.trim() })
         .then(() => {
           loadCategories()
         })
@@ -123,7 +123,7 @@ const ProductsAdmin = () => {
           toast.error("Error updating category")
         })
     } else {
-      addCategory(cat.name!, cat.image)
+      addCategory(cat.name?.trim() || "", cat.image)
         .then(() => {
           loadCategories()
         })
@@ -217,17 +217,17 @@ const ProductsAdmin = () => {
             })
         } else if (cat) {
           setCategories(
-            categories.map(c => {
+            categories.map((c) => {
               if (c === cat) {
                 return {
                   ...c,
-                  image: imageUrl
-                };
+                  image: imageUrl,
+                }
               } else {
-                return c;
+                return c
               }
-           })
-          );
+            })
+          )
         }
         toast.success("Image uploaded successfully")
         img && setTimeout(() => (img.style.opacity = "1"), 1500)

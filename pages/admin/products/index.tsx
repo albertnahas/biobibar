@@ -20,6 +20,7 @@ import EditImageBlock from "../../../atoms/EditImageBlock"
 import { uploadImage } from "../../../helpers/UploadImage"
 import deleteCategory from "../../../helpers/category/deleteCategory"
 import { updateCategory } from "../../../helpers/category/updateCategory"
+import { updateProduct } from "../../../helpers/product/updateProduct"
 
 const ProductsAdmin = () => {
   const [products, setProducts] = useState<Product[]>([])
@@ -102,6 +103,7 @@ const ProductsAdmin = () => {
   }
 
   const onClickSaveCategory = (cat: CategoryItem) => {
+    const prevCatName = categories.find((c) => c.id === cat.id)?.name
     setCategories(
       categories.map((c) => {
         if (c.id === cat.id) {
@@ -115,8 +117,18 @@ const ProductsAdmin = () => {
     )
     if (cat.id) {
       updateCategory(cat.id, { name: cat.name?.trim() })
-        .then(() => {
+        .then(async () => {
           loadCategories()
+          // update products in the database with new category name
+          if (prevCatName && prevCatName !== cat.name) {
+            const allProducts = await fetchProducts()
+            allProducts.forEach((p) => {
+              if (p.category === prevCatName) {
+                p.category = cat.name || ""
+                updateProduct(p.id, p)
+              }
+            })
+          }
         })
         .catch((err: any) => {
           console.log(err)

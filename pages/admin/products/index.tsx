@@ -125,7 +125,7 @@ const ProductsAdmin = () => {
             allProducts.forEach((p) => {
               if (p.category === prevCatName) {
                 p.category = cat.name || ""
-                updateProduct(p.id, p)
+                updateProduct(p.id!, p)
               }
             })
           }

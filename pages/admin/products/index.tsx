@@ -203,7 +203,7 @@ const ProductsAdmin = () => {
 
     let imageUrl: string
     try {
-      imageUrl = await uploadImage(file)
+      imageUrl = await uploadImage(file, ref.current.src)
       if (imageUrl) {
         const img = ref?.current
         if (cat && cat.id) {

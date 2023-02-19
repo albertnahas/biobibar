@@ -92,7 +92,7 @@ const EditCoverSection = () => {
 
     let imageUrl;
     try {
-      imageUrl = await uploadImage(file);
+      imageUrl = await uploadImage(file, ref.current.src);
       if (imageUrl) {
         setHome({ ...home, [inputName]: imageUrl });
         toast.success("Image uploaded successfully");

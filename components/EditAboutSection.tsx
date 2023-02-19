@@ -89,7 +89,7 @@ const EditAboutSection = () => {
 
     let imageUrl;
     try {
-      imageUrl = await uploadImage(file);
+      imageUrl = await uploadImage(file, ref.current.src);
       if (imageUrl) {
         setAbout({ ...about, image: imageUrl });
         toast.success("Image uploaded successfully");

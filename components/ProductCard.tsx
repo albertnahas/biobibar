@@ -11,7 +11,7 @@ export const ProductCard: FC<Props> = (product) => {
 
   return (
     <div
-      className="cursor-pointer"
+      className="cursor-pointer w-300"
       onClick={() => {
         route.push(productLink(product))
       }}
@@ -28,7 +28,7 @@ export const ProductCard: FC<Props> = (product) => {
       />
       <Link href={productLink(product)}>
         <h3 className="mt-2 text-2xl">{title}</h3>
-        <div className="w-300 flex justify-between">
+        <div className="flex justify-between">
           <p className="text-md">{description}</p>
           <p className="text-md">{price}$</p>
         </div>

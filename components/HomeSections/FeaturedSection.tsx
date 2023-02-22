@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { FC } from "react"
+import { FC, useState } from "react"
 import { ReactSVG } from "react-svg"
 import Slider from "react-slick"
 import { Product } from "../../types/product"
@@ -48,16 +48,33 @@ export const FeaturedSection: FC<Props> = ({ products, coverUrl }) => {
 
 // Circle function
 const Circle: FC<CircleProps> = ({ children, className, product, href }) => {
-  return (
-    <Link href={href || ""}>
-      <div
-        style={{
-          backgroundImage: `linear-gradient(
+  const [isHover, setIsHover] = useState(false)
+  const handleMouseEnter = () => {
+    setIsHover(true);
+  }
+  const handleMouseLeave = () => {
+    setIsHover(false);
+  }
+
+  const circleStyle = {
+    backgroundImage: isHover
+      ? `linear-gradient(
             var(--transparent-primary),
             var(--transparent-primary)
-          ), url(${product?.image || "./asset1.png"})`,
-        }}
-        className={`circle md:w-180 md:h-180 m-auto h-20 w-20 rounded-full border-4 bg-primary-light md:border-8 ${className}`}
+          ), url(${product?.image || "./asset1.png"})`
+      : `url(${product?.image || "./asset1.png"})`,
+    transition: 'background-image ease-out 0.5s'
+  }
+
+  return (
+    <Link
+      href={href || ""}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div
+        style={circleStyle}
+        className={`circle md:w-180 md:h-180 m-auto h-20 w-20 rounded-full border-4 md:border-8 ${className}`}
       >
         {children}
       </div>

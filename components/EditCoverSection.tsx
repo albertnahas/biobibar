@@ -1,151 +1,152 @@
-import React, { useState, useEffect, useRef, RefObject } from "react";
-import Image from "next/image";
-import { toast } from "react-toastify";
+import React, { useState, useEffect, useRef, RefObject } from "react"
+import Image from "next/image"
+import { toast } from "react-toastify"
 
-import { Home } from "../types/home";
-import fetchHome from "../helpers/home/fetchHome";
-import updateHome from "../helpers/home/updateHome";
-import { uploadImage } from "../helpers/UploadImage";
-import EditImageBlock from "../atoms/EditImageBlock";
+import { Home } from "../types/home"
+import fetchHome from "../helpers/home/fetchHome"
+import updateHome from "../helpers/home/updateHome"
+import { uploadImage } from "../helpers/UploadImage"
+import EditImageBlock from "../atoms/EditImageBlock"
 
 const defaultHome: Home = {
   cover: "",
   slogan: "",
+  slogan2: "",
   logo: "",
   logoDark: "",
   cover2: "",
   cover3: "",
-};
+}
 const EditCoverSection = () => {
-  const [home, setHome] = useState<Home>(defaultHome);
-  const { slogan, cover, logo, logoDark, cover2, cover3 } = home;
-  const isMounted = useRef(false);
-  const [loading, setLoading] = useState(true);
+  const [home, setHome] = useState<Home>(defaultHome)
+  const { slogan, slogan2, cover, logo, logoDark, cover2, cover3 } = home
+  const isMounted = useRef(false)
+  const [loading, setLoading] = useState(true)
 
-  const [imageLink, setImageLink] = useState<string>();
+  const [imageLink, setImageLink] = useState<string>()
 
   useEffect(() => {
     fetchHome().then((res: Home | null) => {
-      setHome(res || {});
-      setLoading(false);
-    });
-  }, []);
+      setHome(res || {})
+      setLoading(false)
+    })
+  }, [])
 
   useEffect(() => {
     if (loading) {
-      return;
+      return
     }
     const timerId = setTimeout(() => {
       if (isMounted.current) {
-        updateHome(home);
+        updateHome(home)
       } else {
-        isMounted.current = true;
+        isMounted.current = true
       }
-    }, 1000);
+    }, 1000)
 
-    return () => timerId && clearTimeout(timerId);
-  }, [home, loading]);
+    return () => timerId && clearTimeout(timerId)
+  }, [home, loading])
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value } = e.target;
-    setHome({ ...home, [name]: value });
-  };
+    const { name, value } = e.target
+    setHome({ ...home, [name]: value })
+  }
 
-  const imageRef = React.useRef<HTMLImageElement>(null);
-  const imageRef2 = React.useRef<HTMLImageElement>(null);
-  const imageRef3 = React.useRef<HTMLImageElement>(null);
+  const imageRef = React.useRef<HTMLImageElement>(null)
+  const imageRef2 = React.useRef<HTMLImageElement>(null)
+  const imageRef3 = React.useRef<HTMLImageElement>(null)
 
   const [isOpen, setIsOpen] = useState<
     RefObject<HTMLImageElement> | undefined | null
-  >(null);
+  >(null)
 
   const handleOpen = (ref?: RefObject<HTMLImageElement>): void => {
-    setIsOpen(ref);
-  };
+    setIsOpen(ref)
+  }
 
   const handleUpload = async (
     ref?: RefObject<HTMLImageElement>,
     e?: React.ChangeEvent
   ) => {
-    const input = e?.target as HTMLInputElement;
+    const input = e?.target as HTMLInputElement
 
-    const inputName = input.name;
+    const inputName = input.name
 
     if (!input.files?.length) {
-      return;
+      return
     }
-    const file = input.files[0];
+    const file = input.files[0]
 
     // display the image
-    const reader = new FileReader();
+    const reader = new FileReader()
     reader.onload = (e) => {
-      setImageLink(e.target?.result as string);
-      setIsOpen(null);
+      setImageLink(e.target?.result as string)
+      setIsOpen(null)
 
       if (ref?.current instanceof HTMLImageElement) {
-        ref.current.style.opacity = "0.5";
+        ref.current.style.opacity = "0.5"
       }
-    };
-    reader.readAsDataURL(file);
+    }
+    reader.readAsDataURL(file)
 
-    let imageUrl;
+    let imageUrl
     try {
-      imageUrl = await uploadImage(file);
+      imageUrl = await uploadImage(file)
       if (imageUrl) {
-        setHome({ ...home, [inputName]: imageUrl });
-        toast.success("Image uploaded successfully");
-        const img = ref?.current;
-        img && setTimeout(() => (img.style.opacity = "1"), 1500);
+        setHome({ ...home, [inputName]: imageUrl })
+        toast.success("Image uploaded successfully")
+        const img = ref?.current
+        img && setTimeout(() => (img.style.opacity = "1"), 1500)
       }
     } catch (e) {
-      toast.error("Image size is too large");
-      return;
+      toast.error("Image size is too large")
+      return
     }
-  };
+  }
 
   const handleViewClick = (ref: any) => {
     if (ref?.current instanceof HTMLImageElement) {
-      ref.current.click();
+      ref.current.click()
     }
-  };
+  }
 
   const handleView = (e: any) => {
-    const imageUrl = e.target.src;
+    const imageUrl = e.target.src
     if (!document.querySelector("div.img-lightbox")) {
-      const lightbox = document.createElement("div");
-      lightbox.classList.add("img-lightbox");
+      const lightbox = document.createElement("div")
+      lightbox.classList.add("img-lightbox")
 
-      const image = document.createElement("img");
-      image.src = imageUrl;
-      lightbox.appendChild(image);
+      const image = document.createElement("img")
+      image.src = imageUrl
+      lightbox.appendChild(image)
 
-      const closeButton = document.createElement("button");
-      closeButton.classList.add("close-lightbox-btn");
-      closeButton.innerHTML = "X";
-      lightbox.appendChild(closeButton);
+      const closeButton = document.createElement("button")
+      closeButton.classList.add("close-lightbox-btn")
+      closeButton.innerHTML = "X"
+      lightbox.appendChild(closeButton)
 
       lightbox.addEventListener("click", (e: any) => {
-        const els = document.querySelectorAll(".img-lightbox img");
-        let isImg = false;
+        const els = document.querySelectorAll(".img-lightbox img")
+        let isImg = false
         for (let i = 0; i < els.length; i++) {
-          if (els[i] === e.target) isImg = true;
+          if (els[i] === e.target) isImg = true
         }
-        if (!isImg) document.body.removeChild(lightbox);
-        document.body.style.overflow = "auto";
-      });
+        if (!isImg) document.body.removeChild(lightbox)
+        document.body.style.overflow = "auto"
+      })
 
       closeButton.addEventListener("click", () => {
-        document.body.removeChild(lightbox);
-        document.body.style.overflow = "auto";
-      });
+        document.body.removeChild(lightbox)
+        document.body.style.overflow = "auto"
+      })
 
-      document.body.appendChild(lightbox);
-      document.body.style.overflow = "hidden";
-      setIsOpen(null);
+      document.body.appendChild(lightbox)
+      document.body.style.overflow = "hidden"
+      setIsOpen(null)
     }
-  };
+  }
 
   return (
     <section className="contact">
@@ -253,18 +254,33 @@ const EditCoverSection = () => {
               />
             </div>
           </div>
+          <div className="col-2">
+            <div className="grid gap-4 md:grid-cols-4">
+              <label>Edit text</label>
+              <textarea
+                className={`${
+                  loading ? "input-disabled" : "input-primary"
+                } col-span-3`}
+                value={slogan2}
+                disabled={loading}
+                name="slogan2"
+                rows={5}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
         </div>
       </div>
       {isOpen && (
         <div
           className="overlay"
           onClick={() => {
-            setIsOpen(null);
+            setIsOpen(null)
           }}
         ></div>
       )}
     </section>
-  );
-};
+  )
+}
 
-export default EditCoverSection;
+export default EditCoverSection

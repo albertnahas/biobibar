@@ -69,7 +69,7 @@ const Home: FC<Props> = ({
           <ArrivalsSection products={newProducts} />
         </Animate>
         <CategoriesSection categories={categories} />
-        <BannerSection coverUrl={home.cover3} />
+        <BannerSection coverUrl={home.cover3} slogan={home.slogan2} />
         <Animate>
           <div className="md:px-40 md:pt-40">
             <ContactSection />

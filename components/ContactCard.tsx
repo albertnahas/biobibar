@@ -12,50 +12,30 @@ const ContactCard = (
       <section
         className={`contact rounded-lg py-2 ${read ? "bg-gray-100" : ""}`}
       >
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-6 lg:px-24">
-          <h3>
-            customer
-            <small className="block text-gray-400">
-              {moment(createdAt).fromNow()}
-            </small>
-          </h3>
-          <input
-            type="text"
-            className="input-readonly"
-            placeholder={name}
-            readOnly
-          />
-          <input
-            type="text"
-            className="input-readonly"
-            placeholder={phone}
-            readOnly
-          />
-          <input
-            type="email"
-            className="input-readonly"
-            placeholder={email}
-            readOnly
-          />
-          {source ? (
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 lg:px-24">
+          <div className="flex gap-4">
             <input
-              type="text"
-              className="input-readonly"
-              placeholder={source}
-              readOnly
+              type="checkbox"
+              className="mt-3 rounded-full text-secondary shadow focus:ring-secondary"
+              name="isFeatured"
+              checked={read}
+              onChange={(e) => {
+                onCheckRead(id || "", e.target.checked)
+              }}
             />
-          ) : (
-            <>-</>
-          )}
-          <input
-            type="checkbox"
-            className="mt-3 rounded-full text-secondary shadow focus:ring-secondary"
-            name="isFeatured"
-            checked={read}
-            onChange={(e) => {
-              onCheckRead(id || "", e.target.checked)
-            }}
-          />
+            <h3>
+              customer
+              <small className="block text-gray-400">
+                {moment(createdAt).fromNow()}
+              </small>
+            </h3>
+          </div>
+          <div>
+            <p>{name}</p>
+            <small>{email}</small>
+          </div>
+          <p>{phone}</p>
+          <p>{source}</p>
         </div>
       </section>
       <hr className="mb-4 md:mb-4" />

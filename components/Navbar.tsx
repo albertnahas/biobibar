@@ -30,7 +30,7 @@ export const Navbar: FC<Props> = ({
           backgroundImage:
             transparent || bottom
               ? ""
-              : `url("/bg.png"), url("${background || `"/asset1.png"`})`,
+              : `url("/bg.png"), url("${background || `/asset1.png`})`,
         }}
       >
         <div className="z-21 h-100 md:px-18 relative mx-auto justify-between px-12 pt-10 md:flex md:items-center lg:max-w-7xl">

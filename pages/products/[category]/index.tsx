@@ -7,13 +7,17 @@ import fetchProducts from "../../../helpers/products/fetchProducts"
 import fetchCategories from "../../../helpers/categories/fetchCategories"
 import Head from "next/head"
 import Pagination from "../../../components/Pagination"
+import { Home } from "../../../types/home"
+import fetchHome from "../../../helpers/home/fetchHome"
 
 const Products = ({
   products,
   category,
+  home,
 }: {
   products?: Product[]
   category: string
+  home: Home
 }) => {
   const [currentPage, setCurrentPage] = useState(1)
   const pageSize = 10
@@ -41,7 +45,7 @@ const Products = ({
           href={`https://www.biobibar.com/products/${category}`}
         />
       </Head>
-      <Layout>
+      <Layout background={home.cover}>
         <Breadcrumb
           items={[
             { label: "Home", path: "/" },
@@ -82,10 +86,12 @@ export async function getStaticProps({ params }: any) {
   const products = await fetchProducts(
     category && category !== "all" ? { category: category } : {}
   )
+  const home = (await fetchHome()) || {}
   return {
     props: {
       products,
       category,
+      home,
     },
     revalidate: 10,
   }

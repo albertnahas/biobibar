@@ -3,7 +3,12 @@ import { FC, useState } from "react"
 import Facebook from "./Facebook"
 import { ReactSVG } from "react-svg"
 
-export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
+export const Navbar: FC<Props> = ({
+  bottom,
+  transparent,
+  isAdmin,
+  background,
+}) => {
   const [navbar, setNavbar] = useState(false)
   const links = [
     { href: "/", label: "Home" },
@@ -23,7 +28,9 @@ export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
         className="bg-cover bg-center bg-no-repeat bg-blend-multiply"
         style={{
           backgroundImage:
-            transparent || bottom ? "" : `url("/bg.png"), url("/asset1.png")`,
+            transparent || bottom
+              ? ""
+              : `url("/bg.png"), url("${background || `"/asset1.png"`})`,
         }}
       >
         <div className="z-21 h-100 md:px-18 relative mx-auto justify-between px-12 pt-10 md:flex md:items-center lg:max-w-7xl">
@@ -147,4 +154,5 @@ interface Props {
   bottom?: boolean
   transparent?: boolean
   isAdmin?: boolean
+  background?: string
 }

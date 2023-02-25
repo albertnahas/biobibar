@@ -14,13 +14,17 @@ import { ContactSection } from "../components/HomeSections/ContactSection"
 import { FeaturedSection } from "../components/HomeSections/FeaturedSection"
 import fetchProducts from "../helpers/products/fetchProducts"
 import { Product } from "../types/product"
+import fetchHome from "../helpers/home/fetchHome"
+import { Home } from "../types/home"
 
 export async function getStaticProps() {
+  const home = (await fetchHome()) || {}
   const info = (await fetchInfo()) || {}
   const about = (await fetchAbout()) || {}
   const featuredProducts = await fetchProducts({ featured: true })
   return {
     props: {
+      home,
       info,
       about,
       featuredProducts,
@@ -30,10 +34,12 @@ export async function getStaticProps() {
 }
 
 const about = ({
+  home,
   info,
   about,
   featuredProducts,
 }: {
+  home?: Home
   info?: Info
   about?: About
   featuredProducts?: Product[]
@@ -46,7 +52,7 @@ const about = ({
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href={`https://www.biobibar.com/about`} />
       </Head>
-      <Layout>
+      <Layout background={home?.cover}>
         <Breadcrumb
           items={[
             { label: "Home", path: "/" },

@@ -52,10 +52,7 @@ const Circle: FC<CircleProps> = ({ children, className, product, href }) => {
     <Link href={href || ""}>
       <div
         style={{
-          backgroundImage: `linear-gradient(
-            var(--transparent-primary),
-            var(--transparent-primary)
-          ), url(${product?.image || "./asset1.png"})`,
+          backgroundImage: `url(${product?.image || "./asset1.png"})`,
         }}
         className={`circle md:w-180 md:h-180 m-auto h-20 w-20 rounded-full border-4 bg-primary-light md:border-8 ${className}`}
       >

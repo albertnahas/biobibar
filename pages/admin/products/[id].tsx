@@ -382,7 +382,7 @@ const Product = () => {
                               type={"number"}
                               min={0}
                               max={100000}
-                              step={1}
+                              step={0.01}
                               {...field}
                             />
                           )}

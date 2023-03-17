@@ -30,7 +30,7 @@ export const ProductCard: FC<Props> = (product) => {
         <h3 className="mt-2 text-2xl">{title}</h3>
         <div style={{ maxWidth: 300 }} className="flex justify-between">
           <p className="text-md">{description}</p>
-          <p className="text-md">{price}$</p>
+          {/* <p className="text-md">{price}$</p> */}
         </div>
       </Link>
     </div>

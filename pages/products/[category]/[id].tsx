@@ -95,8 +95,8 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product, products }) => {
           <hr className="my-2  text-secondary-dark" />
           <p className="text-secondary-dark">{description}</p>
           <p className="text-secondary-dark">{text}</p>
-          <hr className="my-2  text-secondary-dark" />
-          <p className="text-2xl font-medium text-secondary-dark">{price}$</p>
+          {/* <hr className="my-2  text-secondary-dark" /> */}
+          {/* <p className="text-2xl font-medium text-secondary-dark">{price}$</p> */}
           <hr className="my-2  text-secondary-dark" />
         </div>
       </div>

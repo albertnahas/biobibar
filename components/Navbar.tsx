@@ -104,6 +104,18 @@ export const Navbar: FC<Props> = ({
                     </Link>
                   </li>
                 ))}
+                {isAdmin && (
+                  <li>
+                    <Link
+                      href="/admin/users"
+                      className={`mr-2 px-3 py-1 text-2xl uppercase text-${
+                        bottom ? "secondary-dark" : "primary"
+                      } `}
+                    >
+                      Users
+                    </Link>
+                  </li>
+                )}
                 {!isAdmin && (
                   <li className="flex" key="chat">
                     <button

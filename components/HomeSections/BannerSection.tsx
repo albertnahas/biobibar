@@ -25,7 +25,7 @@ export const BannerSection = ({
         <div className="text-center">
           <Link
             href="/products/all"
-            className="btn-primary rounded-3xl bg-white px-10 py-2 text-2xl uppercase"
+            className="btn-primary rounded-3xl bg-white text-primary px-10 py-2 text-2xl uppercase"
           >
             Order now
           </Link>

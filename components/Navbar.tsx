@@ -1,6 +1,6 @@
-import { useRouter } from "next/router"
 import Link from "next/link"
 import { FC, useState } from "react"
+import { ReactSVG } from "react-svg"
 
 export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
   const [navbar, setNavbar] = useState(false)
@@ -96,6 +96,48 @@ export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
                     </Link>
                   </li>
                 ))}
+                {isAdmin && (
+                  <li>
+                    <Link
+                      href="/admin/users"
+                      className={`mr-2 px-3 py-1 text-2xl uppercase text-${
+                        bottom ? "secondary-dark" : "primary"
+                      } `}
+                    >
+                      Users
+                    </Link>
+                  </li>
+                )}
+                {!isAdmin && (
+                  <li className="flex" key="chat">
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (window.FB && window.FB.CustomerChat) {
+                          var event = new CustomEvent("messengerDialog", {
+                            detail: "open",
+                            bubbles: true,
+                          });
+                          document.dispatchEvent(event);
+                        }
+                      }}
+                      className={`py-1 pl-3  stroke-${
+                        bottom ? "secondary-dark" : "primary"
+                      }`}
+                      style={{
+                        stroke: bottom
+                          ? "var(--secondary-dark)"
+                          : "var(--primary)",
+                      }}
+                    >
+                      <ReactSVG
+                        stroke="currentColor"
+                        src="/chat.svg"
+                        className="h-6 w-6"
+                      />
+                    </button>
+                  </li>
+                )}
               </ul>
             </div>
           </div>
@@ -103,6 +145,12 @@ export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
       </nav>
     </>
   )
+}
+
+declare global {
+  interface Window {
+    FB: any
+  }
 }
 
 interface Props {

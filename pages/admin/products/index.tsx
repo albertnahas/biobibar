@@ -184,7 +184,7 @@ const ProductsAdmin = () => {
                   <button onClick={onClickEditCategory.bind(null, c)}>
                     <ReactSVG
                       src="/edit2.svg"
-                      className="text-seconday mb-1 h-4 w-4 fill-gray-500"
+                      className="text-secondary mb-1 h-4 w-4 fill-gray-500"
                     />
                   </button>
                 )}

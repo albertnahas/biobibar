@@ -4,12 +4,14 @@ import Breadcrumb from "../../../molecules/Breadcrumb"
 import Layout from "../../layout"
 import { ProductCard } from "../../../components/ProductCard"
 import { Product } from "../../../types/product"
-import fetchProducts from "../../../helpers/fetchProducts"
+import fetchProducts from "../../../helpers/products/fetchProducts"
 import { ContactForm } from "../../../components/ContactForm"
-import fetchProduct from "../../../helpers/fetchProduct"
+import fetchProduct from "../../../helpers/product/fetchProduct"
 import { productLink } from "../../../helpers/utils"
 import Head from "next/head"
 import ImageViewer from "react-simple-image-viewer"
+import fetchHome from "../../../helpers/home/fetchHome"
+import { Home } from "../../../types/home"
 
 interface SingleProductProps {
   product: Product
@@ -93,8 +95,8 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product, products }) => {
           <hr className="my-2  text-secondary-dark" />
           <p className="text-secondary-dark">{description}</p>
           <p className="text-secondary-dark">{text}</p>
-          <hr className="my-2  text-secondary-dark" />
-          <p className="text-2xl font-medium text-secondary-dark">{price}$</p>
+          {/* <hr className="my-2  text-secondary-dark" /> */}
+          {/* <p className="text-2xl font-medium text-secondary-dark">{price}$</p> */}
           <hr className="my-2  text-secondary-dark" />
         </div>
       </div>
@@ -135,14 +137,18 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product, products }) => {
   )
 }
 
-const ProductPage = ({ product, products }: SingleProductProps) => {
+const ProductPage = ({
+  product,
+  products,
+  home,
+}: SingleProductProps & { home: Home }) => {
   if (!product) {
     return {
       notFound: true,
     }
   }
   return (
-    <Layout>
+    <Layout background={home.cover}>
       <SingleProduct product={product} products={products} />
     </Layout>
   )
@@ -153,11 +159,13 @@ export async function getStaticProps({ params }: any) {
   // this is where you should fetch the product data from database or API
   const product = await fetchProduct(id)
   const products = await fetchProducts({ category: product.category })
+  const home = await fetchHome()
 
   return {
     props: {
       product,
       products,
+      home,
     },
     revalidate: 10,
   }

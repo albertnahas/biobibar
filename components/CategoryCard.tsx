@@ -12,7 +12,7 @@ export const CategoryCard: FC<Props> = ({ title, image, productCount }) => {
           backgroundImage: `linear-gradient(
             var(--transparent-primary),
             var(--transparent-primary)
-          ), url("/asset3.png")`,
+          ), url("${image}")`,
         }}
       >
         <Link

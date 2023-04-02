@@ -30,7 +30,7 @@ export const HeroSection = ({
       /> */}
       <h1
         dir="rtl"
-        className="mt-32 text-center font-arabic text-primary-light text-6xl"
+        className="mt-32 text-center font-arabic text-primary-light text-5xl"
       >
         {slogan || "من عبق حلب بدأنا..."}
       </h1>

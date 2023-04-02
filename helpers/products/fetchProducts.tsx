@@ -1,6 +1,6 @@
-import { Product } from "../types/product"
-import { DATABASE_URL, MOCK_PRODUCTS } from "./constants"
-import _products from "../data/products.json"
+import { Product } from "../../types/product"
+import { DATABASE_URL, MOCK_PRODUCTS } from "../constants"
+import _products from "../../data/products.json"
 
 const axios = require("axios")
 

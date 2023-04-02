@@ -6,14 +6,14 @@ import React, {
   LegacyRef,
 } from "react";
 import { Product } from "../../../types/product";
-import fetchProduct from "../../../helpers/fetchProduct";
+import fetchProduct from "../../../helpers/product/fetchProduct";
 import { useForm, Controller } from "react-hook-form";
 import Image from "next/image";
-import { updateProduct } from "../../../helpers/updateProduct";
-import addProduct from "../../../helpers/addProduct";
+import { updateProduct } from "../../../helpers/product/updateProduct";
+import addProduct from "../../../helpers/product/addProduct";
 import { useRouter } from "next/router";
 import Layout from "../../layout";
-import fetchCategories from "../../../helpers/fetchCategories";
+import fetchCategories from "../../../helpers/categories/fetchCategories";
 import { Category } from "../../../types/category";
 import { uploadImage } from "../../../helpers/UploadImage";
 import { ReactSVG } from "react-svg";
@@ -159,8 +159,6 @@ const Product = () => {
 
   // useEffect when images change set imagesLinks
   useEffect(() => {
-    console.log("images", images);
-
     setImagesLinks([]);
     if (images?.length) {
       images.forEach((image) => {
@@ -384,7 +382,7 @@ const Product = () => {
                               type={"number"}
                               min={0}
                               max={100000}
-                              step={1}
+                              step={0.01}
                               {...field}
                             />
                           )}

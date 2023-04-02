@@ -1,9 +1,9 @@
-import { Product } from "../types/product"
-import { DATABASE_URL } from "./constants"
+import { Product } from "../../types/product"
+import { DATABASE_URL } from "../constants"
 import { initializeApp } from "firebase/app"
-import { firebaseConfig } from "./config"
+import { firebaseConfig } from "../config"
 import { getAuth } from "firebase/auth"
-import { addAuthToURL } from "./addAuthToURL"
+import { addAuthToURL } from "../addAuthToURL"
 const app = initializeApp(firebaseConfig)
 
 const axios = require("axios")

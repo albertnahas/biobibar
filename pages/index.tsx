@@ -3,8 +3,8 @@ import { AboutSection } from "../components/HomeSections/AboutSection"
 import { ContactSection } from "../components/HomeSections/ContactSection"
 import { Footer } from "../components/Footer"
 import { Navbar } from "../components/Navbar"
-import fetchCategories from "../helpers/fetchCategories"
-import fetchProducts from "../helpers/fetchProducts"
+import fetchCategories from "../helpers/categories/fetchCategories"
+import fetchProducts from "../helpers/products/fetchProducts"
 import { Category } from "../types/category"
 import { Product } from "../types/product"
 import { ArrivalsSection } from "../components/HomeSections/ArrivalsSection"
@@ -12,9 +12,9 @@ import { BannerSection } from "../components/HomeSections/BannerSection"
 import { CategoriesSection } from "../components/HomeSections/CategoriesSection"
 import { FeaturedSection } from "../components/HomeSections/FeaturedSection"
 import { HeroSection } from "../components/HomeSections/HeroSection"
-import fetchHome from "../helpers/fetchHome"
+import fetchHome from "../helpers/home/fetchHome"
 import { Home } from "../types/home"
-import fetchInfo from "../helpers/fetchInfo"
+import fetchInfo from "../helpers/info/fetchInfo"
 import { Info } from "../types/info"
 import { Animate } from "../components/Animate"
 import Head from "next/head"
@@ -42,7 +42,7 @@ export async function getStaticProps() {
       featuredProducts,
       categories,
     },
-    revalidate: 60,
+    revalidate: 10,
   }
 }
 
@@ -69,7 +69,7 @@ const Home: FC<Props> = ({
           <ArrivalsSection products={newProducts} />
         </Animate>
         <CategoriesSection categories={categories} />
-        <BannerSection coverUrl={home.cover3} />
+        <BannerSection coverUrl={home.cover3} slogan={home.slogan2} />
         <Animate>
           <div className="md:px-40 md:pt-40">
             <ContactSection />

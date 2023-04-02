@@ -1,8 +1,14 @@
 import Link from "next/link"
 import { FC, useState } from "react"
+import Facebook from "./Facebook"
 import { ReactSVG } from "react-svg"
 
-export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
+export const Navbar: FC<Props> = ({
+  bottom,
+  transparent,
+  isAdmin,
+  background,
+}) => {
   const [navbar, setNavbar] = useState(false)
   const links = [
     { href: "/", label: "Home" },
@@ -16,13 +22,15 @@ export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
       <div
         className={`${
           navbar ? "block" : "hidden"
-        }  fixed inset-0 z-0 bg-text opacity-90`}
+        } fixed inset-0 z-0 bg-text opacity-90`}
       ></div>
       <nav
         className="bg-cover bg-center bg-no-repeat bg-blend-multiply"
         style={{
           backgroundImage:
-            transparent || bottom ? "" : `url("/bg.png"), url("/asset1.png")`,
+            transparent || bottom
+              ? ""
+              : `url("/bg.png"), url("${background || `/asset1.png`})`,
         }}
       >
         <div className="z-21 h-100 md:px-18 relative mx-auto justify-between px-12 pt-10 md:flex md:items-center lg:max-w-7xl">
@@ -30,7 +38,7 @@ export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
             <div className="flex items-center justify-between py-3 md:block md:py-5">
               <Link href="/">
                 <h2
-                  className={`text-2xl uppercase text-${
+                  className={`text-xl uppercase text-${
                     bottom ? "secondary-dark" : "primary"
                   }`}
                 >
@@ -88,7 +96,7 @@ export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
                   <li key={isAdmin ? `/admin${link.href}` : link.href}>
                     <Link
                       href={isAdmin ? `/admin${link.href}` : link.href}
-                      className={`mr-2 px-3 py-1 text-2xl uppercase text-${
+                      className={`mr-2 px-3 py-1 text-xl uppercase text-${
                         bottom ? "secondary-dark" : "primary"
                       } `}
                     >
@@ -112,13 +120,13 @@ export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
                   <li className="flex" key="chat">
                     <button
                       onClick={(e) => {
-                        e.preventDefault();
+                        e.preventDefault()
                         if (window.FB && window.FB.CustomerChat) {
                           var event = new CustomEvent("messengerDialog", {
                             detail: "open",
                             bubbles: true,
-                          });
-                          document.dispatchEvent(event);
+                          })
+                          document.dispatchEvent(event)
                         }
                       }}
                       className={`py-1 pl-3  stroke-${
@@ -142,6 +150,7 @@ export const Navbar: FC<Props> = ({ bottom, transparent, isAdmin }) => {
             </div>
           </div>
         </div>
+        {bottom && !isAdmin && <Facebook />}
       </nav>
     </>
   )
@@ -157,4 +166,5 @@ interface Props {
   bottom?: boolean
   transparent?: boolean
   isAdmin?: boolean
+  background?: string
 }

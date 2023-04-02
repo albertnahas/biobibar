@@ -20,7 +20,6 @@ const withAuthentication = <P extends AuthenticatedPageProps>(
       if (!props.isAuthenticated) {
         Router.push("/admin/login")
       }
-      console.log("auth check", props.isAuthenticated)
     }, [props.isAuthenticated])
 
     return <Page {...props} />

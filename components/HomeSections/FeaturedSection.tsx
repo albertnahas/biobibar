@@ -7,7 +7,7 @@ import { productLink } from "../../helpers/utils"
 
 export const FeaturedSection: FC<Props> = ({ products, coverUrl }) => {
   const settings = {
-    dots: true,
+    dots: !!coverUrl,
     infinite: true,
     speed: 500,
     slidesToShow: 3,
@@ -22,7 +22,9 @@ export const FeaturedSection: FC<Props> = ({ products, coverUrl }) => {
     <section
       className="bg-cover bg-top bg-no-repeat bg-blend-multiply"
       style={{
-        backgroundImage: `url("/bg.png"), url(${coverUrl || "./asset2.png"})`,
+        backgroundImage: coverUrl
+          ? `url("/bg.png"), url(${coverUrl || "./asset2.png"})`
+          : ``,
       }}
     >
       <div className="h-200 container mx-auto">
@@ -50,10 +52,7 @@ const Circle: FC<CircleProps> = ({ children, className, product, href }) => {
     <Link href={href || ""}>
       <div
         style={{
-          backgroundImage: `linear-gradient(
-            var(--transparent-primary),
-            var(--transparent-primary)
-          ), url(${product?.image || "./asset1.png"})`,
+          backgroundImage: `url(${product?.image || "./asset1.png"})`,
         }}
         className={`circle md:w-180 md:h-180 m-auto h-20 w-20 rounded-full border-4 bg-primary-light md:border-8 ${className}`}
       >

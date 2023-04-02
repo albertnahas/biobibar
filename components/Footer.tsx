@@ -5,7 +5,7 @@ import { Info } from "../types/info"
 export const Footer = ({ info }: { info?: Info }) => {
   return (
     <footer className="footer mb-24">
-      <div className="container px-12 pt-20 md:px-24">
+      <div className="container m-auto px-12 pt-20 md:px-24">
         <div className="grid md:grid-cols-2 [&_td]:p-2">
           <div className="col-1 mb-8 md:mb-0">
             <table>

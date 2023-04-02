@@ -1,164 +1,152 @@
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import { toast } from "react-toastify";
-import { ReactSVG } from "react-svg";
+import React, { useState, useEffect, useRef, RefObject } from "react"
+import Image from "next/image"
+import { toast } from "react-toastify"
 
-import { Home } from "../types/home";
-import fetchHome from "../helpers/fetchHome";
-import updateHome from "../helpers/updateHome";
-import { uploadImage } from "../helpers/UploadImage";
-import EditImageMenu from "../atoms/EditImageMenu";
+import { Home } from "../types/home"
+import fetchHome from "../helpers/home/fetchHome"
+import updateHome from "../helpers/home/updateHome"
+import { uploadImage } from "../helpers/UploadImage"
+import EditImageBlock from "../atoms/EditImageBlock"
 
 const defaultHome: Home = {
   cover: "",
   slogan: "",
+  slogan2: "",
   logo: "",
   logoDark: "",
   cover2: "",
   cover3: "",
-};
+}
 const EditCoverSection = () => {
-  const [home, setHome] = useState<Home>(defaultHome);
-  const [debouncedHome, setDebouncedHome] = useState<Home>(defaultHome);
-  const { slogan } = debouncedHome;
-  const { cover, logo, logoDark, cover2, cover3 } = home;
+  const [home, setHome] = useState<Home>(defaultHome)
+  const { slogan, slogan2, cover, logo, logoDark, cover2, cover3 } = home
+  const isMounted = useRef(false)
+  const [loading, setLoading] = useState(true)
 
-  const [imageLink, setImageLink] = useState<string>();
-
-  const [isOpen, setIsOpen] = useState<string | null>(null);
+  const [imageLink, setImageLink] = useState<string>()
 
   useEffect(() => {
     fetchHome().then((res: Home | null) => {
-      setHome(res || {});
-      setDebouncedHome(res || {});
-    });
-  }, []);
+      setHome(res || {})
+      setLoading(false)
+    })
+  }, [])
 
   useEffect(() => {
+    if (loading) {
+      return
+    }
     const timerId = setTimeout(() => {
-      setHome(debouncedHome);
-    }, 1000);
+      if (isMounted.current) {
+        updateHome(home)
+      } else {
+        isMounted.current = true
+      }
+    }, 1000)
 
-    return () => clearTimeout(timerId);
-  }, [debouncedHome]);
-
-  useEffect(() => {
-    updateHome(home);
-  }, [home]);
+    return () => timerId && clearTimeout(timerId)
+  }, [home, loading])
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value } = e.target;
-    setDebouncedHome({ ...home, [name]: value });
-  };
+    const { name, value } = e.target
+    setHome({ ...home, [name]: value })
+  }
 
-  const handleOpen = (name: string): void => {
-    setIsOpen(isOpen === name ? null : name);
-    if (!isOpen) {
-      if (!document.querySelector("div.overlay")) {
-        const overlay = document.createElement("div");
-        overlay.classList.add("overlay");
-        document.body.appendChild(overlay);
+  const imageRef = React.useRef<HTMLImageElement>(null)
+  const imageRef2 = React.useRef<HTMLImageElement>(null)
+  const imageRef3 = React.useRef<HTMLImageElement>(null)
 
-        overlay.addEventListener("click", (e: any) => {
-          setIsOpen(null);
-          document.body.removeChild(overlay);
-        });
-      }
-    }
-  };
+  const [isOpen, setIsOpen] = useState<
+    RefObject<HTMLImageElement> | undefined | null
+  >(null)
 
-  const handleUpload = async (e: React.ChangeEvent) => {
-    const input = e.target as HTMLInputElement;
+  const handleOpen = (ref?: RefObject<HTMLImageElement>): void => {
+    setIsOpen(ref)
+  }
 
-    const inputName = input.name;
+  const handleUpload = async (
+    ref?: RefObject<HTMLImageElement>,
+    e?: React.ChangeEvent
+  ) => {
+    const input = e?.target as HTMLInputElement
+
+    const inputName = input.name
 
     if (!input.files?.length) {
-      return;
+      return
     }
-    const file = input.files[0];
+    const file = input.files[0]
 
     // display the image
-    const reader = new FileReader();
+    const reader = new FileReader()
     reader.onload = (e) => {
-      setImageLink(e.target?.result as string);
-    };
-    reader.readAsDataURL(file);
+      setImageLink(e.target?.result as string)
+      setIsOpen(null)
 
-    let imageUrl;
+      if (ref?.current instanceof HTMLImageElement) {
+        ref.current.style.opacity = "0.5"
+      }
+    }
+    reader.readAsDataURL(file)
+
+    let imageUrl
     try {
-      imageUrl = await uploadImage(file);
+      imageUrl = await uploadImage(file)
       if (imageUrl) {
-        setHome({ ...home, [inputName]: imageUrl });
-        toast.success("Image uploaded successfully");
+        setHome({ ...home, [inputName]: imageUrl })
+        toast.success("Image uploaded successfully")
+        const img = ref?.current
+        img && setTimeout(() => (img.style.opacity = "1"), 1500)
       }
     } catch (e) {
-      toast.error("Image size is too large");
-      return;
+      toast.error("Image size is too large")
+      return
     }
-  };
+  }
 
-  const imageRef = React.useRef<any>(null);
-  const imageRef2 = React.useRef<any>(null);
-  const imageRef3 = React.useRef<any>(null);
-
-  const handleViewClick = (cover: string) => {
-    let ref;
-    switch (cover) {
-      case "cover":
-        ref = imageRef;
-        break;
-      case "cover2":
-        ref = imageRef2;
-        break;
-      case "cover3":
-        ref = imageRef3;
-        break;
-      default:
-        break;
-    }
-
+  const handleViewClick = (ref: any) => {
     if (ref?.current instanceof HTMLImageElement) {
-      ref.current.click();
+      ref.current.click()
     }
-  };
+  }
 
   const handleView = (e: any) => {
-    const imageUrl = e.target.src;
+    const imageUrl = e.target.src
     if (!document.querySelector("div.img-lightbox")) {
-      const lightbox = document.createElement("div");
-      lightbox.classList.add("img-lightbox");
+      const lightbox = document.createElement("div")
+      lightbox.classList.add("img-lightbox")
 
-      const image = document.createElement("img");
-      image.src = imageUrl;
-      lightbox.appendChild(image);
+      const image = document.createElement("img")
+      image.src = imageUrl
+      lightbox.appendChild(image)
 
-      const closeButton = document.createElement("button");
-      closeButton.classList.add("close-lightbox-btn");
-      closeButton.innerHTML = "X";
-      lightbox.appendChild(closeButton);
+      const closeButton = document.createElement("button")
+      closeButton.classList.add("close-lightbox-btn")
+      closeButton.innerHTML = "X"
+      lightbox.appendChild(closeButton)
 
       lightbox.addEventListener("click", (e: any) => {
-        const els = document.querySelectorAll(".img-lightbox img");
-        let isImg = false;
+        const els = document.querySelectorAll(".img-lightbox img")
+        let isImg = false
         for (let i = 0; i < els.length; i++) {
-          if (els[i] === e.target) isImg = true;
+          if (els[i] === e.target) isImg = true
         }
-        if (!isImg) document.body.removeChild(lightbox);
-
-        document.body.style.overflow = "auto";
-      });
+        if (!isImg) document.body.removeChild(lightbox)
+        document.body.style.overflow = "auto"
+      })
 
       closeButton.addEventListener("click", () => {
-        document.body.removeChild(lightbox);
-        document.body.style.overflow = "auto";
-      });
+        document.body.removeChild(lightbox)
+        document.body.style.overflow = "auto"
+      })
 
-      document.body.appendChild(lightbox);
-      document.body.style.overflow = "hidden";
+      document.body.appendChild(lightbox)
+      document.body.style.overflow = "hidden"
+      setIsOpen(null)
     }
-  };
+  }
 
   return (
     <section className="contact">
@@ -173,26 +161,22 @@ const EditCoverSection = () => {
                 height="200"
                 ref={imageRef}
                 onClick={handleView}
-                src={cover || "/asset1.png"}
+                src={cover || "/placeholder-image.jpg"}
                 style={{
                   objectFit: "cover",
                 }}
                 alt="cover"
               />
-              <div
-                className="cover-edit-icon"
-                onClick={() => handleOpen("cover")}
-              >
-                <ReactSVG src="/edit.svg" className="edit-svg h-3 w-3" />
-              </div>
-              {isOpen === "cover" && (
-                <EditImageMenu
-                  handleViewClick={() => handleViewClick("cover")}
-                  handleUpload={handleUpload}
-                  inputName="cover"
-                  btnClass="cover-edit-btn"
-                />
-              )}
+              <EditImageBlock
+                iconClass="cover-edit-icon"
+                handleOpen={handleOpen.bind(this, imageRef)}
+                handleViewClick={() => handleViewClick(imageRef)}
+                handleUpload={handleUpload.bind(this, imageRef)}
+                inputName="cover"
+                btnClass="cover-edit-btn"
+                open={isOpen}
+                svgClass="edit-svg h-3 w-3"
+              />
             </div>
           </div>
           <div className="col-2">
@@ -200,8 +184,11 @@ const EditCoverSection = () => {
               <label>Edit text</label>
               <textarea
                 dir="rtl"
-                className="input-primary col-span-3 text-right"
+                className={`${
+                  loading ? "input-disabled" : "input-primary"
+                } col-span-3 text-right`}
                 value={slogan}
+                disabled={loading}
                 name="slogan"
                 rows={5}
                 onChange={handleChange}
@@ -225,23 +212,19 @@ const EditCoverSection = () => {
                 style={{
                   objectFit: "cover",
                 }}
-                src={cover2 || "/asset2.png"}
+                src={cover2 || "/placeholder-image.jpg"}
                 alt="cover2"
               />
-              <div
-                className="cover-edit-icon"
-                onClick={() => handleOpen("cover2")}
-              >
-                <ReactSVG src="/edit.svg" className="edit-svg h-3 w-3" />
-              </div>
-              {isOpen === "cover2" && (
-                <EditImageMenu
-                  handleViewClick={() => handleViewClick("cover2")}
-                  handleUpload={handleUpload}
-                  inputName="cover2"
-                  btnClass="cover-edit-btn"
-                />
-              )}
+              <EditImageBlock
+                iconClass="cover-edit-icon"
+                btnClass="cover-edit-btn"
+                svgClass="edit-svg h-3 w-3"
+                inputName="cover2"
+                open={isOpen}
+                handleOpen={handleOpen.bind(this, imageRef2)}
+                handleViewClick={() => handleViewClick(imageRef2)}
+                handleUpload={handleUpload.bind(this, imageRef2)}
+              />
             </div>
           </div>
           <div className="col-2">
@@ -256,29 +239,48 @@ const EditCoverSection = () => {
                 style={{
                   objectFit: "cover",
                 }}
-                src={cover3 || "/asset1.png"}
+                src={cover3 || "/placeholder-image.jpg"}
                 alt="cover3"
               />
-              <div
-                className="cover-edit-icon"
-                onClick={() => handleOpen("cover3")}
-              >
-                <ReactSVG src="/edit.svg" className="edit-svg h-3 w-3" />
-              </div>
-              {isOpen === "cover3" && (
-                <EditImageMenu
-                  handleViewClick={() => handleViewClick("cover3")}
-                  handleUpload={handleUpload}
-                  inputName="cover3"
-                  btnClass="cover-edit-btn"
-                />
-              )}
+              <EditImageBlock
+                iconClass="cover-edit-icon"
+                btnClass="cover-edit-btn"
+                svgClass="edit-svg h-3 w-3"
+                inputName="cover3"
+                open={isOpen}
+                handleOpen={handleOpen.bind(this, imageRef3)}
+                handleViewClick={() => handleViewClick(imageRef3)}
+                handleUpload={handleUpload.bind(this, imageRef3)}
+              />
+            </div>
+          </div>
+          <div className="col-2">
+            <div className="grid gap-4 md:grid-cols-4">
+              <label>Edit text</label>
+              <textarea
+                className={`${
+                  loading ? "input-disabled" : "input-primary"
+                } col-span-3`}
+                value={slogan2}
+                disabled={loading}
+                name="slogan2"
+                rows={5}
+                onChange={handleChange}
+              />
             </div>
           </div>
         </div>
       </div>
+      {isOpen && (
+        <div
+          className="overlay"
+          onClick={() => {
+            setIsOpen(null)
+          }}
+        ></div>
+      )}
     </section>
-  );
-};
+  )
+}
 
-export default EditCoverSection;
+export default EditCoverSection

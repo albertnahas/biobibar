@@ -1,6 +1,12 @@
 import Link from "next/link"
 
-export const BannerSection = ({ coverUrl }: { coverUrl?: string }) => {
+export const BannerSection = ({
+  coverUrl,
+  slogan,
+}: {
+  coverUrl?: string
+  slogan?: string
+}) => {
   return (
     <section
       className="banner min-h-500 relative mb-24 bg-cover bg-center bg-no-repeat py-20 px-12 bg-blend-color shadow-2xl shadow-secondary-dark"
@@ -10,7 +16,7 @@ export const BannerSection = ({ coverUrl }: { coverUrl?: string }) => {
     >
       <div className="container mx-auto [&>*]:mt-10">
         <p className="text-center text-3xl text-white">
-          Let&apos;s change the feelings in your feet with
+          {slogan}
         </p>
         <h2 className="text-center text-6xl text-white">BIOBIBAR</h2>
         <p className="text-center text-xl text-white">

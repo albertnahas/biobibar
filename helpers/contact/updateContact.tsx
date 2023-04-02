@@ -1,7 +1,7 @@
-import { Category } from "../types/category"
-import { Contact } from "../types/contact"
-import { addAuthToURL } from "./addAuthToURL"
-import { DATABASE_URL } from "./constants"
+import { Category } from "../../types/category"
+import { Contact } from "../../types/contact"
+import { addAuthToURL } from "../addAuthToURL"
+import { DATABASE_URL } from "../constants"
 
 export async function updateContact(contactId: string, contact: Contact) {
   if (!contactId) {

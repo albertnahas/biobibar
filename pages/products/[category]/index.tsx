@@ -1,19 +1,38 @@
-import React from "react"
+import React, { useMemo, useState } from "react"
 import { ProductCard } from "../../../components/ProductCard"
 import Layout from "../../layout"
 import Breadcrumb from "../../../molecules/Breadcrumb"
 import { Product } from "../../../types/product"
-import fetchProducts from "../../../helpers/fetchProducts"
-import fetchCategories from "../../../helpers/fetchCategories"
+import fetchProducts from "../../../helpers/products/fetchProducts"
+import fetchCategories from "../../../helpers/categories/fetchCategories"
 import Head from "next/head"
+import Pagination from "../../../components/Pagination"
+import { Home } from "../../../types/home"
+import fetchHome from "../../../helpers/home/fetchHome"
 
 const Products = ({
   products,
   category,
+  home,
 }: {
   products?: Product[]
   category: string
+  home: Home
 }) => {
+  const [currentPage, setCurrentPage] = useState(1)
+  const pageSize = 10
+
+  const paginatedProducts = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * pageSize
+    const lastPageIndex = firstPageIndex + pageSize
+    return products?.slice(firstPageIndex, lastPageIndex)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage])
+
+  const onPageChange = (page: number) => {
+    setCurrentPage(page)
+  }
+
   const title = `Products - ${category || "All"} - BIOBIBAR`
   return (
     <>
@@ -26,7 +45,7 @@ const Products = ({
           href={`https://www.biobibar.com/products/${category}`}
         />
       </Head>
-      <Layout>
+      <Layout background={home.cover}>
         <Breadcrumb
           items={[
             { label: "Home", path: "/" },
@@ -35,7 +54,7 @@ const Products = ({
           ]}
         />
         <div className="container mt-12 px-0 md:px-24">
-          {products?.map((product) => (
+          {paginatedProducts?.map((product) => (
             <div className="mb-12 grid md:grid-cols-2" key={product.id}>
               <ProductCard
                 id={product.id}
@@ -49,6 +68,12 @@ const Products = ({
               </div>
             </div>
           ))}
+          <Pagination
+            items={products?.length || 0}
+            currentPage={currentPage}
+            pageSize={pageSize}
+            onPageChange={onPageChange}
+          />
         </div>
       </Layout>
     </>
@@ -61,10 +86,12 @@ export async function getStaticProps({ params }: any) {
   const products = await fetchProducts(
     category && category !== "all" ? { category: category } : {}
   )
+  const home = (await fetchHome()) || {}
   return {
     props: {
       products,
       category,
+      home,
     },
     revalidate: 10,
   }
@@ -74,8 +101,18 @@ export async function getStaticPaths() {
   // this is where you should fetch all product ids from database or API
   const categories = await fetchCategories()
   const paths = categories
-    .map((category) => `/products/${category.name}`)
-    .concat("/products/all")
+    .map((category) => ({
+      params: {
+        category: category.name,
+      },
+    }))
+    .concat([
+      {
+        params: {
+          category: "all",
+        },
+      },
+    ])
 
   return {
     paths,

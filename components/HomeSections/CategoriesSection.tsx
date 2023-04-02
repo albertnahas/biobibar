@@ -11,7 +11,7 @@ export const CategoriesSection: FC<Props> = ({ categories }) => {
             <CategoryCard
               key={category.name}
               title={category.name}
-              //   image={category.image}
+              image={category.image}
               productCount={category.productsCount}
             />
           ))}

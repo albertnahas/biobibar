@@ -1,6 +1,6 @@
-import { Product } from "../types/product"
-import { addAuthToURL } from "./addAuthToURL"
-import { DATABASE_URL } from "./constants"
+import { Product } from "../../types/product"
+import { addAuthToURL } from "../addAuthToURL"
+import { DATABASE_URL } from "../constants"
 
 export async function updateProduct(productId: string, product: Product) {
   let updates = {

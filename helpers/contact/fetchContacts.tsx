@@ -1,5 +1,5 @@
-import { Contact } from "../types/contact"
-import { DATABASE_URL } from "./constants"
+import { Contact } from "../../types/contact"
+import { DATABASE_URL } from "../constants"
 
 const axios = require("axios")
 
